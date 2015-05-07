@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2015 a las 05:32:27
+-- Tiempo de generación: 07-05-2015 a las 06:13:49
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `packets`
+-- Base de datos: ` packets`
 --
 
 -- --------------------------------------------------------
@@ -58,11 +58,10 @@ CREATE TABLE IF NOT EXISTS `clientes` (
 CREATE TABLE IF NOT EXISTS `empleados` (
 `id` int(15) NOT NULL,
   `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `a_paterno` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
-  `a_materno` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_paterno` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_materno` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `calle` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `numero` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `cp` int(15) NOT NULL,
   `sucursal` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -82,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `sucursales` (
 `id` int(11) NOT NULL,
   `nombre_sucursal` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `calle` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `numero` int(15) NOT NULL,
   `cp` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `ciudad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
