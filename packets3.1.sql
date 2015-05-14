@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-05-2015 a las 19:39:06
+-- Tiempo de generación: 14-05-2015 a las 18:21:21
 -- Versión del servidor: 5.6.12
 -- Versión de PHP: 5.5.3
 
@@ -31,8 +31,7 @@ USE `packets`;
 CREATE TABLE IF NOT EXISTS `clientes` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `apellido_paterno` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `apellido_materno` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(35) COLLATE utf8_spanish_ci NOT NULL,
   `nombre_compañia` varchar(70) COLLATE utf8_spanish_ci DEFAULT NULL,
   `rfc` varchar(12) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
@@ -43,13 +42,21 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `pais` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `puesto` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `titulo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `email` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(40) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre_usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `contraseña` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `contraseña` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
   `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_eliminado` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `nombre`, `apellidos`, `nombre_compañia`, `rfc`, `telefono`, `direccion`, `codigo_postal`, `ciudad`, `estado`, `pais`, `puesto`, `titulo`, `email`, `nombre_usuario`, `contraseña`, `fecha_registro`, `fecha_eliminado`) VALUES
+(1, 'Cortez Hernandez', 'Gabino', 'null', 'null', '6951091757', 'Infonavit Playas calle Ramon F. Iturbe #502', 82580, 'Mazatlan ', 'Sinaloa', 'Mexico', 'null', 'Lic.', 'onibag_93@hotmail.com', 'gabino93', '84f0ac1160190ae4b2cf5bef9cd526a6', '2015-05-14 10:07:25', NULL),
+(2, 'Lòpez Castañeda', 'Paul Antonio', 'null', 'null', '9820269', 'Calle #2249 Col centro', 82000, 'Mazatlan', 'Sinaloa', 'Mexico', 'null', 'Dr.', 'paul_1mk@hotmail.com', 'paul123', '00a4de914aee7e0318532803fdd554f8', '2015-05-14 10:16:26', NULL);
 
 -- --------------------------------------------------------
 

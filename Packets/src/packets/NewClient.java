@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -36,19 +37,19 @@ public class NewClient extends javax.swing.JInternalFrame {
         
         //si las cajas de email estan basias asignamos null
         if(txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")){
-            email = "null";
+            email = "NULL";
         }
         
         if(txtCompanyName.getText().equals("")){
-            companyName = "null";
+            companyName = "NULL";
         }
         
         if(txtRFC.getText().equals("")){
-            rfc = "null";
+            rfc = "NULL";
         }
         
         if(txtPosition.getText().equals("")){
-            position = "null";
+            position = "NULL";
         }
         
         if(txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")){
@@ -426,7 +427,7 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
