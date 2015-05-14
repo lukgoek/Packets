@@ -124,7 +124,7 @@ public class MainMDI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -138,10 +138,10 @@ public class MainMDI extends javax.swing.JFrame {
     private void menuNewClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewClientActionPerformed
         NewClient obj = new NewClient();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 900, 800);
+        obj.setBounds(50, 50, 700, 800);
         
         //tamaño del internal frame
-        obj.setSize(900, 800);
+        //obj.setSize(700, 800);
         obj.setVisible(true);
         
         desktopPane.add(obj);
