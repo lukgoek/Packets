@@ -28,72 +28,102 @@ public class NewClient extends javax.swing.JInternalFrame {
 
     public void saveNewClient(){
         
-        if(txtPassword.getText().equals(txtConfirmPassword.getText())){
-            if(txtEmail.getText().equals(txtConfirmEmail.getText())){
-                
-                
-            System.out.println("entro");
-            
-            }
+        //recogemos el email
+        String email = txtEmail.getText();
+        String companyName = txtCompanyName.getText();
+        String rfc = txtRFC.getText();
+        String position = txtPosition.getText();
+        
+        //si las cajas de email estan basias asignamos null
+        if(txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")){
+            email = "null";
+        }
+        
+        if(txtCompanyName.getText().equals("")){
+            companyName = "null";
+        }
+        
+        if(txtRFC.getText().equals("")){
+            rfc = "null";
+        }
+        
+        if(txtPosition.getText().equals("")){
+            position = "null";
+        }
+        
+        if(txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
+            return;
         }
         
         
         
         
         
-        
-        
-       obj = new Conexion();
-       cn =obj.conectar(); 
-       
-       
-       //MD5() es un tipo de encrytacion, inposible de desencryptar
-        String sql ="INSERT INTO clientes (nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, contraseña, nombre_compañia, rfc, puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
-        //recogemos las variables para poder tratarlas
-        
-        String lastName = txtLastName.getText();
-        String name = txtName.getText();
-        String address = txtAddress.getText();
-        String phone = txtPhone.getText();
-        String postalCode = txtPostalCode.getText();
-        String city = txtCity.getText();
-        String state = txtState.getText();
-        String country = txtCountry.getText();
-        String degree = comboDegree.getSelectedItem().toString();
-        String email = txtEmail.getText();
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
-        String companyName = txtCompanyName.getText();
-        String rfc = txtRFC.getText();
-        String position = txtPosition.getText();
-        
-        
-            try {
-              PreparedStatement consulta = cn.prepareStatement(sql);
-                consulta.setString(1, lastName);
-                consulta.setString(2, name);
-                consulta.setString(3, address);
-                consulta.setString(4, phone);
-                consulta.setString(5, postalCode);
-                consulta.setString(6, city);
-                consulta.setString(7, state);
-                consulta.setString(8, country);
-                consulta.setString(9, degree);
-                consulta.setString(10, email);
-                consulta.setString(11, username);
-                consulta.setString(12, password);
-                consulta.setString(13, companyName);
-                consulta.setString(14, rfc);
-                consulta.setString(15, position);
-                consulta.execute();
-               
+        if(txtPassword.getText().equals(txtConfirmPassword.getText())){
+            if(txtEmail.getText().equals(txtConfirmEmail.getText())){
+                if(txtPassword.getText().length() >=8){
+                        
+                obj = new Conexion();
+                cn =obj.conectar(); 
+
+
                 
-                    JOptionPane.showMessageDialog(rootPane, "The client was save.");
-            } catch (SQLException ex) {
-                Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                 String sql ="INSERT INTO clientes (nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, contraseña, nombre_compañia, rfc, puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
+                 
+
+                 String lastName = txtLastName.getText();
+                 String name = txtName.getText();
+                 String address = txtAddress.getText();
+                 String phone = txtPhone.getText();
+                 String postalCode = txtPostalCode.getText();
+                 String city = txtCity.getText();
+                 String state = txtState.getText();
+                 String country = txtCountry.getText();
+                 String degree = comboDegree.getSelectedItem().toString();
+                 
+                 String username = txtUsername.getText();
+                 String password = txtPassword.getText();
+                 
+
+
+                     try {
+                       PreparedStatement consulta = cn.prepareStatement(sql);
+                         consulta.setString(1, lastName);
+                         consulta.setString(2, name);
+                         consulta.setString(3, address);
+                         consulta.setString(4, phone);
+                         consulta.setString(5, postalCode);
+                         consulta.setString(6, city);
+                         consulta.setString(7, state);
+                         consulta.setString(8, country);
+                         consulta.setString(9, degree);
+                         consulta.setString(10, email);
+                         consulta.setString(11, username);
+                         consulta.setString(12, password);
+                         consulta.setString(13, companyName);
+                         consulta.setString(14, rfc);
+                         consulta.setString(15, position);
+                         consulta.execute();
+
+
+                             JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
+                     } catch (SQLException ex) {
+                         Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+            
+                    
+                }else{
+                   JOptionPane.showMessageDialog(rootPane, "Password too short."); 
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "The e-mails do not match.");
             }
-       
-        
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "The passwords do not match.");
+        }
+          
     }
     
     
@@ -396,7 +426,7 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();

@@ -46,10 +46,11 @@ public class MainMDI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("Nenu Options");
+        fileMenu.setText("Menu Options");
 
+        menuNewClient.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         menuNewClient.setMnemonic('o');
-        menuNewClient.setText("New Client");
+        menuNewClient.setText("NewCustomer");
         menuNewClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuNewClientActionPerformed(evt);
