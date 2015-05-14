@@ -31,7 +31,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         menuNewClient = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
+        menuNewVehicle = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
@@ -44,6 +44,8 @@ public class MainMDI extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        desktopPane.setLayout(null);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu Options");
@@ -58,9 +60,15 @@ public class MainMDI extends javax.swing.JFrame {
         });
         fileMenu.add(menuNewClient);
 
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
+        menuNewVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        menuNewVehicle.setMnemonic('s');
+        menuNewVehicle.setText("New Vehicle");
+        menuNewVehicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNewVehicleActionPerformed(evt);
+            }
+        });
+        fileMenu.add(menuNewVehicle);
 
         saveAsMenuItem.setMnemonic('a');
         saveAsMenuItem.setText("Save As ...");
@@ -148,6 +156,18 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(obj);
     }//GEN-LAST:event_menuNewClientActionPerformed
 
+    private void menuNewVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewVehicleActionPerformed
+          NewVehicle obj = new NewVehicle();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 620, 500);
+        
+        //tamaño del internal frame
+        //obj.setSize(700, 800);
+        obj.setVisible(true);
+        
+        desktopPane.add(obj);
+    }//GEN-LAST:event_menuNewVehicleActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -196,9 +216,9 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuNewClient;
+    private javax.swing.JMenuItem menuNewVehicle;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }

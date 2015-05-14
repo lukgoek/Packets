@@ -63,7 +63,7 @@ public class NewClient extends javax.swing.JInternalFrame {
         
         if(txtPassword.getText().equals(txtConfirmPassword.getText())){
             if(txtEmail.getText().equals(txtConfirmEmail.getText())){
-                if(txtPassword.getText().length() >=8){
+                if(txtPassword.getText().length() >= 8){
                         
                 obj = new Conexion();
                 cn =obj.conectar(); 
