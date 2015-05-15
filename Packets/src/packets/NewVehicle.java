@@ -61,7 +61,6 @@ public class NewVehicle extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("New Vehicle");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicle Description", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N

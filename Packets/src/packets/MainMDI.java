@@ -147,10 +147,9 @@ public class MainMDI extends javax.swing.JFrame {
     private void menuNewClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewClientActionPerformed
         NewClient obj = new NewClient();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 700, 800);
+        obj.setBounds(50, 50, 650, 700);
         
-        //tamaño del internal frame
-        //obj.setSize(700, 800);
+        
         obj.setVisible(true);
         
         desktopPane.add(obj);
