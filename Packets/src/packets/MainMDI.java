@@ -158,7 +158,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void menuNewVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewVehicleActionPerformed
           NewVehicle obj = new NewVehicle();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 620, 500);
+        obj.setBounds(50, 50, 500, 500);
         
         //tamaño del internal frame
         //obj.setSize(700, 800);

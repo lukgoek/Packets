@@ -6,19 +6,107 @@
 
 package packets;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
+
 /**
  *
  * @author fimaz2014
  */
 public class NewVehicle extends javax.swing.JInternalFrame {
 
+        Conexion obj;  
+        Connection cn;
+        
     /**
      * Creates new form NewVehicle
      */
     public NewVehicle() {
         initComponents();
+        
     }
 
+     public void cleanPanels(){
+        
+       txtBrand.setText("");
+       txtModel.setText("");
+       txtPlate.setText("");
+       txtRegistrationDate.setText("");
+       txtDateRemoved.setText("");
+       txtLocation.setText("");
+       
+       
+     }
+     public void saveNewVehicle(){
+         
+         String registrationdate = txtRegistrationDate.getText();
+         String dateremoved = txtDateRemoved.getText();
+         String location = txtLocation.getText();
+         
+         
+          if(txtRegistrationDate.getText().equals("")){
+            registrationdate = "NULL";
+        }
+          if(txtDateRemoved.getText().equals("")){
+            dateremoved = "NULL";
+        }
+          
+          if(txtLocation.getText().equals("")){
+            location = "NULL";
+        }
+          
+               
+         if(txtBrand.getText().equals("") || txtModel.getText().equals("") || txtPlate.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
+            return;
+        }
+    
+         obj = new Conexion();
+         cn =obj.conectar(); 
+
+
+                
+                 String sql ="INSERT INTO vehiculos (marca, modelo, placa, numero_vehiculo, tipo_vehiculo, chofer, fecha_registro, fecha_eliminado, estado, localizacion) VALUES (?, ?, ?, ?, ?, ?, ?, MD5(?)?, ?, ?)";
+               
+                  String brand = txtBrand.getText();
+                  String model = txtModel.getText();
+                  String plate = txtPlate.getText();
+                  String numbervehicle = txtNumVehicle.getText();
+                  String type = comboType.getSelectedItem().toString();
+                  String driver = comboDriver.getSelectedItem().toString();
+                  String status = btngroupStatus.getSelection().toString();
+                 
+                     try {
+                       PreparedStatement consulta = cn.prepareStatement(sql);
+                         consulta.setString(1, brand);
+                         consulta.setString(2, model);
+                         consulta.setString(3, plate);
+                         consulta.setString(4, numbervehicle);
+                         consulta.setString(5, type);
+                         consulta.setString(6, driver);
+                         consulta.setString(7, registrationdate);
+                         consulta.setString(8, dateremoved);
+                         consulta.setString(9, status);
+                         consulta.setString(10, location);
+                         consulta.execute();
+                         
+                         cleanPanels();
+
+
+                             JOptionPane.showMessageDialog(rootPane, "Vehicle data has been saved.");
+                     } catch (SQLException ex) {
+                         Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+   
+         }
+     
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,6 +117,7 @@ public class NewVehicle extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btngroupStatus = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtModel = new javax.swing.JTextField();
@@ -42,17 +131,17 @@ public class NewVehicle extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         txtDateRemoved = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtTipe = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        comboDriver = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        optAvailable = new javax.swing.JRadioButton();
+        optBusy = new javax.swing.JRadioButton();
+        optDamaged = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         txtLocation = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtBrand = new javax.swing.JTextField();
+        comboType = new javax.swing.JComboBox();
         btnGuardar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
 
@@ -79,27 +168,33 @@ public class NewVehicle extends javax.swing.JInternalFrame {
 
         jLabel9.setText("*Type: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboDriver.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gabino Cortez", "Paul Lopez", "Humberto Lugo" }));
 
         jLabel10.setText("*Status:");
 
-        jRadioButton1.setText("Available");
+        btngroupStatus.add(optAvailable);
+        optAvailable.setText("Available");
 
-        jRadioButton2.setText("Busy");
+        btngroupStatus.add(optBusy);
+        optBusy.setText("Busy");
 
-        jRadioButton3.setText("Damaged");
+        btngroupStatus.add(optDamaged);
+        optDamaged.setText("Damaged");
 
         jLabel11.setText("*Location:");
 
         jLabel12.setText("*Brand:");
 
+        comboType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Trailer", "Camion", "Camioneta" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
                     .addComponent(jLabel12)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -113,34 +208,34 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(optAvailable)
+                    .addComponent(optBusy)
+                    .addComponent(optDamaged)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNumVehicle, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, 1, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(comboDriver, 0, 150, Short.MAX_VALUE)
+                                        .addGap(19, 19, 19))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtNumVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addComponent(jLabel9))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtDateRemoved, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtRegistrationDate, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtBrand, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                     .addComponent(txtPlate, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(69, 69, 69)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel3)))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtModel, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                            .addComponent(txtTipe)))))
+                            .addComponent(txtModel)
+                            .addComponent(comboType, 0, 90, Short.MAX_VALUE)))
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,11 +256,11 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(txtTipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboDriver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -178,17 +273,24 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jRadioButton1)
+                    .addComponent(optAvailable))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(optBusy)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(optDamaged)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnGuardar.setText("Save");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCerrar.setText("Close");
 
@@ -196,31 +298,35 @@ public class NewVehicle extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnGuardar)
-                .addGap(31, 31, 31)
-                .addComponent(btnCerrar)
-                .addGap(254, 254, 254))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153)
+                .addComponent(btnGuardar)
+                .addGap(36, 36, 36)
+                .addComponent(btnCerrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCerrar)
                     .addComponent(btnGuardar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        saveNewVehicle();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,7 +366,9 @@ public class NewVehicle extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.ButtonGroup btngroupStatus;
+    private javax.swing.JComboBox comboDriver;
+    private javax.swing.JComboBox comboType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -274,9 +382,9 @@ public class NewVehicle extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton optAvailable;
+    private javax.swing.JRadioButton optBusy;
+    private javax.swing.JRadioButton optDamaged;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtDateRemoved;
     private javax.swing.JTextField txtLocation;
@@ -284,6 +392,5 @@ public class NewVehicle extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNumVehicle;
     private javax.swing.JTextField txtPlate;
     private javax.swing.JTextField txtRegistrationDate;
-    private javax.swing.JTextField txtTipe;
     // End of variables declaration//GEN-END:variables
 }
