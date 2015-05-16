@@ -21,14 +21,14 @@ public class EditCustomer extends javax.swing.JFrame {
 
     Conexion obj;
     Connection cn;
-    NewClient objeto;
+    UpdateCustomer objeto;
     
     public EditCustomer() {
         initComponents();
         updateTable();
     }
 
-    public EditCustomer(NewClient newclient, JTextField ID) {
+    public EditCustomer(UpdateCustomer updateCustomer, JTextField ID) {
         initComponents();
         updateTable();
         //solamente cerramos la ventana no cerreamos la applicacion
@@ -38,7 +38,7 @@ public class EditCustomer extends javax.swing.JFrame {
         cn = obj.conectar();
         
         this.txtID = ID;
-        this.objeto = newclient;
+        this.objeto = updateCustomer;
         
     }
     
@@ -194,7 +194,7 @@ public class EditCustomer extends javax.swing.JFrame {
        int rowSelected = tbDataCustomer.getSelectedRow();
        
        if(rowSelected <= -1){
-           JOptionPane.showMessageDialog(rootPane, "You need to select one customer to continue", "¡ERROR!", 1);
+           JOptionPane.showMessageDialog(rootPane, "You need to select one customer to continue.", "¡ERROR!", 1);
        }else{
            
         

@@ -20,16 +20,199 @@ import javax.swing.text.BadLocationException;
  *
  * @author HbTO
  */
-public class NewClient extends javax.swing.JInternalFrame {
+public class UpdateCustomer extends javax.swing.JInternalFrame {
 
     
         Conexion obj;  
         Connection cn;
         
-    public NewClient() {
+    public UpdateCustomer() {
         initComponents();
     }
     
+    
+    
+    public void updateCustomerMethod(){
+        
+        int ID = Integer.parseInt(txtID.getText());
+        int decision = JOptionPane.showConfirmDialog(this, "All information is correct?", "¡Review the information!", JOptionPane.YES_NO_OPTION, 2);
+        
+        
+         if(decision == 0){
+             
+        String email = txtEmail.getText();
+        String companyName = txtCompanyName.getText();
+        String rfc = txtRFC.getText();
+        String position = txtPosition.getText();
+        
+        //si las cajas de email estan basias asignamos null
+        if(txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")){
+            email = "NULL";
+        }
+        
+        if(txtCompanyName.getText().equals("")){
+            companyName = "NULL";
+        }
+        
+        if(txtRFC.getText().equals("")){
+            rfc = "NULL";
+        }
+        
+        if(txtPosition.getText().equals("")){
+            position = "NULL";
+        }
+        
+        if(txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
+            return;
+        }
+        
+        if(txtPostalCode.getText().length() < 5){
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+            return;
+                   
+        }
+        
+        
+        
+        
+        if(txtPassword.getText().equals(txtConfirmPassword.getText())){
+            if(txtEmail.getText().equals(txtConfirmEmail.getText())){
+                if(txtPassword.getText().length() >= 8){
+                    
+                    obj = new Conexion();
+                    cn =obj.conectar(); 
+                    
+                
+                    String lastName = txtLastName.getText();
+                            String name = txtName.getText();
+                            String address = txtAddress.getText();
+                            String phone = txtPhone.getText();
+                            String postalCode = txtPostalCode.getText();
+                            String city = txtCity.getText();
+                            String state = txtState.getText();
+                            String country = txtCountry.getText();
+                            String degree = comboDegree.getSelectedItem().toString();
+
+                            String username = txtUsername.getText();
+                            String password = txtPassword.getText();
+
+                   String sql ="UPDATE clientes SET nombre = ?, apellidos = ?, direccion = ?, telefono = ?, codigo_postal = ?, ciudad = ?, estado = ?, pais = ?, titulo = ?, email = ?, nombre_usuario = ?, contraseña = ?, nombre_compañia = ?, rfc = ?, puesto = ? WHERE id=?";
+
+                   try{
+
+                       PreparedStatement query = cn.prepareStatement(sql);
+                            query.setString(1, name);
+                             query.setString(2, lastName);
+                             query.setString(3, address);
+                             query.setString(4, phone);
+                             query.setString(5, postalCode);
+                             query.setString(6, city);
+                             query.setString(7, state);
+                             query.setString(8, country);
+                             query.setString(9, degree);
+                             query.setString(10, email);
+                             query.setString(11, username);
+                             query.setString(12, password);
+                             query.setString(13, companyName);
+                             query.setString(14, rfc);
+                             query.setString(15, position);
+
+
+
+                        query.setInt(16, ID);
+                        query.execute();
+                        
+                       JOptionPane.showMessageDialog(this, "Customer has been Updated.");
+                       cleanPanels();
+                   }catch(Exception e){
+
+                   }   
+                }else{
+                   JOptionPane.showMessageDialog(rootPane, "Password too short."); 
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "The e-mails do not match.");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "The passwords do not match.");
+        }
+    } 
+        
+        
+    }
+
+    
+    
+    public void editCustomer(){
+        
+        //cleanPanels();
+        String ID = txtID.getText();
+        
+        
+        String degree = "";
+        
+        String sql ="SELECT nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, nombre_usuario, email, nombre_compañia, rfc, puesto, titulo FROM clientes WHERE id=?";
+        
+            try {
+                
+                obj = new Conexion();
+                cn =obj.conectar(); 
+                 
+                PreparedStatement query = cn.prepareStatement(sql);
+                query.setString(1, ID);
+                ResultSet rs = query.executeQuery();
+                
+                if(rs.next()){
+                    
+                    txtLastName.setText(rs.getString("apellidos"));
+                    txtName.setText(rs.getString("nombre"));
+                    txtAddress.setText(rs.getString("direccion"));
+                    txtPhone.setText(rs.getString("telefono"));
+                    txtPostalCode.setText(rs.getString("codigo_postal"));
+                    txtCity.setText(rs.getString("ciudad"));
+                    txtState.setText(rs.getString("estado"));
+                    txtCountry.setText(rs.getString("pais"));
+                    txtUsername.setText(rs.getString("nombre_usuario"));
+                    
+                    txtEmail.setText(rs.getString("email"));
+                    
+                    txtCompanyName.setText(rs.getString("nombre_compañia"));
+                    txtRFC.setText(rs.getString("rfc"));
+                    txtPosition.setText(rs.getString("puesto"));
+                    
+                    degree = rs.getString("titulo");
+                    
+                    int tamañoCombo = comboDegree.getItemCount();
+                    //System.out.println(tamañoCombo);
+                    
+                  for(int i=0; i<tamañoCombo; i++){
+                      
+                      String comboContenido = comboDegree.getItemAt(i).toString();
+                      System.out.println(comboContenido);
+                      System.out.println(degree+" --- "+comboContenido);
+                      
+                      if(comboContenido.equals(degree)){
+                          comboDegree.setSelectedIndex(i);
+                                  System.out.println(degree+" entro "+comboContenido);
+                          break;
+                      }
+                      
+                      
+                  }
+                    
+                    
+                    
+                }
+                
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+    }
     
     private void cleanPanels(){
         
@@ -146,7 +329,7 @@ public class NewClient extends javax.swing.JInternalFrame {
 
                                  JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
                          } catch (SQLException ex) {
-                             Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                             Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
                          }
             
                    
@@ -207,16 +390,17 @@ public class NewClient extends javax.swing.JInternalFrame {
         txtPosition = new javax.swing.JTextField();
         txtRFC = new javax.swing.JTextField();
         txtCompanyName = new javax.swing.JTextField();
-        btnSave = new javax.swing.JButton();
+        btnUpdateCustomer = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("New Client");
+        setTitle("Edit Customer");
         setPreferredSize(new java.awt.Dimension(704, 587));
 
-        pnlPersonalInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personal Information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        pnlPersonalInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Replace the old personal information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
         jLabel6.setText("*City:");
 
@@ -450,12 +634,12 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save1.png"))); // NOI18N
-        btnSave.setText("  Save");
-        btnSave.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save2.png"))); // NOI18N
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update1.png"))); // NOI18N
+        btnUpdateCustomer.setText("  Update");
+        btnUpdateCustomer.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update2.png"))); // NOI18N
+        btnUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnUpdateCustomerActionPerformed(evt);
             }
         });
 
@@ -468,15 +652,26 @@ public class NewClient extends javax.swing.JInternalFrame {
             }
         });
 
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
+        btnDelete.setText("Close");
+        btnDelete.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(111, 111, 111)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -503,18 +698,19 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addComponent(pnlCompanyInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnClose))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(btnUpdateCustomer)
+                    .addComponent(btnClose)
+                    .addComponent(btnDelete))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
 
-        saveNewClient();
-    }//GEN-LAST:event_btnSaveActionPerformed
+        updateCustomerMethod();
+    }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
     private void txtPostalCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyPressed
        
@@ -544,19 +740,40 @@ public class NewClient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPostalCodeKeyTyped
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        UpdateCustomer obj = new UpdateCustomer();
-        MainMDI MainMDI = new MainMDI();
-        obj.setBounds(50, 50, 650, 700);
+        EditCustomer objeto = new EditCustomer(this, txtID);
+        objeto.setVisible(true);
         
-        
-        obj.setVisible(true);
-        
-         MainMDI.add(obj);
+
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        
+        int ID = Integer.parseInt(txtID.getText());
+        int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete customer with id: "+ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
+        
+        
+         if(decision == 0){
+             
+         
+            String sql ="UPDATE clientes SET fecha_eliminado = NOW() WHERE id=?";
+        
+            try{
+                
+                PreparedStatement query = cn.prepareStatement(sql);
+                query.setInt(1, ID);
+                 query.execute();
+                JOptionPane.showMessageDialog(this, "Customer has been removed.");
+                cleanPanels();
+            }catch(Exception e){
+    
+            }   
+                
+         } 
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -575,28 +792,30 @@ public class NewClient extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewClient().setVisible(true);
+                new UpdateCustomer().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.JComboBox comboDegree;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

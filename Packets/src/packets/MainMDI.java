@@ -32,7 +32,7 @@ public class MainMDI extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         menuNewClient = new javax.swing.JMenuItem();
         menuNewVehicle = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
+        menuUpdateCustomer = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
@@ -68,10 +68,15 @@ public class MainMDI extends javax.swing.JFrame {
         });
         fileMenu.add(menuNewVehicle);
 
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
+        menuUpdateCustomer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        menuUpdateCustomer.setMnemonic('a');
+        menuUpdateCustomer.setText("Update Customer");
+        menuUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUpdateCustomerActionPerformed(evt);
+            }
+        });
+        fileMenu.add(menuUpdateCustomer);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -182,6 +187,17 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(obj);
     }//GEN-LAST:event_cutMenuItemActionPerformed
 
+    private void menuUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateCustomerActionPerformed
+        UpdateCustomer obj = new UpdateCustomer();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 650, 700);
+        
+        
+        obj.setVisible(true);
+        
+        desktopPane.add(obj);
+    }//GEN-LAST:event_menuUpdateCustomerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,8 +247,8 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuNewClient;
     private javax.swing.JMenuItem menuNewVehicle;
+    public javax.swing.JMenuItem menuUpdateCustomer;
     private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }
