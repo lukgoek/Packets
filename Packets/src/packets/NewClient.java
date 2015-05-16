@@ -82,6 +82,11 @@ public class NewClient extends javax.swing.JInternalFrame {
             return;
         }
         
+        if(txtPostalCode.getText().length() < 5){
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+            return;
+                   
+        }
         
         
         
@@ -89,58 +94,60 @@ public class NewClient extends javax.swing.JInternalFrame {
         if(txtPassword.getText().equals(txtConfirmPassword.getText())){
             if(txtEmail.getText().equals(txtConfirmEmail.getText())){
                 if(txtPassword.getText().length() >= 8){
-                        
-                obj = new Conexion();
-                cn =obj.conectar(); 
+                   
+                       
+                      
+                    obj = new Conexion();
+                    cn =obj.conectar(); 
 
 
-                
-                 String sql ="INSERT INTO clientes (nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, contraseña, nombre_compañia, rfc, puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
-                 
 
-                 String lastName = txtLastName.getText();
-                 String name = txtName.getText();
-                 String address = txtAddress.getText();
-                 String phone = txtPhone.getText();
-                 String postalCode = txtPostalCode.getText();
-                 String city = txtCity.getText();
-                 String state = txtState.getText();
-                 String country = txtCountry.getText();
-                 String degree = comboDegree.getSelectedItem().toString();
-                 
-                 String username = txtUsername.getText();
-                 String password = txtPassword.getText();
-                 
+                     String sql ="INSERT INTO clientes (nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, contraseña, nombre_compañia, rfc, puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
 
 
-                     try {
-                       PreparedStatement consulta = cn.prepareStatement(sql);
-                         consulta.setString(1, lastName);
-                         consulta.setString(2, name);
-                         consulta.setString(3, address);
-                         consulta.setString(4, phone);
-                         consulta.setString(5, postalCode);
-                         consulta.setString(6, city);
-                         consulta.setString(7, state);
-                         consulta.setString(8, country);
-                         consulta.setString(9, degree);
-                         consulta.setString(10, email);
-                         consulta.setString(11, username);
-                         consulta.setString(12, password);
-                         consulta.setString(13, companyName);
-                         consulta.setString(14, rfc);
-                         consulta.setString(15, position);
-                         consulta.execute();
-                         
-                         cleanPanels();
+                     String lastName = txtLastName.getText();
+                     String name = txtName.getText();
+                     String address = txtAddress.getText();
+                     String phone = txtPhone.getText();
+                     String postalCode = txtPostalCode.getText();
+                     String city = txtCity.getText();
+                     String state = txtState.getText();
+                     String country = txtCountry.getText();
+                     String degree = comboDegree.getSelectedItem().toString();
+
+                     String username = txtUsername.getText();
+                     String password = txtPassword.getText();
 
 
-                             JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
-                     } catch (SQLException ex) {
-                         Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
-                     }
+
+                         try {
+                           PreparedStatement consulta = cn.prepareStatement(sql);
+                             consulta.setString(1, lastName);
+                             consulta.setString(2, name);
+                             consulta.setString(3, address);
+                             consulta.setString(4, phone);
+                             consulta.setString(5, postalCode);
+                             consulta.setString(6, city);
+                             consulta.setString(7, state);
+                             consulta.setString(8, country);
+                             consulta.setString(9, degree);
+                             consulta.setString(10, email);
+                             consulta.setString(11, username);
+                             consulta.setString(12, password);
+                             consulta.setString(13, companyName);
+                             consulta.setString(14, rfc);
+                             consulta.setString(15, position);
+                             consulta.execute();
+
+                             cleanPanels();
+
+
+                                 JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
+                         } catch (SQLException ex) {
+                             Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                         }
             
-                    
+                   
                 }else{
                    JOptionPane.showMessageDialog(rootPane, "Password too short."); 
                 }
@@ -496,17 +503,14 @@ public class NewClient extends javax.swing.JInternalFrame {
        || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
         
        }else{
-           JOptionPane.showMessageDialog(rootPane, "Only put numbers.", "!Error¡", 2);
-           return;
+           evt.consume();
        }
        
        
         System.out.println("tamaño "+postalCodeSize);
         if(postalCodeSize > 4){
-            
-           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code.");
-            
-            
+           evt.consume();
+           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code."); 
         }
     }//GEN-LAST:event_txtPostalCodeKeyTyped
 
