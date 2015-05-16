@@ -45,14 +45,12 @@ public class MainMDI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        desktopPane.setLayout(null);
-
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu Options");
 
         menuNewClient.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         menuNewClient.setMnemonic('o');
-        menuNewClient.setText("NewCustomer");
+        menuNewClient.setText("New Customer");
         menuNewClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuNewClientActionPerformed(evt);
@@ -87,10 +85,16 @@ public class MainMDI extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        editMenu.setText("WERO");
 
+        cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
+        cutMenuItem.setText("New Employee");
+        cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cutMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(cutMenuItem);
 
         copyMenuItem.setMnemonic('y');
@@ -166,6 +170,17 @@ public class MainMDI extends javax.swing.JFrame {
         
         desktopPane.add(obj);
     }//GEN-LAST:event_menuNewVehicleActionPerformed
+
+    private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
+        NewEmployee obj = new NewEmployee();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 650, 700);
+        
+        
+        obj.setVisible(true);
+        
+        desktopPane.add(obj);
+    }//GEN-LAST:event_cutMenuItemActionPerformed
 
     /**
      * @param args the command line arguments

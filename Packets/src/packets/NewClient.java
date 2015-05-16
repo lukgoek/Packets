@@ -6,12 +6,14 @@
  */
 package packets;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -80,6 +82,11 @@ public class NewClient extends javax.swing.JInternalFrame {
             return;
         }
         
+        if(txtPostalCode.getText().length() < 5){
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+            return;
+                   
+        }
         
         
         
@@ -87,58 +94,60 @@ public class NewClient extends javax.swing.JInternalFrame {
         if(txtPassword.getText().equals(txtConfirmPassword.getText())){
             if(txtEmail.getText().equals(txtConfirmEmail.getText())){
                 if(txtPassword.getText().length() >= 8){
-                        
-                obj = new Conexion();
-                cn =obj.conectar(); 
+                   
+                       
+                      
+                    obj = new Conexion();
+                    cn =obj.conectar(); 
 
 
-                
-                 String sql ="INSERT INTO clientes (nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, contraseña, nombre_compañia, rfc, puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
-                 
 
-                 String lastName = txtLastName.getText();
-                 String name = txtName.getText();
-                 String address = txtAddress.getText();
-                 String phone = txtPhone.getText();
-                 String postalCode = txtPostalCode.getText();
-                 String city = txtCity.getText();
-                 String state = txtState.getText();
-                 String country = txtCountry.getText();
-                 String degree = comboDegree.getSelectedItem().toString();
-                 
-                 String username = txtUsername.getText();
-                 String password = txtPassword.getText();
-                 
+                     String sql ="INSERT INTO clientes (nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, contraseña, nombre_compañia, rfc, puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
 
 
-                     try {
-                       PreparedStatement consulta = cn.prepareStatement(sql);
-                         consulta.setString(1, lastName);
-                         consulta.setString(2, name);
-                         consulta.setString(3, address);
-                         consulta.setString(4, phone);
-                         consulta.setString(5, postalCode);
-                         consulta.setString(6, city);
-                         consulta.setString(7, state);
-                         consulta.setString(8, country);
-                         consulta.setString(9, degree);
-                         consulta.setString(10, email);
-                         consulta.setString(11, username);
-                         consulta.setString(12, password);
-                         consulta.setString(13, companyName);
-                         consulta.setString(14, rfc);
-                         consulta.setString(15, position);
-                         consulta.execute();
-                         
-                         cleanPanels();
+                     String lastName = txtLastName.getText();
+                     String name = txtName.getText();
+                     String address = txtAddress.getText();
+                     String phone = txtPhone.getText();
+                     String postalCode = txtPostalCode.getText();
+                     String city = txtCity.getText();
+                     String state = txtState.getText();
+                     String country = txtCountry.getText();
+                     String degree = comboDegree.getSelectedItem().toString();
+
+                     String username = txtUsername.getText();
+                     String password = txtPassword.getText();
 
 
-                             JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
-                     } catch (SQLException ex) {
-                         Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
-                     }
+
+                         try {
+                           PreparedStatement consulta = cn.prepareStatement(sql);
+                             consulta.setString(1, lastName);
+                             consulta.setString(2, name);
+                             consulta.setString(3, address);
+                             consulta.setString(4, phone);
+                             consulta.setString(5, postalCode);
+                             consulta.setString(6, city);
+                             consulta.setString(7, state);
+                             consulta.setString(8, country);
+                             consulta.setString(9, degree);
+                             consulta.setString(10, email);
+                             consulta.setString(11, username);
+                             consulta.setString(12, password);
+                             consulta.setString(13, companyName);
+                             consulta.setString(14, rfc);
+                             consulta.setString(15, position);
+                             consulta.execute();
+
+                             cleanPanels();
+
+
+                                 JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
+                         } catch (SQLException ex) {
+                             Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                         }
             
-                    
+                   
                 }else{
                    JOptionPane.showMessageDialog(rootPane, "Password too short."); 
                 }
@@ -224,6 +233,15 @@ public class NewClient extends javax.swing.JInternalFrame {
         jLabel5.setText("*Phone:");
 
         jLabel1.setText("*Postal Code:");
+
+        txtPostalCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPostalCodeKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPostalCodeKeyTyped(evt);
+            }
+        });
 
         jLabel12.setText("*Degree:");
 
@@ -412,24 +430,28 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Save");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save1.png"))); // NOI18N
+        jButton1.setText("  Save");
+        jButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save2.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
         jButton2.setText("Close");
+        jButton2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jButton1)
-                .addGap(73, 73, 73)
-                .addComponent(jButton2)
+                .addGap(111, 111, 111)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -448,10 +470,10 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addGap(9, 9, 9)
                 .addComponent(pnlCompanyInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -464,6 +486,33 @@ public class NewClient extends javax.swing.JInternalFrame {
         
         saveNewClient();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtPostalCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyPressed
+       
+
+    }//GEN-LAST:event_txtPostalCodeKeyPressed
+
+    private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
+         int postalCodeSize = txtPostalCode.getText().length();
+        
+        System.out.println("char " +evt.getKeyChar());
+         
+        
+       if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
+               evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
+       || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
+        
+       }else{
+           evt.consume();
+       }
+       
+       
+        System.out.println("tamaño "+postalCodeSize);
+        if(postalCodeSize > 4){
+           evt.consume();
+           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code."); 
+        }
+    }//GEN-LAST:event_txtPostalCodeKeyTyped
 
     /**
      * @param args the command line arguments
