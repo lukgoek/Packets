@@ -9,6 +9,7 @@ package packets;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,8 +29,76 @@ public class NewClient extends javax.swing.JInternalFrame {
     public NewClient() {
         initComponents();
     }
+    
+    
 
-    public void cleanPanels(){
+    public void editCustomer(){
+        
+        //cleanPanels();
+        String ID = txtID.getText();
+        obj = new Conexion();
+        cn =obj.conectar(); 
+        
+        String degree = "";
+        
+        String sql ="SELECT nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, nombre_usuario, email, nombre_compañia, rfc, puesto, titulo FROM clientes WHERE id=?";
+        
+            try {
+                PreparedStatement consulta = cn.prepareStatement(sql);
+                consulta.setString(1, ID);
+                ResultSet rs = consulta.executeQuery();
+                
+                if(rs.next()){
+                    
+                    txtLastName.setText(rs.getString("apellidos"));
+                    txtName.setText(rs.getString("nombre"));
+                    txtAddress.setText(rs.getString("direccion"));
+                    txtPhone.setText(rs.getString("telefono"));
+                    txtPostalCode.setText(rs.getString("codigo_postal"));
+                    txtCity.setText(rs.getString("ciudad"));
+                    txtState.setText(rs.getString("estado"));
+                    txtCountry.setText(rs.getString("pais"));
+                    txtUsername.setText(rs.getString("nombre_usuario"));
+                    
+                    txtEmail.setText(rs.getString("email"));
+                    
+                    txtCompanyName.setText(rs.getString("nombre_compañia"));
+                    txtRFC.setText(rs.getString("rfc"));
+                    txtPosition.setText(rs.getString("puesto"));
+                    
+                    degree = rs.getString("titulo");
+                    
+                    int tamañoCombo = comboDegree.getItemCount();
+                    //System.out.println(tamañoCombo);
+                    
+                  for(int i=0; i<tamañoCombo; i++){
+                      
+                      String comboContenido = comboDegree.getItemAt(i).toString();
+                      System.out.println(comboContenido);
+                      System.out.println(degree+" --- "+comboContenido);
+                      
+                      if(comboContenido.equals(degree)){
+                          comboDegree.setSelectedIndex(i);
+                                  System.out.println(degree+" entro "+comboContenido);
+                          break;
+                      }
+                      
+                      
+                  }
+                    
+                    
+                    
+                }
+                
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+    }
+    
+    private void cleanPanels(){
         
        txtLastName.setText("");
        txtName.setText("");
@@ -52,7 +121,7 @@ public class NewClient extends javax.swing.JInternalFrame {
     }
     
     
-    public void saveNewClient(){
+    private void saveNewClient(){
         
         //recogemos el email
         String email = txtEmail.getText();
@@ -197,6 +266,7 @@ public class NewClient extends javax.swing.JInternalFrame {
         txtConfirmPassword = new javax.swing.JPasswordField();
         jLabel17 = new javax.swing.JLabel();
         txtConfirmEmail = new javax.swing.JTextField();
+        btnEdit = new javax.swing.JButton();
         pnlCompanyInformation = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -206,6 +276,7 @@ public class NewClient extends javax.swing.JInternalFrame {
         txtCompanyName = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        txtID = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -257,6 +328,15 @@ public class NewClient extends javax.swing.JInternalFrame {
 
         jLabel17.setText("Confirm e-mail:");
 
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit1.png"))); // NOI18N
+        btnEdit.setText(" Edit");
+        btnEdit.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit2.png"))); // NOI18N
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlPersonalInformationLayout = new javax.swing.GroupLayout(pnlPersonalInformation);
         pnlPersonalInformation.setLayout(pnlPersonalInformationLayout);
         pnlPersonalInformationLayout.setHorizontalGroup(
@@ -264,27 +344,6 @@ public class NewClient extends javax.swing.JInternalFrame {
             .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
-                        .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPhone))
-                            .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
                         .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
@@ -321,8 +380,35 @@ public class NewClient extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(txtConfirmPassword))))))
-                .addContainerGap())
+                                    .addComponent(txtConfirmPassword))))
+                        .addContainerGap())
+                    .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
+                        .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPhone))
+                                    .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 10, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPersonalInformationLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60))))))
         );
         pnlPersonalInformationLayout.setVerticalGroup(
             pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,8 +416,9 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(20, 20, 20)
+                    .addComponent(jLabel2)
+                    .addComponent(btnEdit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -380,7 +467,7 @@ public class NewClient extends javax.swing.JInternalFrame {
                         .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlCompanyInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Company Information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
@@ -460,30 +547,34 @@ public class NewClient extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(pnlPersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(188, 188, 188))
+                .addGap(18, 18, 18)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(pnlPersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(pnlPersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(9, 9, 9)
                 .addComponent(pnlCompanyInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        
-        
-        
+
         saveNewClient();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -513,6 +604,13 @@ public class NewClient extends javax.swing.JInternalFrame {
            JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code."); 
         }
     }//GEN-LAST:event_txtPostalCodeKeyTyped
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        EditCustomer objeto = new EditCustomer(this, txtID);
+        objeto.setVisible(true);
+        
+
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -550,6 +648,7 @@ public class NewClient extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEdit;
     private javax.swing.JComboBox comboDegree;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -572,7 +671,7 @@ public class NewClient extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlCompanyInformation;
-    private javax.swing.JPanel pnlPersonalInformation;
+    public javax.swing.JPanel pnlPersonalInformation;
     private javax.swing.JTextArea txtAddress;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCompanyName;
@@ -580,7 +679,8 @@ public class NewClient extends javax.swing.JInternalFrame {
     private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JTextField txtCountry;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtLastName;
+    private javax.swing.JTextField txtID;
+    public javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhone;
