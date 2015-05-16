@@ -27,6 +27,12 @@ public class MainMDI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -42,6 +48,23 @@ public class MainMDI extends javax.swing.JFrame {
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
+        editMenu1 = new javax.swing.JMenu();
+        cutMenuItem1 = new javax.swing.JMenuItem();
+        copyMenuItem1 = new javax.swing.JMenuItem();
+        pasteMenuItem1 = new javax.swing.JMenuItem();
+        deleteMenuItem1 = new javax.swing.JMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +152,33 @@ public class MainMDI extends javax.swing.JFrame {
 
         menuBar.add(helpMenu);
 
+        editMenu1.setMnemonic('e');
+        editMenu1.setText("GABINO");
+
+        cutMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        cutMenuItem1.setMnemonic('t');
+        cutMenuItem1.setText("New Location");
+        cutMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cutMenuItem1ActionPerformed(evt);
+            }
+        });
+        editMenu1.add(cutMenuItem1);
+
+        copyMenuItem1.setMnemonic('y');
+        copyMenuItem1.setText("Copy");
+        editMenu1.add(copyMenuItem1);
+
+        pasteMenuItem1.setMnemonic('p');
+        pasteMenuItem1.setText("Paste");
+        editMenu1.add(pasteMenuItem1);
+
+        deleteMenuItem1.setMnemonic('d');
+        deleteMenuItem1.setText("Delete");
+        editMenu1.add(deleteMenuItem1);
+
+        menuBar.add(editMenu1);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,6 +248,17 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(obj);
     }//GEN-LAST:event_menuUpdateCustomerActionPerformed
 
+    private void cutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItem1ActionPerformed
+          NewLocation obj = new NewLocation();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 300, 300);
+        
+        
+        obj.setVisible(true);
+        
+        desktopPane.add(obj);
+    }//GEN-LAST:event_cutMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,18 +298,29 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
+    private javax.swing.JMenuItem copyMenuItem1;
     private javax.swing.JMenuItem cutMenuItem;
+    private javax.swing.JMenuItem cutMenuItem1;
     private javax.swing.JMenuItem deleteMenuItem;
+    private javax.swing.JMenuItem deleteMenuItem1;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JMenu editMenu1;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuNewClient;
     private javax.swing.JMenuItem menuNewVehicle;
     public javax.swing.JMenuItem menuUpdateCustomer;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JMenuItem pasteMenuItem1;
     // End of variables declaration//GEN-END:variables
 
 }

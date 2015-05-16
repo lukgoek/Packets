@@ -45,14 +45,12 @@ public class NewVehicle extends javax.swing.JInternalFrame {
      }
      public void saveNewVehicle(){
          
-         String registrationdate = txtRegistrationDate.getText();
+         
          String dateremoved = txtDateRemoved.getText();
          String location = txtLocation.getText();
          
          
-          if(txtRegistrationDate.getText().equals("")){
-            registrationdate = "NULL";
-        }
+          
           if(txtDateRemoved.getText().equals("")){
             dateremoved = "NULL";
         }
@@ -62,17 +60,15 @@ public class NewVehicle extends javax.swing.JInternalFrame {
         }
           
                
-         if(txtBrand.getText().equals("") || txtModel.getText().equals("") || txtPlate.getText().equals("")){
+         if(txtBrand.getText().equals("") || txtModel.getText().equals("") || txtPlate.getText().equals("")|| txtRegistrationDate.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
     
-         obj = new Conexion();
-         cn =obj.conectar(); 
+                obj = new Conexion();
+                cn =obj.conectar(); 
 
-
-                
-                 String sql ="INSERT INTO vehiculos (marca, modelo, placa, numero_vehiculo, tipo_vehiculo, chofer, fecha_registro, fecha_eliminado, estado, localizacion) VALUES (?, ?, ?, ?, ?, ?, ?, MD5(?)?, ?, ?)";
+        String sql ="INSERT INTO vehiculos (marca, modelo, placa, numero_vehiculo, tipo_vehiculo, chofer, fecha_registro, fecha_eliminado, estado, localizacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                
                   String brand = txtBrand.getText();
                   String model = txtModel.getText();
@@ -80,6 +76,7 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                   String numbervehicle = txtNumVehicle.getText();
                   String type = comboType.getSelectedItem().toString();
                   String driver = comboDriver.getSelectedItem().toString();
+                  String registrationdate = txtRegistrationDate.getText();
                   String status = btngroupStatus.getSelection().toString();
                  
                      try {
@@ -101,7 +98,7 @@ public class NewVehicle extends javax.swing.JInternalFrame {
 
                              JOptionPane.showMessageDialog(rootPane, "Vehicle data has been saved.");
                      } catch (SQLException ex) {
-                         Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                         Logger.getLogger(NewVehicle.class.getName()).log(Level.SEVERE, null, ex);
                      }
    
          }
@@ -142,8 +139,8 @@ public class NewVehicle extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         txtBrand = new javax.swing.JTextField();
         comboType = new javax.swing.JComboBox();
-        btnGuardar = new javax.swing.JButton();
-        btnCerrar = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -285,24 +282,33 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnGuardar.setText("Save");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save1.png"))); // NOI18N
+        btnSave.setText("  Save");
+        btnSave.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save2.png"))); // NOI18N
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        btnCerrar.setText("Close");
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
+        btnClose.setText("Close");
+        btnClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(btnGuardar)
-                .addGap(36, 36, 36)
-                .addComponent(btnCerrar)
+                .addGap(108, 108, 108)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
@@ -316,17 +322,22 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCerrar)
-                    .addComponent(btnGuardar))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(btnSave)
+                    .addComponent(btnClose))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+
         saveNewVehicle();
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,8 +375,8 @@ public class NewVehicle extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCerrar;
-    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnSave;
     private javax.swing.ButtonGroup btngroupStatus;
     private javax.swing.JComboBox comboDriver;
     private javax.swing.JComboBox comboType;
