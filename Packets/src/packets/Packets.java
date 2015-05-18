@@ -15,7 +15,10 @@ public class Packets {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       MainMDI obj = new MainMDI();
+       obj.setVisible(true);
+       
+       
     }
     
 }

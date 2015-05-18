@@ -251,7 +251,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void cutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItem1ActionPerformed
           NewLocation obj = new NewLocation();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 300, 300);
+        obj.setBounds(50, 50, 350, 350);
         
         
         obj.setVisible(true);
