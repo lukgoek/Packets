@@ -1,5 +1,6 @@
 package packets;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -22,6 +23,25 @@ public class NewEmployee extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+        public void cleanPanels(){
+        
+       txtLastName.setText("");
+       txtName.setText("");
+       txtAddress.setText("");
+       txtPhone.setText("");
+       txtPostalCode.setText("");
+       txtEmail.setText("");
+       txtConfirmEmail.setText("");   
+       txtBranch.setText("");   
+       
+       
+       txtLastName.requestFocus();
+       
+    }
+
+    
+    
+    
     public void saveNewEmployee(){
         
         //recogemos el email
@@ -38,6 +58,19 @@ public class NewEmployee extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
+        
+            if(txtPostalCode.getText().length() < 5){
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+            return;
+                   
+        }
+
+       if(txtPhone.getText().length() < 7){
+            JOptionPane.showMessageDialog(rootPane, "Phone too short.");  
+            return;
+                   
+        }
+        
         
         //y esta valida que sean igual por ejemplo weroJOto = weroJOto
         if(txtEmail.getText().equals(txtConfirmEmail.getText())){
@@ -69,6 +102,7 @@ public class NewEmployee extends javax.swing.JInternalFrame {
                          consulta.setString(6, branch);                    
                          consulta.setString(7, email);
                          consulta.execute();
+                         cleanPanels();
 
 
                      JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
@@ -109,8 +143,8 @@ public class NewEmployee extends javax.swing.JInternalFrame {
         txtEmail = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         txtConfirmEmail = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -223,37 +257,42 @@ public class NewEmployee extends javax.swing.JInternalFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Save");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
+        jButton2.setText("Close");
+        jButton2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save1.png"))); // NOI18N
+        jButton1.setText("  Save");
+        jButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save2.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Close");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(jButton1)
-                .addGap(73, 73, 73)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -267,6 +306,30 @@ public class NewEmployee extends javax.swing.JInternalFrame {
         saveNewEmployee();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {                                       
+         int postalCodeSize = txtPostalCode.getText().length();
+        
+        System.out.println("char " +evt.getKeyChar());
+         
+        
+       if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
+               evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
+       || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
+        
+       }else{
+           evt.consume();
+       }
+       
+       
+        System.out.println("tamaño "+postalCodeSize);
+        if(postalCodeSize > 4){
+           evt.consume();
+           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code."); 
+        }
+    }                                      
+ 
+    
     /**
      * @param args the command line arguments
      */
@@ -292,6 +355,7 @@ public class NewEmployee extends javax.swing.JInternalFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NewEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
