@@ -102,8 +102,9 @@ public class MainMDI extends javax.swing.JFrame {
         });
         fileMenu.add(menuUpdateCustomer);
 
+        exitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
         exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
+        exitMenuItem.setText("Update Vehicle");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
@@ -261,7 +262,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void cutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItem1ActionPerformed
           NewLocation obj = new NewLocation();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 350, 350);
+        obj.setBounds(50, 50, 400, 300);
         
         
         obj.setVisible(true);
