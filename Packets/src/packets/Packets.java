@@ -15,9 +15,12 @@ public class Packets {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       MainMDI obj = new MainMDI();
-       obj.setVisible(true);
-       
+          /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainMDI().setVisible(true);
+            }
+        });
        
     }
     
