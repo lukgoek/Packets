@@ -505,7 +505,11 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnClose))
+<<<<<<< HEAD
                 .addContainerGap(41, Short.MAX_VALUE))
+=======
+                .addContainerGap(61, Short.MAX_VALUE))
+>>>>>>> ecd91e689b576061e19b30e0361a33fc978b910a
         );
 
         pack();

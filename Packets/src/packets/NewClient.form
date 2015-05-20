@@ -69,7 +69,11 @@
                   <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+<<<<<<< HEAD
               <EmptySpace pref="41" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="61" max="32767" attributes="0"/>
+>>>>>>> ecd91e689b576061e19b30e0361a33fc978b910a
           </Group>
       </Group>
     </DimensionLayout>

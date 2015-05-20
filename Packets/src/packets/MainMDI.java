@@ -69,6 +69,8 @@ public class MainMDI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        desktopPane.setLayout(null);
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu Options");
 
@@ -176,8 +178,14 @@ public class MainMDI extends javax.swing.JFrame {
         });
         editMenu1.add(cutMenuItem1);
 
+        copyMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         copyMenuItem1.setMnemonic('y');
-        copyMenuItem1.setText("Copy");
+        copyMenuItem1.setText("NewTypeVehicle");
+        copyMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyMenuItem1ActionPerformed(evt);
+            }
+        });
         editMenu1.add(copyMenuItem1);
 
         pasteMenuItem1.setMnemonic('p');
@@ -282,6 +290,18 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(obj);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void copyMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItem1ActionPerformed
+        
+        NewTypeVehicle obj = new NewTypeVehicle();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 400, 400);
+        
+        
+        obj.setVisible(true);
+        
+        desktopPane.add(obj);
+    }//GEN-LAST:event_copyMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
