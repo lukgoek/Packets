@@ -168,15 +168,15 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                   System.out.println("status "+status);
                  
                      try {
-                       PreparedStatement consulta = cn.prepareStatement(sql);
-                         consulta.setString(1, brand);
-                         consulta.setString(2, model);
-                         consulta.setString(3, plate);
-                         consulta.setString(4, numbervehicle);
-                         consulta.setString(5, type);
-                         consulta.setString(6, driver);
-                         consulta.setString(7, status);
-                         consulta.execute();
+                       PreparedStatement query = cn.prepareStatement(sql);
+                         query.setString(1, brand);
+                         query.setString(2, model);
+                         query.setString(3, plate);
+                         query.setString(4, numbervehicle);
+                         query.setString(5, type);
+                         query.setString(6, driver);
+                         query.setString(7, status);
+                         query.execute();
                          
                          cleanPanels();
 

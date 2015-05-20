@@ -37,12 +37,12 @@ public class NewLocation extends javax.swing.JInternalFrame {
          String id_sucursal = txtIDSucursal.getText();
          
         try {
-                       PreparedStatement consulta = cn.prepareStatement(sql);
-                         consulta.setString(1, id);
-                         consulta.setString(2, description);
-                         consulta.setString(3, id_sucursal);
+                       PreparedStatement query = cn.prepareStatement(sql);
+                         query.setString(1, id);
+                         query.setString(2, description);
+                         query.setString(3, id_sucursal);
                       
-                         consulta.execute();
+                         query.execute();
                          
                          JOptionPane.showMessageDialog(rootPane, "Location data has been saved.");
                      } catch (SQLException ex) {
