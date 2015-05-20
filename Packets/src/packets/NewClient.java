@@ -216,7 +216,7 @@ public class NewClient extends javax.swing.JInternalFrame {
         setTitle("New Client");
         setPreferredSize(new java.awt.Dimension(704, 587));
 
-        pnlPersonalInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personal Information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        pnlPersonalInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personal Information", 2, 0, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
         jLabel6.setText("*City:");
 
@@ -239,11 +239,11 @@ public class NewClient extends javax.swing.JInternalFrame {
         jLabel1.setText("*Postal Code:");
 
         txtPostalCode.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPostalCodeKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPostalCodeKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPostalCodeKeyPressed(evt);
             }
         });
 
@@ -403,7 +403,7 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlCompanyInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Company Information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        pnlCompanyInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Company Information", 2, 0, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
         jLabel9.setText("Name:");
 
@@ -505,7 +505,7 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnClose))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
