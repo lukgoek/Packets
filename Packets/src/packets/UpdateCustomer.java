@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,8 +29,41 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
         
     public UpdateCustomer() {
         initComponents();
+        updateComboDegree();
     }
     
+    
+    public void updateComboDegree(){
+         obj = new Conexion();
+        cn =obj.conectar();
+     
+        //declaramos la consulta
+        String sql ="SELECT descripcion FROM tipo_titulo";
+        
+        String []datos;
+   
+        try{
+            //Objeto statement es una consulta preparada
+            //se obtiene de la conexion
+            Statement consulta = cn.createStatement();  
+            //resultSet objeto que pèrmite recorrer las filas en una consulta
+            ResultSet rs = consulta.executeQuery(sql);
+        
+            //.next() manda al siguiente registro (devuelve true si tiene informacion)
+            while(rs.next()){
+                //asignamos tamaño al arreglo
+                datos = new String[8];
+                
+                //.getString(); recoge datos
+                datos[0] = rs.getString("descripcion");
+                comboDegree.addItem(datos[0]);
+            }
+        
+        }catch(Exception ex){
+            ex.printStackTrace();
+            
+        }
+    }
     
     
     public void updateCustomerMethod(){
@@ -383,6 +417,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
         jLabel17 = new javax.swing.JLabel();
         txtConfirmEmail = new javax.swing.JTextField();
         btnEdit = new javax.swing.JButton();
+        btnEdit1 = new javax.swing.JButton();
         pnlCompanyInformation = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -433,8 +468,6 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
         jLabel12.setText("*Degree:");
 
-        comboDegree.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dr.", "Lic.", "Dra.", "QFB." }));
-
         jLabel13.setText("e-mail:");
 
         jLabel14.setText("*Username:");
@@ -451,6 +484,15 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
+            }
+        });
+
+        btnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit1.png"))); // NOI18N
+        btnEdit1.setText(" Edit");
+        btnEdit1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit2.png"))); // NOI18N
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEdit1ActionPerformed(evt);
             }
         });
 
@@ -475,16 +517,6 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                             .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                         .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addComponent(comboDegree, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEmail))
-                            .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -497,7 +529,20 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(txtConfirmPassword))))
+                                    .addComponent(txtConfirmPassword)))
+                            .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
+                                        .addComponent(comboDegree, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtEmail))))
                         .addContainerGap())
                     .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
                         .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -550,8 +595,9 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6)
                             .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
-                            .addComponent(comboDegree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(comboDegree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEdit1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -701,7 +747,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                     .addComponent(btnUpdateCustomer)
                     .addComponent(btnClose)
                     .addComponent(btnDelete))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -775,6 +821,11 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
          } 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
+        NewDegree objeto = new NewDegree();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_btnEdit1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -815,6 +866,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnEdit1;
     private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.JComboBox comboDegree;
     private javax.swing.JLabel jLabel1;
