@@ -7,6 +7,7 @@ package packets;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
 
 
@@ -35,7 +36,8 @@ public class Conexion {
             
             
         }catch(Exception ex){
-            System.out.println("Error: "+ex);
+            System.out.println("error:"+ex);
+            JOptionPane.showMessageDialog(null, "Connection error", "", 1);
             
         }
         
