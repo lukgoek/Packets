@@ -26,26 +26,25 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `clientes`
 --
 
-CREATE TABLE IF NOT EXISTS `clientes` (
+CREATE TABLE IF NOT EXISTS `customers` (
 `ID` int(5) NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `apellidos` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `nombre_compañia` varchar(70) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `company_name` varchar(70) COLLATE utf8_spanish_ci DEFAULT NULL,
   `RFC` varchar(12) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `numero` int(6) NOT NULL,
-  `CP` int(5) NOT NULL,
-  `ciudad` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `estado` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `pais` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `puesto` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `titulo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `address` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `postal_code` int(5) NOT NULL,
+  `city` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `state` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `country` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `position` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `degree` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
-  `nombre_usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `contraseña` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `fecha_eliminado` datetime DEFAULT NULL
+  `username` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_removed` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -54,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `clientes` (
 -- Estructura de tabla para la tabla `costo_envio`
 --
 
-CREATE TABLE IF NOT EXISTS `costo_envio` (
+CREATE TABLE IF NOT EXISTS `shipments_costs` (
   `about` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `package` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `overweight` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
@@ -66,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `costo_envio` (
 -- Estructura de tabla para la tabla `empleados`
 --
 
-CREATE TABLE IF NOT EXISTS `empleados` (
+CREATE TABLE IF NOT EXISTS `employees` (
 `id` int(15) NOT NULL,
   `last_name` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -94,7 +93,7 @@ INSERT INTO `empleados` (`id`, `last_name`, `name`, `address`, `phone`, `postal_
 -- Estructura de tabla para la tabla `envio`
 --
 
-CREATE TABLE IF NOT EXISTS `envio` (
+CREATE TABLE IF NOT EXISTS `shipments` (
 `id` int(5) NOT NULL,
   `location` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `number_guide` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -112,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `envio` (
 -- Estructura de tabla para la tabla `localizacion`
 --
 
-CREATE TABLE IF NOT EXISTS `localizacion` (
+CREATE TABLE IF NOT EXISTS `location` (
 `id` int(5) NOT NULL,
   `description` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `id_branch` int(10) NOT NULL
@@ -124,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `localizacion` (
 -- Estructura de tabla para la tabla `sucursales`
 --
 
-CREATE TABLE IF NOT EXISTS `sucursales` (
+CREATE TABLE IF NOT EXISTS `branchs` (
 `id` int(11) NOT NULL,
   `branch_name` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `address` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -143,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `sucursales` (
 -- Estructura de tabla para la tabla `tipo_titulo`
 --
 
-CREATE TABLE IF NOT EXISTS `tipo_titulo` (
+CREATE TABLE IF NOT EXISTS `type_degree` (
 `id` int(5) NOT NULL,
   `descripcion` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
@@ -154,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `tipo_titulo` (
 -- Estructura de tabla para la tabla `tipo_vehiculo`
 --
 
-CREATE TABLE IF NOT EXISTS `tipo_vehiculo` (
+CREATE TABLE IF NOT EXISTS `type_vehicles` (
 `id` int(5) NOT NULL,
   `capacity_weight` varchar(15) NOT NULL,
   `type` varchar(30) NOT NULL
@@ -166,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `tipo_vehiculo` (
 -- Estructura de tabla para la tabla `vehiculos`
 --
 
-CREATE TABLE IF NOT EXISTS `vehiculos` (
+CREATE TABLE IF NOT EXISTS `vehicles` (
 `id` int(5) NOT NULL,
   `brand` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `model` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,

@@ -6,6 +6,7 @@
  */
 package packets;
 
+import static com.oracle.webservices.internal.api.databinding.DatabindingModeFeature.ID;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -698,9 +699,9 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
             }
         });
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
-        btnDelete.setText("Close");
-        btnDelete.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete1.png"))); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete2.png"))); // NOI18N
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -798,26 +799,31 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         
-        int ID = Integer.parseInt(txtID.getText());
-        int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete customer with id: "+ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
         
         
-         if(decision == 0){
-             
-         
-            String sql ="UPDATE clientes SET fecha_eliminado = NOW() WHERE id=?";
-        
-            try{
-                
-                PreparedStatement query = cn.prepareStatement(sql);
-                query.setInt(1, ID);
-                 query.execute();
-                JOptionPane.showMessageDialog(this, "Customer has been removed.");
-                cleanPanels();
-            }catch(Exception e){
-    
-            }   
-                
+        if(txtID.getText().equals("")){
+           JOptionPane.showConfirmDialog(this, "You need select one customer first. ", "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1); 
+        }else{
+            int ID = Integer.parseInt(txtID.getText());
+            int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete customer with id: "+ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
+
+
+             if(decision == 0){
+
+
+                String sql ="UPDATE clientes SET fecha_eliminado = NOW() WHERE id=?";
+
+                try{
+
+                    PreparedStatement query = cn.prepareStatement(sql);
+                    query.setInt(1, ID);
+                     query.execute();
+                    JOptionPane.showMessageDialog(this, "Customer has been removed.");
+                    cleanPanels();
+                }catch(Exception e){
+
+                }   
+             } 
          } 
     }//GEN-LAST:event_btnDeleteActionPerformed
 

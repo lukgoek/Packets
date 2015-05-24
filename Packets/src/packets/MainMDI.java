@@ -34,6 +34,7 @@ public class MainMDI extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         desktopPane = new javax.swing.JDesktopPane();
+        lblBackground = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         menuNewClient = new javax.swing.JMenuItem();
@@ -70,10 +71,16 @@ public class MainMDI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/packets_logo.png"))); // NOI18N
+        desktopPane.add(lblBackground);
+        lblBackground.setBounds(0, 0, 1000, 840);
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu Options");
 
         menuNewClient.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        menuNewClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Customer.png"))); // NOI18N
         menuNewClient.setMnemonic('o');
         menuNewClient.setText("New Customer");
         menuNewClient.addActionListener(new java.awt.event.ActionListener() {
@@ -383,6 +390,7 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JLabel lblBackground;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuNewClient;
     private javax.swing.JMenuItem menuNewVehicle;
