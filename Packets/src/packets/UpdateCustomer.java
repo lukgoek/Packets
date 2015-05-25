@@ -6,7 +6,7 @@
  */
 package packets;
 
-import static com.oracle.webservices.internal.api.databinding.DatabindingModeFeature.ID;
+
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,6 +37,10 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     public void updateComboDegree(){
          obj = new Conexion();
         cn =obj.conectar();
+        
+        
+        comboDegree.removeAllItems();
+        
      
         //declaramos la consulta
         String sql ="SELECT descripcion FROM tipo_titulo";
@@ -496,6 +500,11 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                 btnEdit1ActionPerformed(evt);
             }
         });
+        btnEdit1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnEdit1FocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlPersonalInformationLayout = new javax.swing.GroupLayout(pnlPersonalInformation);
         pnlPersonalInformation.setLayout(pnlPersonalInformationLayout);
@@ -748,7 +757,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                     .addComponent(btnUpdateCustomer)
                     .addComponent(btnClose)
                     .addComponent(btnDelete))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -831,6 +840,11 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
         NewDegree objeto = new NewDegree();
         objeto.setVisible(true);
     }//GEN-LAST:event_btnEdit1ActionPerformed
+
+    private void btnEdit1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEdit1FocusGained
+        
+        updateComboDegree();
+    }//GEN-LAST:event_btnEdit1FocusGained
 
     /**
      * @param args the command line arguments

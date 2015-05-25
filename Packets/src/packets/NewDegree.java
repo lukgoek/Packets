@@ -296,6 +296,7 @@ public class NewDegree extends javax.swing.JFrame {
 
                                  JOptionPane.showMessageDialog(rootPane, "Degree data has been saved.");
                                  updateTableDegree();
+                                 this.dispose();
                          } catch (SQLException ex) {
                              Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
                          }

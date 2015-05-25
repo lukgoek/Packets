@@ -33,6 +33,7 @@ public class MainMDI extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         desktopPane = new javax.swing.JDesktopPane();
         lblBackground = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
@@ -69,8 +70,13 @@ public class MainMDI extends javax.swing.JFrame {
         jMenu4.setText("Edit");
         jMenuBar2.add(jMenu4);
 
+        jMenuItem2.setText("jMenuItem2");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        desktopPane.setLayout(null);
+
+        lblBackground.setBackground(new java.awt.Color(255, 255, 255));
         lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/packets_logo.png"))); // NOI18N
         desktopPane.add(lblBackground);
@@ -264,7 +270,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
         NewEmployee obj = new NewEmployee();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 650, 700);
+        obj.setBounds(50, 50, 650, 500);
         
         
         obj.setVisible(true);
@@ -298,7 +304,7 @@ public class MainMDI extends javax.swing.JFrame {
        
         NewBranch obj = new NewBranch();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 650, 700);
+        obj.setBounds(50, 50, 650, 400);
         
         
         obj.setVisible(true);
@@ -390,6 +396,7 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuNewClient;
