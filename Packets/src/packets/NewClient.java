@@ -55,7 +55,7 @@ public class NewClient extends javax.swing.JInternalFrame {
     
     
     private void saveNewClient(){
-        
+        System.out.println(txtPassword.getText());
         //recogemos el email
         String email = txtEmail.getText();
         String companyName = txtCompanyName.getText();
