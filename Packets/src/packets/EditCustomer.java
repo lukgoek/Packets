@@ -50,7 +50,7 @@ public class EditCustomer extends javax.swing.JFrame {
         
         
         //declaramos la consulta
-        String sql ="SELECT id, nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, nombre_compañia, rfc, puesto FROM clientes WHERE fecha_eliminado IS NULL";
+        String sql ="SELECT id, name, last_name, address, phone, postal_code, city, state, country, degree, email, username, company_name, rfc, position FROM customers WHERE date_removed IS NULL";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();
@@ -80,9 +80,9 @@ public class EditCustomer extends javax.swing.JFrame {
         try{
             //Objeto statement es una consulta preparada
             //se obtiene de la conexion
-            Statement consulta = cn.createStatement();  
+            Statement query = cn.createStatement();  
             //resultSet objeto que pèrmite recorrer las filas en una consulta
-            ResultSet rs = consulta.executeQuery(sql);
+            ResultSet rs = query.executeQuery(sql);
         
             //.next() manda al siguiente registro (devuelve true si tiene informacion)
             while(rs.next()){
@@ -90,20 +90,20 @@ public class EditCustomer extends javax.swing.JFrame {
                 datos = new String[14];
                 
                 //.getString(); recoge datos
-                datos[0] = rs.getString("ID");
-                datos[1] = rs.getString("nombre");
-                datos[2] = rs.getString("apellidos");
-                datos[3] = rs.getString("direccion");
-                datos[4] = rs.getString("telefono");
-                datos[5] = rs.getString("ciudad");
-                datos[6] = rs.getString("estado");
-                datos[7] = rs.getString("pais");
-                datos[8] = rs.getString("titulo");
+                datos[0] = rs.getString("id");
+                datos[1] = rs.getString("name");
+                datos[2] = rs.getString("last_name");
+                datos[3] = rs.getString("address");
+                datos[4] = rs.getString("phone");
+                datos[5] = rs.getString("city");
+                datos[6] = rs.getString("state");
+                datos[7] = rs.getString("country");
+                datos[8] = rs.getString("degree");
                 datos[9] = rs.getString("email");
-                datos[10] = rs.getString("nombre_usuario");
-                datos[11] = rs.getString("nombre_compañia");
+                datos[10] = rs.getString("username");
+                datos[11] = rs.getString("company_name");
                 datos[12] = rs.getString("rfc");
-                datos[13] = rs.getString("puesto");
+                datos[13] = rs.getString("position");
                 //agregamos los datos al modelo
                 model.addRow(datos);
 

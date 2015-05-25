@@ -258,7 +258,7 @@ public class NewDegree extends javax.swing.JFrame {
                 data = new String[2];
                 
                 data[0] = rs.getString("id");
-                data[1] = rs.getString("descripcion");
+                data[1] = rs.getString("description");
                 
                 model.addRow(data);
 
