@@ -46,7 +46,7 @@ public class EditTypeVehicle extends javax.swing.JInternalFrame {
         cn =obj.conectar();
         
      //declaramos la consulta
-        String sql ="SELECT id, capacidad_peso, tipo FROM tipo_vehiculo";
+        String sql ="SELECT id, capacity_weight, type FROM type_vehicle";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();
@@ -64,9 +64,9 @@ public class EditTypeVehicle extends javax.swing.JInternalFrame {
         try{
             //Objeto statement es una consulta preparada
             //se obtiene de la conexion
-            Statement consulta = cn.createStatement();  
+            Statement query = cn.createStatement();  
             //resultSet objeto que pèrmite recorrer las filas en una consulta
-            ResultSet rs = consulta.executeQuery(sql);
+            ResultSet rs = query.executeQuery(sql);
         
             //.next() manda al siguiente registro (devuelve true si tiene informacion)
             while(rs.next()){
@@ -75,8 +75,8 @@ public class EditTypeVehicle extends javax.swing.JInternalFrame {
                 
                 //.getString(); recoge datos
                 datos[0] = rs.getString("id");
-                datos[1] = rs.getString("capacidad_peso");
-                datos[2] = rs.getString("tipo");
+                datos[1] = rs.getString("capacity_weight");
+                datos[2] = rs.getString("type");
               
                 
                 //agregamos los datos al modelo

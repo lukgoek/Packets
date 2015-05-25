@@ -6,7 +6,7 @@
  */
 package packets;
 
-import static com.oracle.webservices.internal.api.databinding.DatabindingModeFeature.ID;
+
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
