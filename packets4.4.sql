@@ -83,10 +83,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
 --
 -- Volcado de datos para la tabla `empleados`
 --
-
-INSERT INTO `empleados` (`id`, `last_name`, `name`, `address`, `phone`, `postal_code`, `branch`, `type_employee`, `email`, `sex`, `registration_date`, `date_removed`) VALUES
-(1, 'Lopez', 'Paul', '1234d', '9820269', 82000, '1', 'Conductor', 'paul_1mk@hotmail.com', 'Male.', '2015-05-25 00:00:35', '2015-05-25 00:00:35');
-
+--
 -- --------------------------------------------------------
 
 --
@@ -181,9 +178,7 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
 --
 -- Volcado de datos para la tabla `vehiculos`
 --
-
-INSERT INTO `vehiculos` (`id`, `brand`, `model`, `plate`, `number_vehicle`, `type_vehicle`, `driver`, `registration_date`, `removed_date`, `status`) VALUES
-(1, 'Ford', 'F-150', 'GC265H93', '01', 'Camioneta', 'Gabino Cortez', '2015-05-18 11:06:41', NULL, 'javax.swing.ButtonGroup@11cfb589');
+--
 
 --
 -- Índices para tablas volcadas
@@ -192,49 +187,49 @@ INSERT INTO `vehiculos` (`id`, `brand`, `model`, `plate`, `number_vehicle`, `typ
 --
 -- Indices de la tabla `clientes`
 --
-ALTER TABLE `clientes`
+ALTER TABLE `customers`
  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indices de la tabla `empleados`
 --
-ALTER TABLE `empleados`
+ALTER TABLE `employees`
  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `envio`
 --
-ALTER TABLE `envio`
+ALTER TABLE `shipments`
  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `localizacion`
 --
-ALTER TABLE `localizacion`
+ALTER TABLE `location`
  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `sucursales`
 --
-ALTER TABLE `sucursales`
+ALTER TABLE `branchs`
  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tipo_titulo`
 --
-ALTER TABLE `tipo_titulo`
+ALTER TABLE `type_degree`
  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tipo_vehiculo`
 --
-ALTER TABLE `tipo_vehiculo`
+ALTER TABLE `type_vehicles`
  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `vehiculos`
 --
-ALTER TABLE `vehiculos`
+ALTER TABLE `vehicles`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -244,42 +239,42 @@ ALTER TABLE `vehiculos`
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
-ALTER TABLE `clientes`
+ALTER TABLE `customers`
 MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
-ALTER TABLE `empleados`
+ALTER TABLE `employees`
 MODIFY `id` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `envio`
 --
-ALTER TABLE `envio`
+ALTER TABLE `shipments`
 MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `localizacion`
 --
-ALTER TABLE `localizacion`
+ALTER TABLE `location`
 MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
-ALTER TABLE `sucursales`
+ALTER TABLE `branchs`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `tipo_titulo`
 --
-ALTER TABLE `tipo_titulo`
+ALTER TABLE `type_degree`
 MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `tipo_vehiculo`
 --
-ALTER TABLE `tipo_vehiculo`
+ALTER TABLE `type_vehicles`
 MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
-ALTER TABLE `vehiculos`
+ALTER TABLE `vehicles`
 MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
