@@ -52,6 +52,7 @@ public class MainMDI extends javax.swing.JFrame {
         editMenu1 = new javax.swing.JMenu();
         cutMenuItem1 = new javax.swing.JMenuItem();
         copyMenuItem1 = new javax.swing.JMenuItem();
+        menuNewVehicle2 = new javax.swing.JMenuItem();
         pasteMenuItem1 = new javax.swing.JMenuItem();
         deleteMenuItem1 = new javax.swing.JMenuItem();
 
@@ -68,8 +69,6 @@ public class MainMDI extends javax.swing.JFrame {
         jMenuBar2.add(jMenu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        desktopPane.setLayout(null);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu Options");
@@ -188,6 +187,16 @@ public class MainMDI extends javax.swing.JFrame {
         });
         editMenu1.add(copyMenuItem1);
 
+        menuNewVehicle2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        menuNewVehicle2.setMnemonic('s');
+        menuNewVehicle2.setText("Update Type Vehicle");
+        menuNewVehicle2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNewVehicle2ActionPerformed(evt);
+            }
+        });
+        editMenu1.add(menuNewVehicle2);
+
         pasteMenuItem1.setMnemonic('p');
         pasteMenuItem1.setText("Paste");
         editMenu1.add(pasteMenuItem1);
@@ -303,6 +312,19 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(obj);
     }//GEN-LAST:event_copyMenuItem1ActionPerformed
 
+    private void menuNewVehicle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewVehicle2ActionPerformed
+        // TODO add your handling code here:
+        UpdateTypeVehicle obj = new UpdateTypeVehicle();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 500, 500);
+        
+        //tamaño del internal frame
+        //obj.setSize(700, 800);
+        obj.setVisible(true);
+        
+        desktopPane.add(obj);
+    }//GEN-LAST:event_menuNewVehicle2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -364,6 +386,7 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuNewClient;
     private javax.swing.JMenuItem menuNewVehicle;
+    private javax.swing.JMenuItem menuNewVehicle2;
     public javax.swing.JMenuItem menuUpdateCustomer;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem pasteMenuItem1;

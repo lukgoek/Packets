@@ -9,26 +9,26 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author genesisaurora
  */
-public class EditVehicle extends javax.swing.JInternalFrame {
-
-   Conexion obj;
-    Connection cn;
-    UpdateVehicle objeto;
+public class EditTypeVehicle extends javax.swing.JInternalFrame {
     
-    public EditVehicle() {
+    Conexion obj;
+    Connection cn;
+    UpdateTypeVehicle objeto;
+ 
+    public EditTypeVehicle() {
         initComponents();
-         updateTable();
+        updateTable();
     }
-
-     public EditVehicle(UpdateVehicle updateVehicle, JTextField ID) {
+    
+     public EditTypeVehicle(UpdateTypeVehicle updateTypeVehicle, JTextField ID) {
         initComponents();
         updateTable();
         //solamente cerramos la ventana no cerreamos la applicacion
@@ -38,29 +38,23 @@ public class EditVehicle extends javax.swing.JInternalFrame {
         cn = obj.conectar();
         
         this.txtID = ID;
-        this.objeto = updateVehicle;
+        this.objeto = updateTypeVehicle;
         
     }
      public void updateTable(){
         obj = new Conexion();
         cn =obj.conectar();
         
-        
-        
-        //declaramos la consulta
-        String sql ="SELECT id, marca, modelo, placa, numero_vehiculo, tipo_vehiculo, chofer, estado FROM vehiculos WHERE fecha_eliminado IS NULL";
+     //declaramos la consulta
+        String sql ="SELECT id, capacidad_peso, tipo FROM tipo_vehiculo";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();
         
         //definimos las columnas de nuestra tabla
         model.addColumn("ID");
-        model.addColumn("Marca");
-        model.addColumn("Placa");
-        model.addColumn("Modelo");
-        model.addColumn("Numero Vehiculo");
-        model.addColumn("Chofer");
-        model.addColumn("Estado");
+        model.addColumn("Weight");
+        model.addColumn("Type Vehicle");
                 
         String []datos;
         
@@ -77,16 +71,13 @@ public class EditVehicle extends javax.swing.JInternalFrame {
             //.next() manda al siguiente registro (devuelve true si tiene informacion)
             while(rs.next()){
                 //asignamos tamaño al arreglo
-                datos = new String[7];
+                datos = new String[3];
                 
                 //.getString(); recoge datos
                 datos[0] = rs.getString("id");
-                datos[1] = rs.getString("marca");
-                datos[2] = rs.getString("placa");
-                datos[3] = rs.getString("modelo");
-                datos[4] = rs.getString("numero_vehiculo");
-                datos[5] = rs.getString("chofer");
-                datos[6] = rs.getString("estado");
+                datos[1] = rs.getString("capacidad_peso");
+                datos[2] = rs.getString("tipo");
+              
                 
                 //agregamos los datos al modelo
                 model.addRow(datos);
@@ -95,14 +86,15 @@ public class EditVehicle extends javax.swing.JInternalFrame {
             }
             
             //agregamos el modelo a la tabla
-            tbDataVehicle.setModel(model);
+            tbDataTypeVehicle.setModel(model);
         
         }catch(Exception ex){
             ex.printStackTrace();
             
         }
-        
-    }
+}     
+ 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,14 +104,22 @@ public class EditVehicle extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbDataVehicle = new javax.swing.JTable();
-        btSendVehicle = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btSendTypeVehicle = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbDataTypeVehicle = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tbDataVehicle.setModel(new javax.swing.table.DefaultTableModel(
+        btSendTypeVehicle.setText("Edit");
+        btSendTypeVehicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSendTypeVehicleActionPerformed(evt);
+            }
+        });
+
+        tbDataTypeVehicle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -130,67 +130,66 @@ public class EditVehicle extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbDataVehicle);
+        jScrollPane1.setViewportView(tbDataTypeVehicle);
 
-        btSendVehicle.setText("Edit");
-        btSendVehicle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSendVehicleActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(btSendTypeVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSendTypeVehicle)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(btSendVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btSendVehicle)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(382, 382, 382))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(133, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSendVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendVehicleActionPerformed
-        int rowSelected = tbDataVehicle.getSelectedRow();
+    private void btSendTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendTypeVehicleActionPerformed
+        int rowSelected = tbDataTypeVehicle.getSelectedRow();
 
         if(rowSelected <= -1){
-            JOptionPane.showMessageDialog(rootPane, "You need to select one Vehicle to continue.", "¡ERROR!", 1);
+            JOptionPane.showMessageDialog(rootPane, "You need to select one Type Vehicle to continue.", "¡ERROR!", 1);
         }else{
 
             this.dispose();
-            String selectedID = tbDataVehicle.getValueAt(rowSelected, 0).toString();
+            String selectedID = tbDataTypeVehicle.getValueAt(rowSelected, 0).toString();
             txtID.setText(selectedID);
 
-            objeto.editVehicle();
+            objeto.editTypeVehicle();
 
             // this.dispose();
 
-        }
-
-    }//GEN-LAST:event_btSendVehicleActionPerformed
+}
+    }//GEN-LAST:event_btSendTypeVehicleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,29 +208,29 @@ public class EditVehicle extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditVehicle().setVisible(true);
+                new EditTypeVehicle().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btSendVehicle;
+    private javax.swing.JButton btSendTypeVehicle;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbDataVehicle;
+    private javax.swing.JTable tbDataTypeVehicle;
     private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables
 }

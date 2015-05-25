@@ -3,61 +3,64 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package packets;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author fimaz2014
+ * @author genesisaurora
  */
-public class NewTypeVehicle extends javax.swing.JInternalFrame {
+public class UpdateTypeVehicle extends javax.swing.JFrame {
 
-      Conexion obj;  
-      Connection cn;
-      
-    public NewTypeVehicle() {
+    Conexion obj;  
+    Connection cn;
+    public UpdateTypeVehicle() {
         initComponents();
     }
-     public void cleanPanels(){
+
+     public void updateTypeVehicle(){
         
-       txtTypeVehicle.setText("");
-       txtWeight.setText("");
-       
-     }
-    public void saveNewTypeVehicle(){
-        if(txtTypeVehicle.getText().equals("") || txtWeight.getText().equals("")){
+        int ID = Integer.parseInt(txtID.getText());
+        int decision = JOptionPane.showConfirmDialog(this, "All information is correct?", "¡Review the information!", JOptionPane.YES_NO_OPTION, 2);
+        
+        
+         if(decision == 0){
+               
+                if(txtTypeVehicle.getText().equals("") || txtWeight.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
-        }
-           obj = new Conexion();
-                cn =obj.conectar(); 
-
-        String sql ="INSERT INTO tipo_vehiculo (tipo, capacidad_peso ) VALUES (?, ?)";
-               
-                  String type_vehicle = txtTypeVehicle.getText();
-                  String weight = txtWeight.getText();
-                 
-                  try {
-                       PreparedStatement query = cn.prepareStatement(sql);
-                         query.setString(1, type_vehicle);
-                         query.setString(2, weight);
-                         query.execute();
+            }
+         
+              
+                    obj = new Conexion();
+                    cn =obj.conectar(); 
+                    
+                
+                            String typevehicle = txtTypeVehicle.getText();
+                            String weight = txtWeight.getText();
                          
-                         cleanPanels();
+                          
 
+                   String sql ="UPDATE tipo_vehiculo SET capacidad_peso = ?, tipo = ? WHERE id=?";
 
-                             JOptionPane.showMessageDialog(rootPane, "Type Vehicle data has been saved.");
-                     } catch (SQLException ex) {
-                         Logger.getLogger(NewTypeVehicle.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-        
+                   try{
+
+                       PreparedStatement query = cn.prepareStatement(sql);
+                            query.setString(1, typevehicle);
+                             query.setString(2, weight);
+                         
+                        query.setInt(3, ID);
+                        query.execute();
+                        
+                       JOptionPane.showMessageDialog(this, "TypeVehicle has been Updated.");
+                      
+                   }catch(Exception e){
+
+                   }     
+     }   
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,8 +77,10 @@ public class NewTypeVehicle extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtTypeVehicle = new javax.swing.JTextField();
         btnEdit = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
+        btnUpdateTypeVehicle = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        txtID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,21 +134,30 @@ public class NewTypeVehicle extends javax.swing.JInternalFrame {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save1.png"))); // NOI18N
-        btnSave.setText("  Save");
-        btnSave.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save2.png"))); // NOI18N
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateTypeVehicle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update1.png"))); // NOI18N
+        btnUpdateTypeVehicle.setText("  Update");
+        btnUpdateTypeVehicle.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update2.png"))); // NOI18N
+        btnUpdateTypeVehicle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnUpdateTypeVehicleActionPerformed(evt);
             }
         });
 
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
-        btnClose.setText("Close");
+        btnClose.setText("Delete");
         btnClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
+        btnDelete.setText("Close");
+        btnDelete.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -152,50 +166,81 @@ public class NewTypeVehicle extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnUpdateTypeVehicle)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnClose))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(btnUpdateTypeVehicle)
+                    .addComponent(btnClose)
+                    .addComponent(btnDelete))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-       UpdateTypeVehicle obj = new UpdateTypeVehicle();
+        /* UpdateTypeVehicle obj = new UpdateTypeVehicle();
         MainMDI MainMDI = new MainMDI();
         obj.setBounds(50, 50, 650, 700);
 
         obj.setVisible(true);
 
-        MainMDI.add(obj);
+        MainMDI.add(obj);*/
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void btnUpdateTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTypeVehicleActionPerformed
 
-        saveNewTypeVehicle();
-    }//GEN-LAST:event_btnSaveActionPerformed
+        updateTypeVehicle();
+    }//GEN-LAST:event_btnUpdateTypeVehicleActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        int ID = Integer.parseInt(txtID.getText());
+        int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete Type Vehicle with id: "+ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
+
+        if(decision == 0){
+
+            String sql ="UPDATE tipo_vehiculo WHERE id=?";
+
+            try{
+
+                PreparedStatement query = cn.prepareStatement(sql);
+                query.setInt(1, ID);
+                query.execute();
+                JOptionPane.showMessageDialog(this, "Type Vehicle has been removed.");
+               
+            }catch(Exception e){
+
+            }
+
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,33 +259,38 @@ public class NewTypeVehicle extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewTypeVehicle().setVisible(true);
+                new UpdateTypeVehicle().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnUpdateTypeVehicle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtTypeVehicle;
     private javax.swing.JTextField txtWeight;
     // End of variables declaration//GEN-END:variables
+
+    void editTypeVehicle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
