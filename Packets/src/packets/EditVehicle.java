@@ -48,19 +48,19 @@ public class EditVehicle extends javax.swing.JInternalFrame {
         
         
         //declaramos la consulta
-        String sql ="SELECT id, marca, modelo, placa, numero_vehiculo, tipo_vehiculo, chofer, estado FROM vehiculos WHERE fecha_eliminado IS NULL";
+        String sql ="SELECT id, brand, model, plate, number_vehicle, type_vehicle, driver, status FROM vehicle WHERE removed_date IS NULL";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();
         
         //definimos las columnas de nuestra tabla
         model.addColumn("ID");
-        model.addColumn("Marca");
-        model.addColumn("Placa");
-        model.addColumn("Modelo");
-        model.addColumn("Numero Vehiculo");
-        model.addColumn("Chofer");
-        model.addColumn("Estado");
+        model.addColumn("brand");
+        model.addColumn("Plate");
+        model.addColumn("Model");
+        model.addColumn("Number Vehicle");
+        model.addColumn("Driver");
+        model.addColumn("Status");
                 
         String []datos;
         
@@ -70,9 +70,9 @@ public class EditVehicle extends javax.swing.JInternalFrame {
         try{
             //Objeto statement es una consulta preparada
             //se obtiene de la conexion
-            Statement consulta = cn.createStatement();  
+            Statement query = cn.createStatement();  
             //resultSet objeto que pèrmite recorrer las filas en una consulta
-            ResultSet rs = consulta.executeQuery(sql);
+            ResultSet rs = query.executeQuery(sql);
         
             //.next() manda al siguiente registro (devuelve true si tiene informacion)
             while(rs.next()){
@@ -81,12 +81,12 @@ public class EditVehicle extends javax.swing.JInternalFrame {
                 
                 //.getString(); recoge datos
                 datos[0] = rs.getString("id");
-                datos[1] = rs.getString("marca");
-                datos[2] = rs.getString("placa");
-                datos[3] = rs.getString("modelo");
-                datos[4] = rs.getString("numero_vehiculo");
-                datos[5] = rs.getString("chofer");
-                datos[6] = rs.getString("estado");
+                datos[1] = rs.getString("brand");
+                datos[2] = rs.getString("plate");
+                datos[3] = rs.getString("model");
+                datos[4] = rs.getString("number_vehicle");
+                datos[5] = rs.getString("driver");
+                datos[6] = rs.getString("status");
                 
                 //agregamos los datos al modelo
                 model.addRow(datos);

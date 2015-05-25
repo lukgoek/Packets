@@ -30,17 +30,15 @@ public class NewLocation extends javax.swing.JInternalFrame {
     public void saveNewLocation(){
         
         
-        String sql = "INSERT INTO localizacion (id, descripcion, id_sucursal ) VALUES (?, ?, ?)";
-        
-         String id = txtID.getText();
+        String sql = "INSERT INTO localizacion (id, description, id_branch) VALUES (?, ?, ?)";
+       
          String description = txtDescription.getText();
-         String id_sucursal = txtIDSucursal.getText();
+         String id_branch = txtIDBranch.getText();
          
         try {
                        PreparedStatement query = cn.prepareStatement(sql);
-                         query.setString(1, id);
-                         query.setString(2, description);
-                         query.setString(3, id_sucursal);
+                         query.setString(1, description);
+                         query.setString(2, id_branch);
                       
                          query.execute();
                          
@@ -59,14 +57,12 @@ public class NewLocation extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel1 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
         btnClose = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
-        txtIDSucursal = new javax.swing.JTextField();
+        txtIDBranch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,8 +70,6 @@ public class NewLocation extends javax.swing.JInternalFrame {
         jInternalFrame1.setClosable(true);
         jInternalFrame1.setIconifiable(true);
         jInternalFrame1.setVisible(true);
-
-        jLabel1.setText("ID:");
 
         jLabel13.setText("Numero de Guia:");
 
@@ -115,31 +109,25 @@ public class NewLocation extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel14))
                         .addGap(18, 18, 18)
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIDBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(163, 163, 163))))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(51, 51, 51)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(txtIDSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                    .addComponent(txtIDBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
                     .addComponent(btnSave))
@@ -209,11 +197,9 @@ public class NewLocation extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnSave;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JTextField txtDescription;
-    private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtIDSucursal;
+    private javax.swing.JTextField txtIDBranch;
     // End of variables declaration//GEN-END:variables
 }
