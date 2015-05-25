@@ -47,7 +47,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 obj = new Conexion();
                 cn =obj.conectar(); 
 
-        String sql ="UPDATE vehicle SET brand = ?, model = ?, plate = ?, number_vehicle = ?, type_vehicle = ?, driver = ?, status = ? WHERE id = ?";
+        String sql ="UPDATE vehicles SET brand = ?, model = ?, plate = ?, number_vehicle = ?, type_vehicle = ?, driver = ?, status = ? WHERE id = ?";
                
                   String brand = txtBrand.getText();
                   String model = txtModel.getText();
@@ -89,7 +89,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         String type = "";
         String driver = "";
         
-        String sql ="SELECT brand, model, plate, number_vehicle, type_vehicle, driver, status FROM vehicle WHERE id=?";
+        String sql ="SELECT brand, model, plate, number_vehicle, type_vehicle, driver, status FROM vehicles WHERE id=?";
         
             try {
                 
@@ -102,12 +102,12 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 
                 if(rs.next()){
                     
-                    txtBrand.setText(rs.getString("marca"));
-                    txtPlate.setText(rs.getString("placa"));
-                    txtModel.setText(rs.getString("modelo"));
-                    txtNumVehicle.setText(rs.getString("numero_vehiculo"));
+                    txtBrand.setText(rs.getString("brand"));
+                    txtPlate.setText(rs.getString("plate"));
+                    txtModel.setText(rs.getString("model"));
+                    txtNumVehicle.setText(rs.getString("number_vehicle"));
                     
-                    type = rs.getString("tipo_vehiculo");
+                    type = rs.getString("type_vehicle");
                     
                     int tamañoCombo = comboType.getItemCount();
                     //System.out.println(tamañoCombo);
@@ -156,7 +156,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 obj = new Conexion();
                 cn =obj.conectar(); 
 
-        String sql ="INSERT INTO vehicle (brand, model, plate, number_vehicle, type_vehicle, driver, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql ="INSERT INTO vehicles (brand, model, plate, number_vehicle, type_vehicle, driver, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
                
                   String brand = txtBrand.getText();
                   String model = txtModel.getText();
@@ -427,13 +427,8 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboDriverActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        UpdateVehicle obj = new UpdateVehicle();
-        MainMDI MainMDI = new MainMDI();
-        obj.setBounds(50, 50, 650, 700);
-
-        obj.setVisible(true);
-
-        MainMDI.add(obj);
+        EditVehicle objeto = new EditVehicle(this, txtID);
+        objeto.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
@@ -448,11 +443,11 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
         int ID = Integer.parseInt(txtID.getText());
-        int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete customer with id: "+ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
+        int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete vehicles with id: "+ID, "¡DELETE VEHICLES!", JOptionPane.YES_NO_OPTION, 1);
 
         if(decision == 0){
 
-            String sql ="UPDATE vehicle SET removed_date = NOW() WHERE id=?";
+            String sql ="UPDATE vehicles SET removed_date = NOW() WHERE id=?";
 
             try{
 

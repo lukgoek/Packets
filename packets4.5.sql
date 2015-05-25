@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `branchs` (
 
 CREATE TABLE IF NOT EXISTS `type_degree` (
 `id` int(5) NOT NULL,
-  `descripcion` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+  `description` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

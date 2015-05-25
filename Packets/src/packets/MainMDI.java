@@ -39,9 +39,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         menuNewClient = new javax.swing.JMenuItem();
-        menuNewVehicle = new javax.swing.JMenuItem();
         menuUpdateCustomer = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -52,10 +50,11 @@ public class MainMDI extends javax.swing.JFrame {
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         editMenu1 = new javax.swing.JMenu();
+        menuNewVehicle = new javax.swing.JMenuItem();
         cutMenuItem1 = new javax.swing.JMenuItem();
         copyMenuItem1 = new javax.swing.JMenuItem();
+        menuUpdateVehicle = new javax.swing.JMenuItem();
         menuNewVehicle2 = new javax.swing.JMenuItem();
-        pasteMenuItem1 = new javax.swing.JMenuItem();
         deleteMenuItem1 = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
@@ -96,16 +95,6 @@ public class MainMDI extends javax.swing.JFrame {
         });
         fileMenu.add(menuNewClient);
 
-        menuNewVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        menuNewVehicle.setMnemonic('s');
-        menuNewVehicle.setText("New Vehicle");
-        menuNewVehicle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuNewVehicleActionPerformed(evt);
-            }
-        });
-        fileMenu.add(menuNewVehicle);
-
         menuUpdateCustomer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menuUpdateCustomer.setMnemonic('a');
         menuUpdateCustomer.setText("Update Customer");
@@ -115,16 +104,6 @@ public class MainMDI extends javax.swing.JFrame {
             }
         });
         fileMenu.add(menuUpdateCustomer);
-
-        exitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Update Vehicle");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
 
@@ -180,6 +159,16 @@ public class MainMDI extends javax.swing.JFrame {
         editMenu1.setMnemonic('e');
         editMenu1.setText("GABINO");
 
+        menuNewVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        menuNewVehicle.setMnemonic('s');
+        menuNewVehicle.setText("New Vehicle");
+        menuNewVehicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNewVehicleActionPerformed(evt);
+            }
+        });
+        editMenu1.add(menuNewVehicle);
+
         cutMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         cutMenuItem1.setMnemonic('t');
         cutMenuItem1.setText("New Location");
@@ -200,6 +189,16 @@ public class MainMDI extends javax.swing.JFrame {
         });
         editMenu1.add(copyMenuItem1);
 
+        menuUpdateVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
+        menuUpdateVehicle.setMnemonic('x');
+        menuUpdateVehicle.setText("Update Vehicle");
+        menuUpdateVehicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUpdateVehicleActionPerformed(evt);
+            }
+        });
+        editMenu1.add(menuUpdateVehicle);
+
         menuNewVehicle2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
         menuNewVehicle2.setMnemonic('s');
         menuNewVehicle2.setText("Update Type Vehicle");
@@ -209,10 +208,6 @@ public class MainMDI extends javax.swing.JFrame {
             }
         });
         editMenu1.add(menuNewVehicle2);
-
-        pasteMenuItem1.setMnemonic('p');
-        pasteMenuItem1.setText("Paste");
-        editMenu1.add(pasteMenuItem1);
 
         deleteMenuItem1.setMnemonic('d');
         deleteMenuItem1.setText("Delete");
@@ -240,9 +235,17 @@ public class MainMDI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
+    private void menuUpdateVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateVehicleActionPerformed
+  UpdateVehicle obj = new UpdateVehicle();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 500, 500);
+        
+        //tamaño del internal frame
+        //obj.setSize(700, 800);
+        obj.setVisible(true);
+        
+        desktopPane.add(obj);  
+    }//GEN-LAST:event_menuUpdateVehicleActionPerformed
 
     private void menuNewClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewClientActionPerformed
         NewClient obj = new NewClient();
@@ -326,7 +329,7 @@ public class MainMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_copyMenuItem1ActionPerformed
 
     private void menuNewVehicle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewVehicle2ActionPerformed
-        // TODO add your handling code here:
+
         UpdateTypeVehicle obj = new UpdateTypeVehicle();
         //coordenadas para mostrar
         obj.setBounds(50, 50, 500, 500);
@@ -386,7 +389,6 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu editMenu1;
-    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu1;
@@ -403,8 +405,8 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuNewVehicle;
     private javax.swing.JMenuItem menuNewVehicle2;
     public javax.swing.JMenuItem menuUpdateCustomer;
+    private javax.swing.JMenuItem menuUpdateVehicle;
     private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem1;
     // End of variables declaration//GEN-END:variables
 
 }

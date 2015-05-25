@@ -48,7 +48,7 @@ public class EditVehicle extends javax.swing.JInternalFrame {
         
         
         //declaramos la consulta
-        String sql ="SELECT id, brand, model, plate, number_vehicle, type_vehicle, driver, status FROM vehicle WHERE removed_date IS NULL";
+        String sql ="SELECT id, brand, model, plate, number_vehicle, type_vehicle, driver, status FROM vehicles WHERE removed_date IS NULL";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();

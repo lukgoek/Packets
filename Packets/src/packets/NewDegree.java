@@ -186,7 +186,7 @@ public class NewDegree extends javax.swing.JFrame {
         //declaramos la consulta
         
         //LIMIT 0,1 nos trae el primer registro
-        String sql ="SELECT id FROM tipo_titulo ORDER BY id DESC LIMIT 0,1";
+        String sql ="SELECT id FROM type_degree ORDER BY id DESC LIMIT 0,1";
        
         
         int []datos;
@@ -236,7 +236,7 @@ public class NewDegree extends javax.swing.JFrame {
         
         
         //declaramos la consulta
-        String sql ="SELECT * FROM tipo_titulo";
+        String sql ="SELECT * FROM type_degree";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();
@@ -279,7 +279,7 @@ public class NewDegree extends javax.swing.JFrame {
 
 
 
-                     String sql ="INSERT INTO tipo_titulo (descripcion) VALUES (?)";
+                     String sql ="INSERT INTO type_degree (description) VALUES (?)";
 
 
                      String description = txtDescription.getText();

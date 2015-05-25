@@ -55,7 +55,7 @@ public class NewClient extends javax.swing.JInternalFrame {
     
     
     private void saveNewClient(){
-        
+        System.out.println(txtPassword.getText());
         //recogemos el email
         String email = txtEmail.getText();
         String companyName = txtCompanyName.getText();
@@ -104,7 +104,7 @@ public class NewClient extends javax.swing.JInternalFrame {
 
 
 
-                     String sql ="INSERT INTO clientes (nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, contraseña, nombre_compañia, rfc, puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
+                     String sql ="INSERT INTO customers (name, last_name, address, phone, postal_code, city, state, country, degree, email, username, password, company_name, rfc, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
 
 
                      String lastName = txtLastName.getText();
@@ -123,23 +123,23 @@ public class NewClient extends javax.swing.JInternalFrame {
 
 
                          try {
-                           PreparedStatement consulta = cn.prepareStatement(sql);
-                             consulta.setString(1, lastName);
-                             consulta.setString(2, name);
-                             consulta.setString(3, address);
-                             consulta.setString(4, phone);
-                             consulta.setString(5, postalCode);
-                             consulta.setString(6, city);
-                             consulta.setString(7, state);
-                             consulta.setString(8, country);
-                             consulta.setString(9, degree);
-                             consulta.setString(10, email);
-                             consulta.setString(11, username);
-                             consulta.setString(12, password);
-                             consulta.setString(13, companyName);
-                             consulta.setString(14, rfc);
-                             consulta.setString(15, position);
-                             consulta.execute();
+                           PreparedStatement query = cn.prepareStatement(sql);
+                             query.setString(1, lastName);
+                             query.setString(2, name);
+                             query.setString(3, address);
+                             query.setString(4, phone);
+                             query.setString(5, postalCode);
+                             query.setString(6, city);
+                             query.setString(7, state);
+                             query.setString(8, country);
+                             query.setString(9, degree);
+                             query.setString(10, email);
+                             query.setString(11, username);
+                             query.setString(12, password);
+                             query.setString(13, companyName);
+                             query.setString(14, rfc);
+                             query.setString(15, position);
+                             query.execute();
 
                              cleanPanels();
 
