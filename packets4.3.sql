@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2015 a las 08:27:26
+-- Tiempo de generación: 25-05-2015 a las 08:38:45
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -77,9 +77,16 @@ CREATE TABLE IF NOT EXISTS `empleados` (
   `type_employee` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `sex` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `fecha_eliminado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+  `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `date_removed` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id`, `last_name`, `name`, `address`, `phone`, `postal_code`, `branch`, `type_employee`, `email`, `sex`, `registration_date`, `date_removed`) VALUES
+(1, 'Lopez', 'Paul', '1234d', '9820269', 82000, '1', 'Conductor', 'paul_1mk@hotmail.com', 'Male.', '2015-05-25 00:00:35', '2015-05-25 00:00:35');
 
 -- --------------------------------------------------------
 
@@ -90,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `empleados` (
 CREATE TABLE IF NOT EXISTS `envio` (
 `id` int(5) NOT NULL,
   `location` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `guider_number` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `number_guide` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `compromise` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `type_send` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `content` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -119,16 +126,15 @@ CREATE TABLE IF NOT EXISTS `localizacion` (
 
 CREATE TABLE IF NOT EXISTS `sucursales` (
 `id` int(11) NOT NULL,
-  `nombre_sucursal` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `numero` int(15) NOT NULL,
-  `cp` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `ciudad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `pais` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `telefono` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `fecha_eliminado` datetime NOT NULL
+  `branch_name` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `address` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `postal_code` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `city` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `state` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `country` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `phone` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `date_removed` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -150,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `tipo_titulo` (
 
 CREATE TABLE IF NOT EXISTS `tipo_vehiculo` (
 `id` int(5) NOT NULL,
-  `weight_capacity` varchar(15) NOT NULL,
+  `capacity_weight` varchar(15) NOT NULL,
   `type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -245,7 +251,7 @@ MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `envio`
 --
