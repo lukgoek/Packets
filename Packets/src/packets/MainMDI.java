@@ -300,7 +300,6 @@ public class MainMDI extends javax.swing.JFrame {
         
         obj.setVisible(true);
         
-        desktopPane.add(obj);
     }//GEN-LAST:event_cutMenuItem1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -325,7 +324,6 @@ public class MainMDI extends javax.swing.JFrame {
         
         obj.setVisible(true);
         
-        desktopPane.add(obj);
     }//GEN-LAST:event_copyMenuItem1ActionPerformed
 
     private void menuNewVehicle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewVehicle2ActionPerformed
@@ -338,7 +336,6 @@ public class MainMDI extends javax.swing.JFrame {
         //obj.setSize(700, 800);
         obj.setVisible(true);
         
-        desktopPane.add(obj);
     }//GEN-LAST:event_menuNewVehicle2ActionPerformed
 
     /**

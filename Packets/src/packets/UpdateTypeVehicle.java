@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author genesisaurora
  */
-public class UpdateTypeVehicle extends javax.swing.JFrame {
+public class UpdateTypeVehicle extends javax.swing.JInternalFrame {
 
     Conexion obj;  
     Connection cn;
@@ -82,7 +82,9 @@ public class UpdateTypeVehicle extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Type Vehicle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 

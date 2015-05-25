@@ -217,7 +217,8 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicle Description", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
@@ -312,9 +313,8 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                             .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(optBusy)
-                        .addComponent(optDamaged)))
+                    .addComponent(optBusy)
+                    .addComponent(optDamaged))
                 .addGap(79, 79, 79))
         );
         jPanel1Layout.setVerticalGroup(

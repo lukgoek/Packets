@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author fimaz2014
  */
-public class NewTypeVehicle extends javax.swing.JInternalFrame {
+public class NewTypeVehicle extends javax.swing.JFrame {
 
       Conexion obj;  
       Connection cn;
@@ -76,8 +76,6 @@ public class NewTypeVehicle extends javax.swing.JInternalFrame {
         btnEdit = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Type Vehicle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 

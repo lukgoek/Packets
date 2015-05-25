@@ -473,6 +473,12 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
         jLabel12.setText("*Degree:");
 
+        comboDegree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboDegreeActionPerformed(evt);
+            }
+        });
+
         jLabel13.setText("e-mail:");
 
         jLabel14.setText("*Username:");
@@ -845,6 +851,10 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
         
         updateComboDegree();
     }//GEN-LAST:event_btnEdit1FocusGained
+
+    private void comboDegreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDegreeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboDegreeActionPerformed
 
     /**
      * @param args the command line arguments
