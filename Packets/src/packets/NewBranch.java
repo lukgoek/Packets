@@ -123,6 +123,12 @@ public class NewBranch extends javax.swing.JInternalFrame {
 
         jLabel6.setText("*City:");
 
+        txtBranchName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBranchNameKeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("*State:");
 
         jLabel2.setText("*Branch Name:");
@@ -306,6 +312,15 @@ public class NewBranch extends javax.swing.JInternalFrame {
         saveNewBranch();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtBranchNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBranchNameKeyTyped
+       char campo = evt.getKeyChar();
+
+      if((campo<'a' || campo>'z') && (campo<'A' || campo>'Z') && (campo!=(char)KeyEvent.VK_BACK_SPACE) && (campo!=(char)KeyEvent.VK_SPACE)){
+      evt.consume();
+      JOptionPane.showMessageDialog(null, "Solo se admite texto","Validar texto",JOptionPane.INFORMATION_MESSAGE);
+}
+    }//GEN-LAST:event_txtBranchNameKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -331,6 +346,7 @@ public class NewBranch extends javax.swing.JInternalFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NewBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

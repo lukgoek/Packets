@@ -179,13 +179,13 @@ public class NewTypeVehicle extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-       /* UpdateTypeVehicle obj = new UpdateTypeVehicle();
+       UpdateTypeVehicle obj = new UpdateTypeVehicle();
         MainMDI MainMDI = new MainMDI();
         obj.setBounds(50, 50, 650, 700);
 
         obj.setVisible(true);
 
-        MainMDI.add(obj);*/
+        MainMDI.add(obj);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -222,6 +222,7 @@ public class NewTypeVehicle extends javax.swing.JInternalFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NewTypeVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
