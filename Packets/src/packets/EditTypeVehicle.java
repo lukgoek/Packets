@@ -46,7 +46,7 @@ public class EditTypeVehicle extends javax.swing.JInternalFrame {
         cn =obj.conectar();
         
      //declaramos la consulta
-        String sql ="SELECT id, capacity_weight, type FROM type_vehicle";
+        String sql ="SELECT id, capacity_weight, type FROM type_vehicles";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();

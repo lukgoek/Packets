@@ -798,7 +798,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         EditCustomer objeto = new EditCustomer(this, txtID);
         objeto.setVisible(true);
-        
+ 
 
     }//GEN-LAST:event_btnEditActionPerformed
 
