@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-05-2015 a las 19:08:09
+-- Tiempo de generación: 20-05-2015 a las 19:14:35
 -- Versión del servidor: 5.6.12
 -- Versión de PHP: 5.5.3
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `packets`
 --
-CREATE DATABASE IF NOT EXISTS `packets` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `packets` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `packets`;
 
 -- --------------------------------------------------------
@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `empleados` (
   `cp` int(15) NOT NULL,
   `sucursal` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `sex` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `tipo_empleado` int(11) NOT NULL,
   `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `fecha_eliminado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -136,6 +137,18 @@ CREATE TABLE IF NOT EXISTS `sucursales` (
   `telefono` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `fecha_eliminado` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_titulo`
+--
+
+CREATE TABLE IF NOT EXISTS `tipo_titulo` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
