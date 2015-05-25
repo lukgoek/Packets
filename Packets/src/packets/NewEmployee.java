@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,112 +16,101 @@ import javax.swing.JOptionPane;
  */
 public class NewEmployee extends javax.swing.JInternalFrame {
 
-   Conexion obj;  
-   Connection cn;
-   
-   
+    Conexion obj;
+    Connection cn;
+
     public NewEmployee() {
         initComponents();
     }
 
-    public void cleanPanels(){
-        
-       txtLastName.setText("");
-       txtName.setText("");
-       txtAddress.setText("");
-       txtPhone.setText("");
-       txtPostalCode.setText("");
-       txtBranch.setText("");   
-       txtTypeEmployee.setText("");
-       txtEmail.setText("");
-       txtConfirmEmail.setText("");   
-       
-       
-       txtLastName.requestFocus();
-    
-      }
+    public void cleanPanels() {
 
-    public void saveNewEmployee(){
-        
+        txtLastName.setText("");
+        txtName.setText("");
+        txtAddress.setText("");
+        txtPhone.setText("");
+        txtPostalCode.setText("");
+        txtBranch.setText("");
+        txtTypeEmployee.setText("");
+        txtEmail.setText("");
+        txtConfirmEmail.setText("");
+
+        txtLastName.requestFocus();
+
+    }
+
+    public void saveNewEmployee() {
+
         //recogemos el email
         String email = txtEmail.getText();
-        
 
         //si las cajas de email estan basias asignamos null
         //esta valida que sean iguales a vacias y si son vacias agrega NULL
-        if(txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")){
+        if (txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")) {
             email = "NULL";
         }
-        
-        if(txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") ||  txtBranch.getText().equals("")){
+
+        if (txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtBranch.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
-        
-            if(txtPostalCode.getText().length() < 5){
-            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+
+        if (txtPostalCode.getText().length() < 5) {
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");
             return;
-                   
+
         }
 
-       if(txtPhone.getText().length() < 7){
-            JOptionPane.showMessageDialog(rootPane, "Phone too short.");  
+        if (txtPhone.getText().length() < 7) {
+            JOptionPane.showMessageDialog(rootPane, "Phone too short.");
             return;
-                   
+
         }
-        
-        
+
         //y esta valida que sean igual por ejemplo weroJOto = weroJOto
-        if(txtEmail.getText().equals(txtConfirmEmail.getText())){
-            
-                 
+        if (txtEmail.getText().equals(txtConfirmEmail.getText())) {
+
             //estaba entrando en conflictos con el return
             //va asi we despues de la validacion de email
-                obj = new Conexion();
-                cn = obj.conectar(); 
+            obj = new Conexion();
+            cn = obj.conectar();
 
-        
-                  String sql ="INSERT INTO empleados (last_name, name, address, phone, postal_code, branch, type_employee,email, sex) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                 
+            String sql = "INSERT INTO empleados (last_name, name, address, phone, postal_code, branch, type_employee,email, sex) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                 String lastName = txtLastName.getText();
-                 String name = txtName.getText();
-                 String address = txtAddress.getText();
-                 String phone = txtPhone.getText();
-                 String postalCode = txtPostalCode.getText();
-                 String branch = txtBranch.getText();
-                 String typeEmployee = txtTypeEmployee.getText();
-                 String sex = comboSex.getSelectedItem().toString();
+            String lastName = txtLastName.getText();
+            String name = txtName.getText();
+            String address = txtAddress.getText();
+            String phone = txtPhone.getText();
+            String postalCode = txtPostalCode.getText();
+            String branch = txtBranch.getText();
+            String typeEmployee = txtTypeEmployee.getText();
+            String sex = comboSex.getSelectedItem().toString();
 
-                     try {
-                       PreparedStatement query = cn.prepareStatement(sql);
-                 
-                         query.setString(1, lastName);
-                         query.setString(2, name);
-                         query.setString(3, address);
-                         query.setString(4, phone);
-                         query.setString(5, postalCode);
-                         query.setString(6, branch);
-                         query.setString(7, typeEmployee);
-                         query.setString(8, email);
-                         query.setString(9, sex);
-                         query.execute();
-                         cleanPanels();
+            try {
+                PreparedStatement query = cn.prepareStatement(sql);
 
+                query.setString(1, lastName);
+                query.setString(2, name);
+                query.setString(3, address);
+                query.setString(4, phone);
+                query.setString(5, postalCode);
+                query.setString(6, branch);
+                query.setString(7, typeEmployee);
+                query.setString(8, email);
+                query.setString(9, sex);
+                query.execute();
+                cleanPanels();
 
-                     JOptionPane.showMessageDialog(rootPane, "Employee data has been saved.");
-                     } catch (SQLException ex) {
-                         Logger.getLogger(NewEmployee.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-            
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "The e-mails do not match.");
+                JOptionPane.showMessageDialog(rootPane, "Employee data has been saved.");
+            } catch (SQLException ex) {
+                Logger.getLogger(NewEmployee.class.getName()).log(Level.SEVERE, null, ex);
             }
-}        
- 
-    
-    
-    
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "The e-mails do not match.");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,9 +156,21 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
         jLabel6.setText("*Branch:");
 
+        txtLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLastNameKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("*Last Name:");
 
         jLabel3.setText("*Name:");
+
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("*Address:");
 
@@ -193,6 +196,12 @@ public class NewEmployee extends javax.swing.JInternalFrame {
         comboSex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
 
         jLabel13.setText("*E-mail:");
+
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
 
         jLabel17.setText("Confirm e-mail:");
 
@@ -403,27 +412,69 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtPostalCodeKeyPressed
 
-                            
 
     private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
         int postalCodeSize = txtPostalCode.getText().length();
 
-        System.out.println("char " +evt.getKeyChar());
+        System.out.println("char " + evt.getKeyChar());
 
-        if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
-            evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-            || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
+                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
+                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
 
-        }else{
+        } else {
             evt.consume();
         }
 
-        System.out.println("tamaño "+postalCodeSize);
-        if(postalCodeSize > 4){
+        System.out.println("tamaño " + postalCodeSize);
+        if (postalCodeSize > 4) {
             evt.consume();
             JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code.");
         }
     }//GEN-LAST:event_txtPostalCodeKeyTyped
+
+    public boolean isEmail(String correo) {
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
+        mat = pat.matcher(correo);
+        if (mat.find()) {
+            return true;
+        } else {
+
+            return false;
+
+        }
+    }
+
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        if (isEmail(txtEmail.getText())) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect email", "Validate Email", JOptionPane.INFORMATION_MESSAGE);
+            txtEmail.requestFocus();
+
+        }
+    }//GEN-LAST:event_txtEmailFocusLost
+
+    private void txtLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_txtLastNameKeyTyped
+
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_txtNameKeyTyped
 
     /**
      * @param args the command line arguments
