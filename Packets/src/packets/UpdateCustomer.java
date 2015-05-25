@@ -43,7 +43,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
         
      
         //declaramos la consulta
-        String sql ="SELECT descripcion FROM tipo_titulo";
+        String sql ="SELECT description FROM type_degree";
         
         String []datos;
    
@@ -60,7 +60,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                 datos = new String[8];
                 
                 //.getString(); recoge datos
-                datos[0] = rs.getString("descripcion");
+                datos[0] = rs.getString("description");
                 comboDegree.addItem(datos[0]);
             }
         
@@ -136,7 +136,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                             String username = txtUsername.getText();
                             String password = txtPassword.getText();
 
-                   String sql ="UPDATE clientes SET nombre = ?, apellidos = ?, direccion = ?, telefono = ?, codigo_postal = ?, ciudad = ?, estado = ?, pais = ?, titulo = ?, email = ?, nombre_usuario = ?, contraseña = ?, nombre_compañia = ?, rfc = ?, puesto = ? WHERE id=?";
+                   String sql ="UPDATE customers SET name = ?, las_name = ?, address = ?, phone = ?, postal_code = ?, city = ?, state = ?, country = ?, degree = ?, email = ?, username = ?, password = ?, company_name = ?, rfc = ?, position = ? WHERE id=?";
 
                    try{
 
@@ -192,7 +192,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
         
         String degree = "";
         
-        String sql ="SELECT nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, nombre_usuario, email, nombre_compañia, rfc, puesto, titulo FROM clientes WHERE id=?";
+        String sql ="SELECT name, last_name, address, phone, postal_code, city, state, country, username, email, company_name, rfc, position, degree FROM customers WHERE id=?";
         
             try {
                 
@@ -205,23 +205,23 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                 
                 if(rs.next()){
                     
-                    txtLastName.setText(rs.getString("apellidos"));
-                    txtName.setText(rs.getString("nombre"));
-                    txtAddress.setText(rs.getString("direccion"));
-                    txtPhone.setText(rs.getString("telefono"));
-                    txtPostalCode.setText(rs.getString("codigo_postal"));
-                    txtCity.setText(rs.getString("ciudad"));
-                    txtState.setText(rs.getString("estado"));
-                    txtCountry.setText(rs.getString("pais"));
-                    txtUsername.setText(rs.getString("nombre_usuario"));
+                    txtLastName.setText(rs.getString("name"));
+                    txtName.setText(rs.getString("last_name"));
+                    txtAddress.setText(rs.getString("address"));
+                    txtPhone.setText(rs.getString("phone"));
+                    txtPostalCode.setText(rs.getString("postal_code"));
+                    txtCity.setText(rs.getString("city"));
+                    txtState.setText(rs.getString("state"));
+                    txtCountry.setText(rs.getString("country"));
+                    txtUsername.setText(rs.getString("username"));
                     
                     txtEmail.setText(rs.getString("email"));
                     
-                    txtCompanyName.setText(rs.getString("nombre_compañia"));
+                    txtCompanyName.setText(rs.getString("company_name"));
                     txtRFC.setText(rs.getString("rfc"));
-                    txtPosition.setText(rs.getString("puesto"));
+                    txtPosition.setText(rs.getString("position"));
                     
-                    degree = rs.getString("titulo");
+                    degree = rs.getString("degree");
                     
                     int tamañoCombo = comboDegree.getItemCount();
                     //System.out.println(tamañoCombo);
@@ -326,7 +326,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
 
 
-                     String sql ="INSERT INTO clientes (nombre, apellidos, direccion, telefono, codigo_postal, ciudad, estado, pais, titulo, email, nombre_usuario, contraseña, nombre_compañia, rfc, puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
+                     String sql ="INSERT INTO customers (name, last_name, address, phone, postal_code, city, state, country, degree, email, username, password, company_name, rfc, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
 
 
                      String lastName = txtLastName.getText();
@@ -345,23 +345,23 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
 
                          try {
-                           PreparedStatement consulta = cn.prepareStatement(sql);
-                             consulta.setString(1, lastName);
-                             consulta.setString(2, name);
-                             consulta.setString(3, address);
-                             consulta.setString(4, phone);
-                             consulta.setString(5, postalCode);
-                             consulta.setString(6, city);
-                             consulta.setString(7, state);
-                             consulta.setString(8, country);
-                             consulta.setString(9, degree);
-                             consulta.setString(10, email);
-                             consulta.setString(11, username);
-                             consulta.setString(12, password);
-                             consulta.setString(13, companyName);
-                             consulta.setString(14, rfc);
-                             consulta.setString(15, position);
-                             consulta.execute();
+                           PreparedStatement query = cn.prepareStatement(sql);
+                             query.setString(1, lastName);
+                             query.setString(2, name);
+                             query.setString(3, address);
+                             query.setString(4, phone);
+                             query.setString(5, postalCode);
+                             query.setString(6, city);
+                             query.setString(7, state);
+                             query.setString(8, country);
+                             query.setString(9, degree);
+                             query.setString(10, email);
+                             query.setString(11, username);
+                             query.setString(12, password);
+                             query.setString(13, companyName);
+                             query.setString(14, rfc);
+                             query.setString(15, position);
+                             query.execute();
 
                              cleanPanels();
 
@@ -820,7 +820,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
              if(decision == 0){
 
 
-                String sql ="UPDATE clientes SET fecha_eliminado = NOW() WHERE id=?";
+                String sql ="UPDATE customer SET date_removed = NOW() WHERE id=?";
 
                 try{
 
