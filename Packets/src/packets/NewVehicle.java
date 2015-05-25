@@ -51,7 +51,7 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                 obj = new Conexion();
                 cn =obj.conectar(); 
 
-        String sql ="INSERT INTO vehiculos (marca, modelo, placa, numero_vehiculo, tipo_vehiculo, chofer, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql ="INSERT INTO vehicle (brand, model, plate, number_vehicle, type_vehicle, driver, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
                
                   String brand = txtBrand.getText();
                   String model = txtModel.getText();

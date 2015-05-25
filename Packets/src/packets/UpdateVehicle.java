@@ -47,7 +47,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 obj = new Conexion();
                 cn =obj.conectar(); 
 
-        String sql ="UPDATE vehiculos SET marca = ?, modelo = ?, placa = ?, numero_vehiculo = ?, tipo_vehiculo = ?, chofer = ?, estado = ? WHERE id = ?";
+        String sql ="UPDATE vehicle SET brand = ?, model = ?, plate = ?, number_vehicle = ?, type_vehicle = ?, driver = ?, status = ? WHERE id = ?";
                
                   String brand = txtBrand.getText();
                   String model = txtModel.getText();
@@ -89,7 +89,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         String type = "";
         String driver = "";
         
-        String sql ="SELECT marca, modelo, placa, numero_vehiculo, tipo_vehiculo, chofer, estado FROM vehiculos WHERE id=?";
+        String sql ="SELECT brand, model, plate, number_vehicle, type_vehicle, driver, status FROM vehicle WHERE id=?";
         
             try {
                 
@@ -156,7 +156,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 obj = new Conexion();
                 cn =obj.conectar(); 
 
-        String sql ="INSERT INTO vehiculos (marca, modelo, placa, numero_vehiculo, tipo_vehiculo, chofer, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql ="INSERT INTO vehicle (brand, model, plate, number_vehicle, type_vehicle, driver, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
                
                   String brand = txtBrand.getText();
                   String model = txtModel.getText();
@@ -452,7 +452,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
 
         if(decision == 0){
 
-            String sql ="UPDATE vehiculos SET fecha_eliminado = NOW() WHERE id=?";
+            String sql ="UPDATE vehicle SET removed_date = NOW() WHERE id=?";
 
             try{
 

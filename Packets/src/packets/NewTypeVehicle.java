@@ -39,7 +39,7 @@ public class NewTypeVehicle extends javax.swing.JInternalFrame {
            obj = new Conexion();
                 cn =obj.conectar(); 
 
-        String sql ="INSERT INTO tipo_vehiculo (tipo, capacidad_peso ) VALUES (?, ?)";
+        String sql ="INSERT INTO type_vehicle (type, capacity_weight ) VALUES (?, ?)";
                
                   String type_vehicle = txtTypeVehicle.getText();
                   String weight = txtWeight.getText();
