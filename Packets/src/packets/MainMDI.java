@@ -16,6 +16,8 @@ public class MainMDI extends javax.swing.JFrame {
      */
     public MainMDI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -37,25 +39,25 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         lblBackground = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
+        menuCustomer = new javax.swing.JMenu();
         menuNewClient = new javax.swing.JMenuItem();
         menuUpdateCustomer = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
+        menuEmployee = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
-        editMenu1 = new javax.swing.JMenu();
+        menuVehicle = new javax.swing.JMenu();
         menuNewVehicle = new javax.swing.JMenuItem();
         cutMenuItem1 = new javax.swing.JMenuItem();
         copyMenuItem1 = new javax.swing.JMenuItem();
         menuUpdateVehicle = new javax.swing.JMenuItem();
         menuNewVehicle2 = new javax.swing.JMenuItem();
         deleteMenuItem1 = new javax.swing.JMenuItem();
+        helpMenu = new javax.swing.JMenu();
+        aboutMenuItem = new javax.swing.JMenuItem();
+        contentMenuItem = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -72,8 +74,7 @@ public class MainMDI extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        desktopPane.setLayout(null);
+        setTitle("PACKETS.CO");
 
         lblBackground.setBackground(new java.awt.Color(255, 255, 255));
         lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -81,11 +82,11 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(lblBackground);
         lblBackground.setBounds(0, 0, 1000, 840);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Menu Options");
+        menuCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/customer_menu.png"))); // NOI18N
+        menuCustomer.setMnemonic('f');
+        menuCustomer.setText("Customer Menu");
 
         menuNewClient.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        menuNewClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Customer.png"))); // NOI18N
         menuNewClient.setMnemonic('o');
         menuNewClient.setText("New Customer");
         menuNewClient.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +94,7 @@ public class MainMDI extends javax.swing.JFrame {
                 menuNewClientActionPerformed(evt);
             }
         });
-        fileMenu.add(menuNewClient);
+        menuCustomer.add(menuNewClient);
 
         menuUpdateCustomer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menuUpdateCustomer.setMnemonic('a');
@@ -103,14 +104,17 @@ public class MainMDI extends javax.swing.JFrame {
                 menuUpdateCustomerActionPerformed(evt);
             }
         });
-        fileMenu.add(menuUpdateCustomer);
+        menuCustomer.add(menuUpdateCustomer);
 
-        menuBar.add(fileMenu);
+        menuBar.add(menuCustomer);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("WERO");
+        menuEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/employees_menu.png"))); // NOI18N
+        menuEmployee.setMnemonic('e');
+        menuEmployee.setText("Employee & Branch");
+        menuEmployee.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/employees_menu2.png"))); // NOI18N
 
         cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        cutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/employees_menu.png"))); // NOI18N
         cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("New Employee");
         cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +122,7 @@ public class MainMDI extends javax.swing.JFrame {
                 cutMenuItemActionPerformed(evt);
             }
         });
-        editMenu.add(cutMenuItem);
+        menuEmployee.add(cutMenuItem);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("New Branch");
@@ -127,37 +131,25 @@ public class MainMDI extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        editMenu.add(jMenuItem1);
+        menuEmployee.add(jMenuItem1);
 
         copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
+        menuEmployee.add(copyMenuItem);
 
         pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
+        menuEmployee.add(pasteMenuItem);
 
         deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
+        menuEmployee.add(deleteMenuItem);
 
-        menuBar.add(editMenu);
+        menuBar.add(menuEmployee);
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        editMenu1.setMnemonic('e');
-        editMenu1.setText("GABINO");
+        menuVehicle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/vehicle_menu.png"))); // NOI18N
+        menuVehicle.setMnemonic('e');
+        menuVehicle.setText("Vehicle");
 
         menuNewVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         menuNewVehicle.setMnemonic('s');
@@ -167,7 +159,7 @@ public class MainMDI extends javax.swing.JFrame {
                 menuNewVehicleActionPerformed(evt);
             }
         });
-        editMenu1.add(menuNewVehicle);
+        menuVehicle.add(menuNewVehicle);
 
         cutMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         cutMenuItem1.setMnemonic('t');
@@ -177,7 +169,7 @@ public class MainMDI extends javax.swing.JFrame {
                 cutMenuItem1ActionPerformed(evt);
             }
         });
-        editMenu1.add(cutMenuItem1);
+        menuVehicle.add(cutMenuItem1);
 
         copyMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         copyMenuItem1.setMnemonic('y');
@@ -187,7 +179,7 @@ public class MainMDI extends javax.swing.JFrame {
                 copyMenuItem1ActionPerformed(evt);
             }
         });
-        editMenu1.add(copyMenuItem1);
+        menuVehicle.add(copyMenuItem1);
 
         menuUpdateVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
         menuUpdateVehicle.setMnemonic('x');
@@ -197,7 +189,7 @@ public class MainMDI extends javax.swing.JFrame {
                 menuUpdateVehicleActionPerformed(evt);
             }
         });
-        editMenu1.add(menuUpdateVehicle);
+        menuVehicle.add(menuUpdateVehicle);
 
         menuNewVehicle2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
         menuNewVehicle2.setMnemonic('s');
@@ -207,13 +199,32 @@ public class MainMDI extends javax.swing.JFrame {
                 menuNewVehicle2ActionPerformed(evt);
             }
         });
-        editMenu1.add(menuNewVehicle2);
+        menuVehicle.add(menuNewVehicle2);
 
         deleteMenuItem1.setMnemonic('d');
         deleteMenuItem1.setText("Delete");
-        editMenu1.add(deleteMenuItem1);
+        menuVehicle.add(deleteMenuItem1);
 
-        menuBar.add(editMenu1);
+        menuBar.add(menuVehicle);
+
+        helpMenu.setMnemonic('h');
+        helpMenu.setText("Option");
+
+        aboutMenuItem.setMnemonic('a');
+        aboutMenuItem.setText("About");
+        helpMenu.add(aboutMenuItem);
+
+        contentMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        contentMenuItem.setMnemonic('c');
+        contentMenuItem.setText("EXIT");
+        contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(contentMenuItem);
+
+        menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
 
@@ -339,6 +350,11 @@ public class MainMDI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuNewVehicle2ActionPerformed
 
+    private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
+        
+        System.exit(0);
+    }//GEN-LAST:event_contentMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -385,9 +401,6 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JMenuItem deleteMenuItem1;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenu editMenu1;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -399,11 +412,14 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuCustomer;
+    private javax.swing.JMenu menuEmployee;
     private javax.swing.JMenuItem menuNewClient;
     private javax.swing.JMenuItem menuNewVehicle;
     private javax.swing.JMenuItem menuNewVehicle2;
     public javax.swing.JMenuItem menuUpdateCustomer;
     private javax.swing.JMenuItem menuUpdateVehicle;
+    private javax.swing.JMenu menuVehicle;
     private javax.swing.JMenuItem pasteMenuItem;
     // End of variables declaration//GEN-END:variables
 
