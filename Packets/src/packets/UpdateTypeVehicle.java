@@ -82,6 +82,7 @@ public class UpdateTypeVehicle extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
 
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Replace the old personal information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
@@ -196,20 +197,16 @@ public class UpdateTypeVehicle extends javax.swing.JInternalFrame {
                     .addComponent(btnUpdateTypeVehicle)
                     .addComponent(btnClose)
                     .addComponent(btnDelete))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        UpdateTypeVehicle obj = new UpdateTypeVehicle();
-        MainMDI MainMDI = new MainMDI();
-        obj.setBounds(50, 50, 650, 700);
-
-        obj.setVisible(true);
-
-        MainMDI.add(obj);
+        EditTypeVehicle objeto = new EditTypeVehicle(this, txtID);
+        objeto.setVisible(true);
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnUpdateTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTypeVehicleActionPerformed

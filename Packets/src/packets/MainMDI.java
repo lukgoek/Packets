@@ -51,10 +51,10 @@ public class MainMDI extends javax.swing.JFrame {
         deleteMenuItem = new javax.swing.JMenuItem();
         menuVehicle = new javax.swing.JMenu();
         menuNewVehicle = new javax.swing.JMenuItem();
-        cutMenuItem1 = new javax.swing.JMenuItem();
-        copyMenuItem1 = new javax.swing.JMenuItem();
+        menuNewLocation = new javax.swing.JMenuItem();
+        menuNewTypeVehicle = new javax.swing.JMenuItem();
         menuUpdateVehicle = new javax.swing.JMenuItem();
-        menuNewVehicle2 = new javax.swing.JMenuItem();
+        menuUpdateTypeVehicle = new javax.swing.JMenuItem();
         deleteMenuItem1 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -77,6 +77,8 @@ public class MainMDI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PACKETS.CO");
+
+        desktopPane.setLayout(null);
 
         lblBackground.setBackground(new java.awt.Color(255, 255, 255));
         lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -175,27 +177,27 @@ public class MainMDI extends javax.swing.JFrame {
         });
         menuVehicle.add(menuNewVehicle);
 
-        cutMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        cutMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        cutMenuItem1.setMnemonic('t');
-        cutMenuItem1.setText("New Location");
-        cutMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuNewLocation.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        menuNewLocation.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        menuNewLocation.setMnemonic('t');
+        menuNewLocation.setText("New Location");
+        menuNewLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cutMenuItem1ActionPerformed(evt);
+                menuNewLocationActionPerformed(evt);
             }
         });
-        menuVehicle.add(cutMenuItem1);
+        menuVehicle.add(menuNewLocation);
 
-        copyMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        copyMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        copyMenuItem1.setMnemonic('y');
-        copyMenuItem1.setText("NewTypeVehicle");
-        copyMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuNewTypeVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        menuNewTypeVehicle.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        menuNewTypeVehicle.setMnemonic('y');
+        menuNewTypeVehicle.setText("NewTypeVehicle");
+        menuNewTypeVehicle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                copyMenuItem1ActionPerformed(evt);
+                menuNewTypeVehicleActionPerformed(evt);
             }
         });
-        menuVehicle.add(copyMenuItem1);
+        menuVehicle.add(menuNewTypeVehicle);
 
         menuUpdateVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
         menuUpdateVehicle.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -208,16 +210,16 @@ public class MainMDI extends javax.swing.JFrame {
         });
         menuVehicle.add(menuUpdateVehicle);
 
-        menuNewVehicle2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
-        menuNewVehicle2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        menuNewVehicle2.setMnemonic('s');
-        menuNewVehicle2.setText("Update Type Vehicle");
-        menuNewVehicle2.addActionListener(new java.awt.event.ActionListener() {
+        menuUpdateTypeVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        menuUpdateTypeVehicle.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        menuUpdateTypeVehicle.setMnemonic('s');
+        menuUpdateTypeVehicle.setText("Update Type Vehicle");
+        menuUpdateTypeVehicle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuNewVehicle2ActionPerformed(evt);
+                menuUpdateTypeVehicleActionPerformed(evt);
             }
         });
-        menuVehicle.add(menuNewVehicle2);
+        menuVehicle.add(menuUpdateTypeVehicle);
 
         deleteMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         deleteMenuItem1.setMnemonic('d');
@@ -281,10 +283,10 @@ public class MainMDI extends javax.swing.JFrame {
         
         //tamaño del internal frame
         //obj.setSize(700, 800);
-        obj.setVisible(true);
+      
         
         desktopPane.add(obj);  
-       
+        obj.show();
     }//GEN-LAST:event_menuUpdateVehicleActionPerformed
 
     private void menuNewClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewClientActionPerformed
@@ -304,9 +306,10 @@ public class MainMDI extends javax.swing.JFrame {
         
         //tamaño del internal frame
         //obj.setSize(700, 800);
-        obj.setVisible(true);
+       // obj.setVisible(true);
         
         desktopPane.add(obj);
+        obj.show();
     }//GEN-LAST:event_menuNewVehicleActionPerformed
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
@@ -331,15 +334,17 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(obj);
     }//GEN-LAST:event_menuUpdateCustomerActionPerformed
 
-    private void cutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItem1ActionPerformed
+    private void menuNewLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewLocationActionPerformed
           NewLocation obj = new NewLocation();
         //coordenadas para mostrar
         obj.setBounds(50, 50, 400, 300);
         
         
-        obj.setVisible(true);
+   
         
-    }//GEN-LAST:event_cutMenuItem1ActionPerformed
+        desktopPane.add(obj);
+        obj.show();
+    }//GEN-LAST:event_menuNewLocationActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        
@@ -354,18 +359,20 @@ public class MainMDI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void copyMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItem1ActionPerformed
+    private void menuNewTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewTypeVehicleActionPerformed
         
         NewTypeVehicle obj = new NewTypeVehicle();
         //coordenadas para mostrar
         obj.setBounds(50, 50, 400, 400);
         
         
-        obj.setVisible(true);
+    
         
-    }//GEN-LAST:event_copyMenuItem1ActionPerformed
+        desktopPane.add(obj);
+        obj.show();
+    }//GEN-LAST:event_menuNewTypeVehicleActionPerformed
 
-    private void menuNewVehicle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewVehicle2ActionPerformed
+    private void menuUpdateTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateTypeVehicleActionPerformed
 
         UpdateTypeVehicle obj = new UpdateTypeVehicle();
         //coordenadas para mostrar
@@ -373,10 +380,12 @@ public class MainMDI extends javax.swing.JFrame {
         
         //tamaño del internal frame
         //obj.setSize(700, 800);
-        obj.setVisible(true);
-        desktopPane.add(obj);
         
-    }//GEN-LAST:event_menuNewVehicle2ActionPerformed
+        obj.setVisible(true);
+        
+        desktopPane.add(obj);
+        obj.show();
+    }//GEN-LAST:event_menuUpdateTypeVehicleActionPerformed
 
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
         
@@ -423,9 +432,7 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem copyMenuItem1;
     private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem cutMenuItem1;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JMenuItem deleteMenuItem1;
     private javax.swing.JDesktopPane desktopPane;
@@ -444,9 +451,11 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenu menuCustomer;
     private javax.swing.JMenu menuEmployee;
     private javax.swing.JMenuItem menuNewClient;
+    private javax.swing.JMenuItem menuNewLocation;
+    private javax.swing.JMenuItem menuNewTypeVehicle;
     private javax.swing.JMenuItem menuNewVehicle;
-    private javax.swing.JMenuItem menuNewVehicle2;
     public javax.swing.JMenuItem menuUpdateCustomer;
+    private javax.swing.JMenuItem menuUpdateTypeVehicle;
     private javax.swing.JMenuItem menuUpdateVehicle;
     private javax.swing.JMenu menuVehicle;
     private javax.swing.JMenuItem pasteMenuItem;

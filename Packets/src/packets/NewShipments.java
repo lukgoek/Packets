@@ -68,6 +68,12 @@ public class NewShipments extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Destination Area: ");
 
+        txtDestinationArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDestinationAreaActionPerformed(evt);
+            }
+        });
+
         comboTypeSend.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("Sender: ");
@@ -207,6 +213,10 @@ public class NewShipments extends javax.swing.JInternalFrame {
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void txtDestinationAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDestinationAreaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDestinationAreaActionPerformed
 
     /**
      * @param args the command line arguments

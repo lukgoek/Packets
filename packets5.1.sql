@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-05-2015 a las 20:26:27
+-- Tiempo de generación: 26-05-2015 a las 20:30:50
 -- Versión del servidor: 5.6.12
 -- Versión de PHP: 5.5.3
 
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
 
 CREATE TABLE IF NOT EXISTS `location` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
-  `description` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `number_guide` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `id_branch` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -194,9 +194,20 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
   `driver` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `registration_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `removed_date` datetime DEFAULT NULL,
-  `status` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `status` varchar(70) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `vehicles`
+--
+
+INSERT INTO `vehicles` (`id`, `brand`, `model`, `plate`, `number_vehicle`, `type_vehicle`, `driver`, `registration_date`, `removed_date`, `status`) VALUES
+(2, 'Ford', 'F-200', 'PA2665LC', '02', 'Camioneta', 'Paul Lopez', '2015-05-26 11:25:30', NULL, 'javax.swing.ButtonGroup@51a20fb5'),
+(3, 'Ford', 'F-250', 'HC265G9', '03', 'Camioneta', 'Gabino Cortez', '2015-05-26 12:01:43', NULL, 'javax.swing.ButtonGroup@1351c368'),
+(4, 'Toyota', 'Tacoma', 'HL416A', '04', 'Camioneta', 'Humberto Lugo', '2015-05-26 12:11:27', NULL, 'javax.swing.JToggleButton$ToggleButtonModel@6d565f45'),
+(5, 'rfgf', 'ghgh', 'hfjhf', 'ghgh', 'Trailer', 'Gabino Cortez', '2015-05-26 12:16:39', NULL, 'javax.swing.JToggleButton$ToggleButtonModel@3f928b84'),
+(6, 'fg', 'fg', 'fg', 'fg', 'Trailer', 'Gabino Cortez', '2015-05-26 12:20:36', NULL, 'javax.swing.JToggleButton$ToggleButtonModel@461b3399');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

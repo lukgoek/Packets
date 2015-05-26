@@ -29,7 +29,11 @@ public class NewVehicle extends javax.swing.JInternalFrame {
      */
     public NewVehicle() {
         initComponents();
-        optAvailable.isSelected();
+        optAvailable.setSelected(true);
+        
+        
+        //String status =  btngroupStatus.getSelection();
+      // System.out.println("status "+status);
         
     }
 
@@ -51,7 +55,7 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                 obj = new Conexion();
                 cn =obj.conectar(); 
 
-        String sql ="INSERT INTO vehicle (brand, model, plate, number_vehicle, type_vehicle, driver, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql ="INSERT INTO vehicles (brand, model, plate, number_vehicle, type_vehicle, driver, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
                
                   String brand = txtBrand.getText();
                   String model = txtModel.getText();
@@ -59,7 +63,7 @@ public class NewVehicle extends javax.swing.JInternalFrame {
                   String numbervehicle = txtNumVehicle.getText();
                   String type = comboType.getSelectedItem().toString();
                   String driver = comboDriver.getSelectedItem().toString();
-                  String status = btngroupStatus.toString();
+                  String status = btngroupStatus.getSelection().toString();
                   System.out.println("status "+status);
                  
                      try {
@@ -361,7 +365,7 @@ public class NewVehicle extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;
-    private javax.swing.ButtonGroup btngroupStatus;
+    public javax.swing.ButtonGroup btngroupStatus;
     private javax.swing.JComboBox comboDriver;
     private javax.swing.JComboBox comboType;
     private javax.swing.JLabel jLabel1;

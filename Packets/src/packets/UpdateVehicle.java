@@ -251,10 +251,11 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         btnEdit = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
         btnEdit1 = new javax.swing.JButton();
-        btnUpdateCustomer = new javax.swing.JButton();
+        btnUpdateVehicle = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Replace the old personal information ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
         setClosable(true);
         setIconifiable(true);
 
@@ -418,12 +419,12 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        btnUpdateCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update1.png"))); // NOI18N
-        btnUpdateCustomer.setText("  Update");
-        btnUpdateCustomer.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update2.png"))); // NOI18N
-        btnUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateVehicle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update1.png"))); // NOI18N
+        btnUpdateVehicle.setText("  Update");
+        btnUpdateVehicle.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update2.png"))); // NOI18N
+        btnUpdateVehicle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateCustomerActionPerformed(evt);
+                btnUpdateVehicleActionPerformed(evt);
             }
         });
 
@@ -451,12 +452,12 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdateVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -468,7 +469,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdateCustomer)
+                    .addComponent(btnUpdateVehicle)
                     .addComponent(btnDelete)
                     .addComponent(btnClose))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -482,14 +483,15 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboDriverActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        EditVehicle objeto = new EditVehicle(this, txtID);
+         EditVehicle objeto = new EditVehicle(this, txtID);
         objeto.setVisible(true);
+        objeto.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
+    private void btnUpdateVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateVehicleActionPerformed
 
         UpdateVehicle();
-    }//GEN-LAST:event_btnUpdateCustomerActionPerformed
+    }//GEN-LAST:event_btnUpdateVehicleActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
@@ -572,7 +574,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnEdit1;
-    private javax.swing.JButton btnUpdateCustomer;
+    private javax.swing.JButton btnUpdateVehicle;
     private javax.swing.ButtonGroup btngroupStatus;
     private javax.swing.JComboBox comboDriver;
     private javax.swing.JComboBox comboTypeVehicle;

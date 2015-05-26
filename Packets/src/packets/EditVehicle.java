@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author genesisaurora
  */
-public class EditVehicle extends javax.swing.JInternalFrame {
+public class EditVehicle extends javax.swing.JFrame {
 
    Conexion obj;
     Connection cn;
@@ -25,7 +25,8 @@ public class EditVehicle extends javax.swing.JInternalFrame {
     
     public EditVehicle() {
         initComponents();
-         updateTable();
+        
+        updateTable();
     }
 
      public EditVehicle(UpdateVehicle updateVehicle, JTextField ID) {
