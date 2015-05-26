@@ -28,6 +28,7 @@ public class NewClient extends javax.swing.JInternalFrame {
         
     public NewClient() {
         initComponents();
+        this.repaint();
     }
     
     

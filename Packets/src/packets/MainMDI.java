@@ -18,6 +18,7 @@ public class MainMDI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
+        
     }
 
     /**
@@ -56,6 +57,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuNewVehicle2 = new javax.swing.JMenuItem();
         deleteMenuItem1 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         contentMenuItem = new javax.swing.JMenuItem();
 
@@ -82,11 +84,15 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(lblBackground);
         lblBackground.setBounds(0, 0, 1000, 840);
 
+        menuBar.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+
         menuCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/customer_menu.png"))); // NOI18N
         menuCustomer.setMnemonic('f');
         menuCustomer.setText("Customer Menu");
+        menuCustomer.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
 
         menuNewClient.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        menuNewClient.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         menuNewClient.setMnemonic('o');
         menuNewClient.setText("New Customer");
         menuNewClient.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +103,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuCustomer.add(menuNewClient);
 
         menuUpdateCustomer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        menuUpdateCustomer.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         menuUpdateCustomer.setMnemonic('a');
         menuUpdateCustomer.setText("Update Customer");
         menuUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -111,10 +118,11 @@ public class MainMDI extends javax.swing.JFrame {
         menuEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/employees_menu.png"))); // NOI18N
         menuEmployee.setMnemonic('e');
         menuEmployee.setText("Employee & Branch");
+        menuEmployee.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         menuEmployee.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/employees_menu2.png"))); // NOI18N
 
         cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        cutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/employees_menu.png"))); // NOI18N
+        cutMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("New Employee");
         cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +133,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuEmployee.add(cutMenuItem);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jMenuItem1.setText("New Branch");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,14 +142,17 @@ public class MainMDI extends javax.swing.JFrame {
         });
         menuEmployee.add(jMenuItem1);
 
+        copyMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Copy");
         menuEmployee.add(copyMenuItem);
 
+        pasteMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Paste");
         menuEmployee.add(pasteMenuItem);
 
+        deleteMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Delete");
         menuEmployee.add(deleteMenuItem);
@@ -150,8 +162,10 @@ public class MainMDI extends javax.swing.JFrame {
         menuVehicle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/vehicle_menu.png"))); // NOI18N
         menuVehicle.setMnemonic('e');
         menuVehicle.setText("Vehicle");
+        menuVehicle.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
 
         menuNewVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        menuNewVehicle.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         menuNewVehicle.setMnemonic('s');
         menuNewVehicle.setText("New Vehicle");
         menuNewVehicle.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +176,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuVehicle.add(menuNewVehicle);
 
         cutMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        cutMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         cutMenuItem1.setMnemonic('t');
         cutMenuItem1.setText("New Location");
         cutMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +187,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuVehicle.add(cutMenuItem1);
 
         copyMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        copyMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         copyMenuItem1.setMnemonic('y');
         copyMenuItem1.setText("NewTypeVehicle");
         copyMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +198,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuVehicle.add(copyMenuItem1);
 
         menuUpdateVehicle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
+        menuUpdateVehicle.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         menuUpdateVehicle.setMnemonic('x');
         menuUpdateVehicle.setText("Update Vehicle");
         menuUpdateVehicle.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +209,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuVehicle.add(menuUpdateVehicle);
 
         menuNewVehicle2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        menuNewVehicle2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         menuNewVehicle2.setMnemonic('s');
         menuNewVehicle2.setText("Update Type Vehicle");
         menuNewVehicle2.addActionListener(new java.awt.event.ActionListener() {
@@ -201,20 +219,30 @@ public class MainMDI extends javax.swing.JFrame {
         });
         menuVehicle.add(menuNewVehicle2);
 
+        deleteMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         deleteMenuItem1.setMnemonic('d');
         deleteMenuItem1.setText("Delete");
         menuVehicle.add(deleteMenuItem1);
 
         menuBar.add(menuVehicle);
 
+        helpMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/options_menu.png"))); // NOI18N
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Option");
+        helpMenu.setText("Options");
+        helpMenu.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jMenuItem3.setText("Settings");
+        helpMenu.add(jMenuItem3);
+
+        aboutMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("About");
         helpMenu.add(aboutMenuItem);
 
         contentMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        contentMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("EXIT");
         contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -256,6 +284,7 @@ public class MainMDI extends javax.swing.JFrame {
         obj.setVisible(true);
         
         desktopPane.add(obj);  
+       
     }//GEN-LAST:event_menuUpdateVehicleActionPerformed
 
     private void menuNewClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewClientActionPerformed
@@ -264,9 +293,8 @@ public class MainMDI extends javax.swing.JFrame {
         obj.setBounds(50, 50, 650, 700);
         
         
-        obj.setVisible(true);
-        
         desktopPane.add(obj);
+        obj.show();
     }//GEN-LAST:event_menuNewClientActionPerformed
 
     private void menuNewVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewVehicleActionPerformed
@@ -410,6 +438,7 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuCustomer;
