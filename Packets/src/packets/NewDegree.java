@@ -217,18 +217,13 @@ public class NewDegree extends javax.swing.JFrame {
             
                 lblID.setText("1");
             }
-            
-            
-            
-            
-        
+                    
         }catch(Exception ex){
             ex.printStackTrace();
             
         }
     }
-    
-    
+     
     public void updateTableDegree(){
         obj = new Conexion();
         cn =obj.conectar();
@@ -245,9 +240,6 @@ public class NewDegree extends javax.swing.JFrame {
         model.addColumn("ID");
         model.addColumn("Description");
         String []data;
-        
-        
-        
         
         try{
             

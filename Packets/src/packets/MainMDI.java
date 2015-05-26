@@ -335,6 +335,7 @@ public class MainMDI extends javax.swing.JFrame {
         //tamaño del internal frame
         //obj.setSize(700, 800);
         obj.setVisible(true);
+        desktopPane.add(obj);
         
     }//GEN-LAST:event_menuNewVehicle2ActionPerformed
 

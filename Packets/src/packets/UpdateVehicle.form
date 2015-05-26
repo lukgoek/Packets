@@ -34,10 +34,10 @@
               <Component id="btnDelete" min="-2" pref="120" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnClose" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="108" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" pref="508" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -93,6 +93,8 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="optAvailable" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="optBusy" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="optDamaged" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -121,17 +123,18 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                   <Component id="txtModel" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                                  <Component id="comboType" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                  <Component id="comboTypeVehicle" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
                               <Component id="btnEdit" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtID" min="-2" pref="43" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtID" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="btnEdit1" min="-2" pref="77" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="optBusy" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="optDamaged" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -165,7 +168,8 @@
                               <Component id="txtNumVehicle" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboType" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="comboTypeVehicle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnEdit1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -176,7 +180,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="comboDriver" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -282,7 +286,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtBrand">
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboType">
+        <Component class="javax.swing.JComboBox" name="comboTypeVehicle">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
@@ -308,6 +312,21 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtID">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnEdit1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Images/edit1.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Edit"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Images/edit2.png"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEdit1ActionPerformed"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="btnEdit1FocusGained"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

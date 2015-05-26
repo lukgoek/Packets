@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import java.awt.event.KeyEvent;
+import java.sql.Statement;
 
 /**
  *
@@ -29,7 +30,43 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     public UpdateVehicle() {
         initComponents();
     }
-
+    
+    public void updateComboTypeVehicle(){
+         obj = new Conexion();
+        cn =obj.conectar();
+        
+        
+        comboTypeVehicle.removeAllItems();
+        
+     
+        //declaramos la consulta
+        String sql ="SELECT capacity_weight, type FROM type_vehicles";
+        
+        String []datos;
+   
+        try{
+            //Objeto statement es una consulta preparada
+            //se obtiene de la conexion
+            Statement consulta = cn.createStatement();  
+            //resultSet objeto que pèrmite recorrer las filas en una consulta
+            ResultSet rs = consulta.executeQuery(sql);
+        
+            //.next() manda al siguiente registro (devuelve true si tiene informacion)
+            while(rs.next()){
+                //asignamos tamaño al arreglo
+                datos = new String[8];
+                
+                //.getString(); recoge datos
+                datos[1] = rs.getString("capacity_weight");
+                datos[2] = rs.getString("type");
+                comboTypeVehicle.addItem(datos[0]);
+            }
+        
+        }catch(Exception ex){
+            ex.printStackTrace();
+            
+        }
+    }
     public void UpdateVehicle(){
         
          int ID = Integer.parseInt(txtID.getText());
@@ -53,7 +90,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                   String model = txtModel.getText();
                   String plate = txtPlate.getText();
                   String numbervehicle = txtNumVehicle.getText();
-                  String type = comboType.getSelectedItem().toString();
+                  String type = comboTypeVehicle.getSelectedItem().toString();
                   String driver = comboDriver.getSelectedItem().toString();
                   String status = btngroupStatus.toString();
                   System.out.println("status "+status);
@@ -109,17 +146,17 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                     
                     type = rs.getString("type_vehicle");
                     
-                    int tamañoCombo = comboType.getItemCount();
+                    int tamañoCombo = comboTypeVehicle.getItemCount();
                     //System.out.println(tamañoCombo);
                     
                   for(int i=0; i<tamañoCombo; i++){
                       
-                      String comboContenido = comboType.getItemAt(i).toString();
+                      String comboContenido = comboTypeVehicle.getItemAt(i).toString();
                       System.out.println(comboContenido);
                       System.out.println(type+" --- "+comboContenido);
                       
                       if(comboContenido.equals(type)){
-                          comboType.setSelectedIndex(i);
+                          comboTypeVehicle.setSelectedIndex(i);
                                   System.out.println(type+" entro "+comboContenido);
                           break;
                       }
@@ -162,7 +199,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                   String model = txtModel.getText();
                   String plate = txtPlate.getText();
                   String numbervehicle = txtNumVehicle.getText();
-                  String type = comboType.getSelectedItem().toString();
+                  String type = comboTypeVehicle.getSelectedItem().toString();
                   String driver = comboDriver.getSelectedItem().toString();
                   String status = btngroupStatus.toString();
                   System.out.println("status "+status);
@@ -210,9 +247,10 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtBrand = new javax.swing.JTextField();
-        comboType = new javax.swing.JComboBox();
+        comboTypeVehicle = new javax.swing.JComboBox();
         btnEdit = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
+        btnEdit1 = new javax.swing.JButton();
         btnUpdateCustomer = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
@@ -257,7 +295,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
 
         jLabel12.setText("*Brand:");
 
-        comboType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Trailer", "Camion", "Camioneta" }));
+        comboTypeVehicle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Trailer", "Camion", "Camioneta" }));
 
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit1.png"))); // NOI18N
         btnEdit.setText(" Edit");
@@ -265,6 +303,20 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
+            }
+        });
+
+        btnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit1.png"))); // NOI18N
+        btnEdit1.setText(" Edit");
+        btnEdit1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit2.png"))); // NOI18N
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEdit1ActionPerformed(evt);
+            }
+        });
+        btnEdit1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnEdit1FocusGained(evt);
             }
         });
 
@@ -288,6 +340,8 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(optAvailable)
+                    .addComponent(optBusy)
+                    .addComponent(optDamaged)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -309,13 +363,13 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboTypeVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(optBusy)
-                    .addComponent(optDamaged))
-                .addGap(79, 79, 79))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,13 +396,14 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                             .addComponent(txtNumVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel9)
-                            .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboTypeVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEdit1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
-                .addGap(24, 24, 24)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboDriver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -401,9 +456,9 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -467,6 +522,15 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_optDamagedActionPerformed
 
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
+               NewTypeVehicle objeto = new NewTypeVehicle();
+               objeto.setVisible(true);
+    }//GEN-LAST:event_btnEdit1ActionPerformed
+
+    private void btnEdit1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEdit1FocusGained
+        updateComboTypeVehicle();
+    }//GEN-LAST:event_btnEdit1FocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -507,10 +571,11 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnEdit1;
     private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.ButtonGroup btngroupStatus;
     private javax.swing.JComboBox comboDriver;
-    private javax.swing.JComboBox comboType;
+    private javax.swing.JComboBox comboTypeVehicle;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;

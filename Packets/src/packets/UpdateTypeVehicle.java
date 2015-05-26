@@ -38,13 +38,13 @@ public class UpdateTypeVehicle extends javax.swing.JInternalFrame {
                     obj = new Conexion();
                     cn =obj.conectar(); 
                     
-                
-                            String typevehicle = txtTypeVehicle.getText();
                             String weight = txtWeight.getText();
+                            String typevehicle = txtTypeVehicle.getText();
+                            
                          
                           
 
-                   String sql ="UPDATE tipo_vehiculo SET capacidad_peso = ?, tipo = ? WHERE id=?";
+                   String sql ="UPDATE type_vehicles SET capacity_weight = ?, type = ? WHERE id=?";
 
                    try{
 
@@ -203,13 +203,13 @@ public class UpdateTypeVehicle extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        /* UpdateTypeVehicle obj = new UpdateTypeVehicle();
+        UpdateTypeVehicle obj = new UpdateTypeVehicle();
         MainMDI MainMDI = new MainMDI();
         obj.setBounds(50, 50, 650, 700);
 
         obj.setVisible(true);
 
-        MainMDI.add(obj);*/
+        MainMDI.add(obj);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnUpdateTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTypeVehicleActionPerformed
@@ -228,7 +228,7 @@ public class UpdateTypeVehicle extends javax.swing.JInternalFrame {
 
         if(decision == 0){
 
-            String sql ="UPDATE tipo_vehiculo WHERE id=?";
+            String sql ="UPDATE type_vehicles WHERE id=?";
 
             try{
 
