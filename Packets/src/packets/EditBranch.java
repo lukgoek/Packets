@@ -1,4 +1,4 @@
-package packets;
+/*package packets;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,22 +8,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author HbTO
- */
-public class EditCustomer extends javax.swing.JFrame {
+public class EditBranch extends javax.swing.JFrame {
 
     Conexion obj;
     Connection cn;
-    UpdateCustomer objeto;
+    UpdateBranch objeto;
     
-    public EditCustomer() {
+    public EditBranch() {
         initComponents();
         updateTable();
     }
 
-    public EditCustomer(UpdateCustomer updateCustomer, JTextField ID) {
+    public EditBranch(UpdateCustomer updateBranch, JTextField ID) {
         initComponents();
         updateTable();
         //solamente cerramos la ventana no cerreamos la applicacion
@@ -33,7 +29,7 @@ public class EditCustomer extends javax.swing.JFrame {
         cn = obj.conectar();
         
         this.txtID = ID;
-        this.objeto = updateCustomer;
+        //this.objeto = updateBranch;
         
     }
     
@@ -45,28 +41,21 @@ public class EditCustomer extends javax.swing.JFrame {
         
         
         //declaramos la consulta
-        String sql ="SELECT id, name, last_name, address, phone, postal_code, city, state, country, degree, email, username, company_name, rfc, position FROM customers WHERE date_removed IS NULL";
+        String sql ="SELECT id, branch_name, address, postal_code, city, state, country, phone,  FROM branchs WHERE date_removed IS NULL";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();
         
         //definimos las columnas de nuestra tabla
         model.addColumn("ID");
-        model.addColumn("Name");
-        model.addColumn("Last name");
+        model.addColumn("Branch name");
         model.addColumn("Address");
-        model.addColumn("Phone number");
         model.addColumn("Postal code");
         model.addColumn("City");
         model.addColumn("State");
         model.addColumn("Country");
-        model.addColumn("Degree");
-        model.addColumn("e-mail");
-        model.addColumn("Username");
-        model.addColumn("Company name");
-        model.addColumn("RFC");
-        model.addColumn("Position");
-        
+        model.addColumn("Phone number");
+      
         String []datos;
         
         
@@ -86,27 +75,20 @@ public class EditCustomer extends javax.swing.JFrame {
                 
                 //.getString(); recoge datos
                 datos[0] = rs.getString("id");
-                datos[1] = rs.getString("name");
-                datos[2] = rs.getString("last_name");
-                datos[3] = rs.getString("address");
-                datos[4] = rs.getString("phone");
-                datos[5] = rs.getString("city");
-                datos[6] = rs.getString("state");
-                datos[7] = rs.getString("country");
-                datos[8] = rs.getString("degree");
-                datos[9] = rs.getString("email");
-                datos[10] = rs.getString("username");
-                datos[11] = rs.getString("company_name");
-                datos[12] = rs.getString("rfc");
-                datos[13] = rs.getString("position");
-                //agregamos los datos al modelo
+                datos[1] = rs.getString("branch_name");
+                datos[2] = rs.getString("address");
+                datos[3] = rs.getString("postal_code");
+                datos[4] = rs.getString("city");
+                datos[5] = rs.getString("state");
+                datos[6] = rs.getString("country");
+                datos[7] = rs.getString("phone");
                 model.addRow(datos);
 
 
             }
             
             //agregamos el modelo a la tabla
-            tbDataCustomer.setModel(model);
+            tbDataBranch.setModel(model);
         
         }catch(Exception ex){
             ex.printStackTrace();
@@ -143,7 +125,7 @@ public class EditCustomer extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Select one customer to edit them");
+        jLabel1.setText("Select one branch to edit them");
 
         btSendCustomer.setText("Edit");
         btSendCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -186,26 +168,21 @@ public class EditCustomer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSendCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendCustomerActionPerformed
-       int rowSelected = tbDataCustomer.getSelectedRow();
+       int rowSelected = tbDataBranch.getSelectedRow();
        
        if(rowSelected <= -1){
-           JOptionPane.showMessageDialog(rootPane, "You need to select one customer to continue.", "¡ERROR!", 1);
+           JOptionPane.showMessageDialog(rootPane, "You need to select one branch to continue.", "¡ERROR!", 1);
        }else{
            
         
         
         this.dispose();
-           String selectedID = tbDataCustomer.getValueAt(rowSelected, 0).toString();
+           String selectedID = tbDataBranch.getValueAt(rowSelected, 0).toString();
            txtID.setText(selectedID);
         
-           objeto.editCustomer();
+           objeto.editBranch();
           
-          
-           
-           
-           
-          // this.dispose();
-           
+
        }
        
        
@@ -214,13 +191,14 @@ public class EditCustomer extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+   /*
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+       /* try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -228,21 +206,21 @@ public class EditCustomer extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+      /*  java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditCustomer().setVisible(true);
+                new EditBranch().setVisible(true);
             }
         });
     }
@@ -255,3 +233,4 @@ public class EditCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables
 }
+*/
