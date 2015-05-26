@@ -12,60 +12,22 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
-/**
- *
- * @author HbTO
- */
-public class UpdateCustomer extends javax.swing.JInternalFrame {
+
+public class UpdateBranch extends javax.swing.JInternalFrame {
 
     
         Conexion obj;  
         Connection cn;
         
-    public UpdateCustomer() {
+    public UpdateBranch() {
         initComponents();
-        updateComboDegree();
+       
     }
     
     
-    public void updateComboDegree(){
-         obj = new Conexion();
-        cn =obj.conectar();
-        
-        
-        comboDegree.removeAllItems();
-        
-     
-        //declaramos la consulta
-        String sql ="SELECT description FROM type_degree";
-        
-        String []datos;
-   
-        try{
-            //Objeto statement es una consulta preparada
-            //se obtiene de la conexion
-            Statement consulta = cn.createStatement();  
-            //resultSet objeto que pèrmite recorrer las filas en una consulta
-            ResultSet rs = consulta.executeQuery(sql);
-        
-            //.next() manda al siguiente registro (devuelve true si tiene informacion)
-            while(rs.next()){
-                //asignamos tamaño al arreglo
-                datos = new String[8];
-                
-                //.getString(); recoge datos
-                datos[0] = rs.getString("description");
-                comboDegree.addItem(datos[0]);
-            }
-        
-        }catch(Exception ex){
-            ex.printStackTrace();
-            
-        }
-    }
     
     
-    public void updateCustomerMethod(){
+    public void updateBranchMethod(){
         
         int ID = Integer.parseInt(txtID.getText());
         int decision = JOptionPane.showConfirmDialog(this, "All information is correct?", "¡Review the information!", JOptionPane.YES_NO_OPTION, 2);
@@ -242,7 +204,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                 
                 
             } catch (SQLException ex) {
-                Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UpdateBranch.class.getName()).log(Level.SEVERE, null, ex);
             }
         
     }
@@ -362,7 +324,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
                                  JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
                          } catch (SQLException ex) {
-                             Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                             Logger.getLogger(UpdateBranch.class.getName()).log(Level.SEVERE, null, ex);
                          }
             
                    
@@ -772,7 +734,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
 
-        updateCustomerMethod();
+       // updateCustomerMethod();
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
     private void txtPostalCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyPressed
@@ -803,7 +765,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPostalCodeKeyTyped
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        EditCustomer objeto = new EditCustomer(this, txtID);
+        EditBranch objeto = new EditBranch(this, txtID);
         objeto.setVisible(true);
  
 
@@ -850,7 +812,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
     private void btnEdit1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEdit1FocusGained
         
-        updateComboDegree();
+     
     }//GEN-LAST:event_btnEdit1FocusGained
 
     private void comboDegreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDegreeActionPerformed
@@ -874,13 +836,13 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdateCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdateCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdateCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateBranch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -890,7 +852,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateCustomer().setVisible(true);
+                new UpdateBranch().setVisible(true);
             }
         });
     }

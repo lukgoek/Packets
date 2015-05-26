@@ -46,9 +46,6 @@ public class MainMDI extends javax.swing.JFrame {
         menuEmployee = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
         menuVehicle = new javax.swing.JMenu();
         menuNewVehicle = new javax.swing.JMenuItem();
         menuNewLocation = new javax.swing.JMenuItem();
@@ -143,21 +140,6 @@ public class MainMDI extends javax.swing.JFrame {
             }
         });
         menuEmployee.add(jMenuItem1);
-
-        copyMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        menuEmployee.add(copyMenuItem);
-
-        pasteMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        menuEmployee.add(pasteMenuItem);
-
-        deleteMenuItem.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        menuEmployee.add(deleteMenuItem);
 
         menuBar.add(menuEmployee);
 
@@ -315,12 +297,11 @@ public class MainMDI extends javax.swing.JFrame {
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
         NewEmployee obj = new NewEmployee();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 500, 500);
-        
-        
-        obj.setVisible(true);
-        
+        obj.setBounds(50, 50, 719, 500);
+                
         desktopPane.add(obj);
+        obj.show();
+        
     }//GEN-LAST:event_cutMenuItemActionPerformed
 
     private void menuUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateCustomerActionPerformed
@@ -351,12 +332,11 @@ public class MainMDI extends javax.swing.JFrame {
         NewBranch obj = new NewBranch();
         //coordenadas para mostrar
         obj.setBounds(50, 50, 650, 400);
-        
-        
-        obj.setVisible(true);
-        
+              
         desktopPane.add(obj);
-        
+       
+        obj.show();
+  
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuNewTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewTypeVehicleActionPerformed
@@ -431,9 +411,15 @@ public class MainMDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
+<<<<<<< HEAD
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
+=======
+    private javax.swing.JMenuItem copyMenuItem1;
+    private javax.swing.JMenuItem cutMenuItem;
+    private javax.swing.JMenuItem cutMenuItem1;
+>>>>>>> 5e449f714662eca994f66b116b3e3352eeb9397e
     private javax.swing.JMenuItem deleteMenuItem1;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu helpMenu;
@@ -458,7 +444,6 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuUpdateTypeVehicle;
     private javax.swing.JMenuItem menuUpdateVehicle;
     private javax.swing.JMenu menuVehicle;
-    private javax.swing.JMenuItem pasteMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }
