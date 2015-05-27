@@ -49,8 +49,8 @@ public class UpdateTypeVehicle extends javax.swing.JInternalFrame {
                    try{
 
                        PreparedStatement query = cn.prepareStatement(sql);
-                            query.setString(1, typevehicle);
-                             query.setString(2, weight);
+                            query.setString(1, weight);
+                             query.setString(2, typevehicle);
                          
                         query.setInt(3, ID);
                         query.execute();
@@ -206,7 +206,7 @@ public class UpdateTypeVehicle extends javax.swing.JInternalFrame {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         EditTypeVehicle objeto = new EditTypeVehicle(this, txtID);
         objeto.setVisible(true);
-        
+       // objeto.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnUpdateTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTypeVehicleActionPerformed

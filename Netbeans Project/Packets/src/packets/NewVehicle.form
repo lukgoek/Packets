@@ -61,7 +61,7 @@
                   <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,10 +100,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="optAvailable" min="-2" max="-2" attributes="0"/>
-                      <Component id="optBusy" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="optDamaged" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -137,6 +134,7 @@
                               <Component id="btnEdit" min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="comboStatus" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
               </Group>
@@ -177,15 +175,11 @@
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="optAvailable" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="optBusy" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="optDamaged" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="94" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -241,30 +235,6 @@
             <Property name="text" type="java.lang.String" value="*Status:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="optAvailable">
-          <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="btngroupStatus"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Available"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="optBusy">
-          <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="btngroupStatus"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Busy"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="optDamaged">
-          <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="btngroupStatus"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Damaged"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
@@ -277,10 +247,11 @@
         <Component class="javax.swing.JComboBox" name="comboType">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Trailer"/>
-                <StringItem index="1" value="Camion"/>
-                <StringItem index="2" value="Camioneta"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Camion 3 axes"/>
+                <StringItem index="1" value="Camion 4 axes"/>
+                <StringItem index="2" value="Camion 6 axes"/>
+                <StringItem index="3" value="Van"/>
               </StringArray>
             </Property>
           </Properties>
@@ -298,6 +269,17 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="comboStatus">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Available"/>
+                <StringItem index="1" value="Busy"/>
+                <StringItem index="2" value="Damaged"/>
+              </StringArray>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

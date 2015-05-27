@@ -296,7 +296,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
 
         jLabel12.setText("*Brand:");
 
-        comboTypeVehicle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Trailer", "Camion", "Camioneta" }));
+        comboTypeVehicle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Camion 3 axes", "Camion 4 axes", "Camion 6 axes", "Van" }));
 
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit1.png"))); // NOI18N
         btnEdit.setText(" Edit");

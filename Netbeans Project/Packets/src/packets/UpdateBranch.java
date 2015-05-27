@@ -422,7 +422,7 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
                     .addComponent(btnUpdateBranch)
                     .addComponent(btnClose)
                     .addComponent(btnDelete))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();

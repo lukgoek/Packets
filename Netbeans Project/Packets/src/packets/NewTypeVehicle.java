@@ -27,8 +27,8 @@ public class NewTypeVehicle extends javax.swing.JFrame {
       
     public NewTypeVehicle() {
         initComponents();
-         updateID();
          updateTableTypeVehicle();
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,10 +39,6 @@ public class NewTypeVehicle extends javax.swing.JFrame {
         txtCapacityWeight = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtTypeVehicle = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtDescription = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        lblID = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDataTypeVehicle = new javax.swing.JTable();
         btnSave = new javax.swing.JButton();
@@ -56,10 +52,6 @@ public class NewTypeVehicle extends javax.swing.JFrame {
 
         jLabel2.setText("Type Vehicle:");
 
-        jLabel3.setText("Description:");
-
-        jLabel4.setText("ID:");
-
         tbDataTypeVehicle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -70,7 +62,15 @@ public class NewTypeVehicle extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbDataTypeVehicle);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -78,19 +78,13 @@ public class NewTypeVehicle extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtTypeVehicle, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                    .addComponent(lblID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCapacityWeight))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -101,15 +95,7 @@ public class NewTypeVehicle extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTypeVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,7 +105,7 @@ public class NewTypeVehicle extends javax.swing.JFrame {
                     .addComponent(txtCapacityWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save1.png"))); // NOI18N
@@ -159,8 +145,8 @@ public class NewTypeVehicle extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
@@ -171,52 +157,6 @@ public class NewTypeVehicle extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void updateID(){
-        obj = new Conexion();
-        cn =obj.conectar();
-        
-        
-        
-        //declaramos la consulta
-        
-        //LIMIT 0,1 nos trae el primer registro
-        String sql ="SELECT id FROM type_vehicles ORDER BY id DESC LIMIT 0,1";
-       
-        
-        int []datos;
-        
-        
-        
-        
-        try{
-            //Objeto statement es una consulta preparada
-            //se obtiene de la conexion
-            Statement query = cn.createStatement();  
-            //resultSet objeto que pèrmite recorrer las filas en una consulta
-            ResultSet rs = query.executeQuery(sql);
-        
-            //.next() manda al siguiente registro (devuelve true si tiene informacion)
-            if(rs.next()){
-                //asignamos tamaño al arreglo
-                datos = new int[1];
-                
-                //.getString(); recoge datos
-                datos[0] = rs.getInt("id");
-                //agregamos los datos al modelo
-                
-            
-                lblID.setText(""+(datos[0]+1));
-
-            }else{
-            
-                lblID.setText("1");
-            }
-                    
-        }catch(Exception ex){
-            ex.printStackTrace();
-            
-        }
-    }
     
      public void updateTableTypeVehicle(){
         obj = new Conexion();
@@ -231,8 +171,7 @@ public class NewTypeVehicle extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         
         //definimos las columnas de nuestra tabla
-        model.addColumn("ID");
-        model.addColumn("Description");
+        
         model.addColumn("Capacity Weight");
         model.addColumn("Type");
         String []data;
@@ -246,8 +185,8 @@ public class NewTypeVehicle extends javax.swing.JFrame {
                 data = new String[4];
                 
                 data[0] = rs.getString("id");
-                data[2] = rs.getString("capacity_weight");
-                data[3] = rs.getString("type");
+                data[1] = rs.getString("capacity_weight");
+                data[2] = rs.getString("type");
                 
                 
                 model.addRow(data);
@@ -262,7 +201,7 @@ public class NewTypeVehicle extends javax.swing.JFrame {
         }
         
     }
-      public void saveNewVehicle(){
+      public void saveNewTypeVehicle(){
         obj = new Conexion();
         cn =obj.conectar(); 
 
@@ -271,7 +210,6 @@ public class NewTypeVehicle extends javax.swing.JFrame {
                      String sql ="INSERT INTO type_vehicles (capacity_weight, type) VALUES (?, ?)";
 
 
-                     String description = txtDescription.getText();
                      String capacity_weight = txtCapacityWeight.getText();
                      String type = txtTypeVehicle.getText();
                      
@@ -291,14 +229,12 @@ public class NewTypeVehicle extends javax.swing.JFrame {
                                  updateTableTypeVehicle();
                                  this.dispose();
                          } catch (SQLException ex) {
-                             Logger.getLogger(NewVehicle.class.getName()).log(Level.SEVERE, null, ex);
+                             Logger.getLogger(NewTypeVehicle.class.getName()).log(Level.SEVERE, null, ex);
                          }
-        
-        
-        
+             
     }
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-     saveNewVehicle();
+     saveNewTypeVehicle();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -346,14 +282,10 @@ public class NewTypeVehicle extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblID;
     private javax.swing.JTable tbDataTypeVehicle;
     private javax.swing.JTextField txtCapacityWeight;
-    private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtTypeVehicle;
     // End of variables declaration//GEN-END:variables
 }

@@ -296,10 +296,11 @@
         <Component class="javax.swing.JComboBox" name="comboTypeVehicle">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Trailer"/>
-                <StringItem index="1" value="Camion"/>
-                <StringItem index="2" value="Camioneta"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Camion 3 axes"/>
+                <StringItem index="1" value="Camion 4 axes"/>
+                <StringItem index="2" value="Camion 6 axes"/>
+                <StringItem index="3" value="Van"/>
               </StringArray>
             </Property>
           </Properties>
