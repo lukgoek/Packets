@@ -77,7 +77,7 @@ public class MainMDI extends javax.swing.JFrame {
 
         lblBackground.setBackground(new java.awt.Color(255, 255, 255));
         lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/packets_logo.png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo2.png"))); // NOI18N
         desktopPane.add(lblBackground);
         lblBackground.setBounds(0, 0, 1000, 840);
 
