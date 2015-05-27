@@ -217,7 +217,6 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtLastName">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLastNameActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtLastNameKeyTyped"/>
           </Events>
           <AuxValues>
@@ -299,7 +298,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmail">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailActionPerformed"/>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtEmailFocusLost"/>
           </Events>
         </Component>
@@ -356,9 +354,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtConfirmEmail">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtConfirmEmailActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

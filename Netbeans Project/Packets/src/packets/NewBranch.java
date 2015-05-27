@@ -60,7 +60,7 @@ public class NewBranch extends javax.swing.JInternalFrame {
 
 
 
-                     String sql ="INSERT INTO branchs (nombre_sucursal, direccion, codigo_postal, ciudad, estado, pais, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                     String sql ="INSERT INTO branchs (branch_name, address, postal_code, city, state, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 
                      String branchName = txtBranchName.getText();
@@ -72,21 +72,21 @@ public class NewBranch extends javax.swing.JInternalFrame {
                      String phone = txtPhone.getText();
                      
                          try {
-                           PreparedStatement consulta = cn.prepareStatement(sql);
-                             consulta.setString(1, branchName);
-                             consulta.setString(2, address);
-                             consulta.setString(3, postalCode);
-                             consulta.setString(4, city);
-                             consulta.setString(5, state);
-                             consulta.setString(6, country);
-                             consulta.setString(7, phone);
-                             consulta.execute();
+                           PreparedStatement query = cn.prepareStatement(sql);
+                             query.setString(1, branchName);
+                             query.setString(2, address);
+                             query.setString(3, postalCode);
+                             query.setString(4, city);
+                             query.setString(5, state);
+                             query.setString(6, country);
+                             query.setString(7, phone);
+                             query.execute();
                              cleanPanels();
 
 
                            JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
                          } catch (SQLException ex) {
-                           Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                           Logger.getLogger(NewBranch.class.getName()).log(Level.SEVERE, null, ex);
                          }
        }
             
@@ -157,9 +157,6 @@ public class NewBranch extends javax.swing.JInternalFrame {
         jLabel1.setText("*Postal Code:");
 
         txtPostalCode.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPostalCodeKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPostalCodeKeyTyped(evt);
             }
@@ -327,10 +324,6 @@ public class NewBranch extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtPostalCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyPressed
-
-    }//GEN-LAST:event_txtPostalCodeKeyPressed
 
     private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
   int postalCodeSize = txtPostalCode.getText().length();

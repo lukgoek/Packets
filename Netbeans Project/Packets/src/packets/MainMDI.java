@@ -37,6 +37,9 @@ public class MainMDI extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         desktopPane = new javax.swing.JDesktopPane();
         lblBackground = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
@@ -54,6 +57,10 @@ public class MainMDI extends javax.swing.JFrame {
         menuUpdateVehicle = new javax.swing.JMenuItem();
         menuUpdateTypeVehicle = new javax.swing.JMenuItem();
         deleteMenuItem1 = new javax.swing.JMenuItem();
+        menuShipments = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        aboutMenuItem1 = new javax.swing.JMenuItem();
+        MenuExit1 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -73,8 +80,16 @@ public class MainMDI extends javax.swing.JFrame {
 
         jMenuItem2.setText("jMenuItem2");
 
+        jMenu5.setText("File");
+        jMenuBar3.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar3.add(jMenu6);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PACKETS.CO");
+
+        desktopPane.setLayout(null);
 
         lblBackground.setBackground(new java.awt.Color(255, 255, 255));
         lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -218,6 +233,39 @@ public class MainMDI extends javax.swing.JFrame {
 
         menuBar.add(menuVehicle);
 
+        menuShipments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/options_menu.png"))); // NOI18N
+        menuShipments.setMnemonic('h');
+        menuShipments.setText("Shipments");
+        menuShipments.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jMenuItem4.setText("New Shipments");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        menuShipments.add(jMenuItem4);
+
+        aboutMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        aboutMenuItem1.setMnemonic('a');
+        aboutMenuItem1.setText("About");
+        menuShipments.add(aboutMenuItem1);
+
+        MenuExit1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        MenuExit1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        MenuExit1.setMnemonic('c');
+        MenuExit1.setText("EXIT");
+        MenuExit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuExit1ActionPerformed(evt);
+            }
+        });
+        menuShipments.add(MenuExit1);
+
+        menuBar.add(menuShipments);
+
         helpMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/options_menu.png"))); // NOI18N
         helpMenu.setMnemonic('h');
         helpMenu.setText("Options");
@@ -292,7 +340,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void menuNewVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewVehicleActionPerformed
           NewVehicle obj = new NewVehicle();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 500, 500);
+        obj.setBounds(100, 100, 500, 500);
         
         //tamaño del internal frame
         //obj.setSize(700, 800);
@@ -326,7 +374,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void menuNewLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewLocationActionPerformed
           NewLocation obj = new NewLocation();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 400, 300);
+        obj.setBounds(100, 100, 400, 300);
         
         
    
@@ -351,25 +399,21 @@ public class MainMDI extends javax.swing.JFrame {
         
         NewTypeVehicle obj = new NewTypeVehicle();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 400, 400);
+        obj.setVisible(true);
         
+        obj.setLocationRelativeTo(null);
         
-    
-        
-        desktopPane.add(obj);
-        obj.show();
+  
     }//GEN-LAST:event_menuNewTypeVehicleActionPerformed
 
     private void menuUpdateTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateTypeVehicleActionPerformed
 
         UpdateTypeVehicle obj = new UpdateTypeVehicle();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 500, 500);
+        obj.setBounds(50, 50, 550, 550);
         
         //tamaño del internal frame
         //obj.setSize(700, 800);
-        
-        obj.setVisible(true);
         
         desktopPane.add(obj);
         obj.show();
@@ -384,13 +428,30 @@ public class MainMDI extends javax.swing.JFrame {
       
         UpdateBranch obj = new UpdateBranch();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 500, 500);
+        obj.setBounds(50, 50, 650, 400);
         
-        obj.setVisible(true);
+<<<<<<< HEAD
+       // obj.setVisible(true);
+=======
+>>>>>>> 864c31e75c00c4ec0be0e298e25342b72037e4c4
         
         desktopPane.add(obj);
         obj.show();
     }//GEN-LAST:event_MenuUpdateBranchActionPerformed
+
+    private void MenuExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuExit1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuExit1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+         NewShipments obj = new NewShipments();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 580, 550);
+              
+        desktopPane.add(obj);
+       
+        obj.show();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -432,8 +493,10 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuBranch;
     private javax.swing.JMenuItem MenuEmployee;
     private javax.swing.JMenuItem MenuExit;
+    private javax.swing.JMenuItem MenuExit1;
     private javax.swing.JMenuItem MenuUpdateBranch;
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JMenuItem aboutMenuItem1;
     private javax.swing.JMenuItem deleteMenuItem1;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu helpMenu;
@@ -441,10 +504,14 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuCustomer;
@@ -453,6 +520,7 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuNewLocation;
     private javax.swing.JMenuItem menuNewTypeVehicle;
     private javax.swing.JMenuItem menuNewVehicle;
+    private javax.swing.JMenu menuShipments;
     public javax.swing.JMenuItem menuUpdateCustomer;
     private javax.swing.JMenuItem menuUpdateTypeVehicle;
     private javax.swing.JMenuItem menuUpdateVehicle;
