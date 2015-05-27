@@ -23,12 +23,7 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
         initComponents();
         
     }
-            public void updateBranch(){
-                    obj = new Conexion();
-                    cn =obj.conectar(); 
-
-
-    
+            
     public void updateBranchMethod(){
         
         int ID = Integer.parseInt(txtID.getText());
