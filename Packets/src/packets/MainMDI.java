@@ -75,8 +75,6 @@ public class MainMDI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PACKETS.CO");
 
-        desktopPane.setLayout(null);
-
         lblBackground.setBackground(new java.awt.Color(255, 255, 255));
         lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/packets_logo.png"))); // NOI18N
@@ -411,15 +409,7 @@ public class MainMDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
-<<<<<<< HEAD
-    private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
-=======
-    private javax.swing.JMenuItem copyMenuItem1;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem cutMenuItem1;
->>>>>>> 5e449f714662eca994f66b116b3e3352eeb9397e
     private javax.swing.JMenuItem deleteMenuItem1;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu helpMenu;

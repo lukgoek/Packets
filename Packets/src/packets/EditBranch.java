@@ -1,4 +1,4 @@
-/*package packets;
+package packets;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,6 +8,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author HbTO
+ */
 public class EditBranch extends javax.swing.JFrame {
 
     Conexion obj;
@@ -19,7 +23,7 @@ public class EditBranch extends javax.swing.JFrame {
         updateTable();
     }
 
-    public EditBranch(UpdateCustomer updateBranch, JTextField ID) {
+    public EditBranch(UpdateBranch updateBranch, JTextField ID) {
         initComponents();
         updateTable();
         //solamente cerramos la ventana no cerreamos la applicacion
@@ -29,7 +33,7 @@ public class EditBranch extends javax.swing.JFrame {
         cn = obj.conectar();
         
         this.txtID = ID;
-        //this.objeto = updateBranch;
+        this.objeto = updateBranch;
         
     }
     
@@ -41,7 +45,7 @@ public class EditBranch extends javax.swing.JFrame {
         
         
         //declaramos la consulta
-        String sql ="SELECT id, branch_name, address, postal_code, city, state, country, phone,  FROM branchs WHERE date_removed IS NULL";
+        String sql ="SELECT id, branch_name, address, postal_code, city, state, country,  phone,  FROM branchs WHERE date_removed IS NULL";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();
@@ -55,7 +59,7 @@ public class EditBranch extends javax.swing.JFrame {
         model.addColumn("State");
         model.addColumn("Country");
         model.addColumn("Phone number");
-      
+        
         String []datos;
         
         
@@ -71,7 +75,7 @@ public class EditBranch extends javax.swing.JFrame {
             //.next() manda al siguiente registro (devuelve true si tiene informacion)
             while(rs.next()){
                 //asignamos tamaño al arreglo
-                datos = new String[14];
+                datos = new String[8];
                 
                 //.getString(); recoge datos
                 datos[0] = rs.getString("id");
@@ -82,6 +86,7 @@ public class EditBranch extends javax.swing.JFrame {
                 datos[5] = rs.getString("state");
                 datos[6] = rs.getString("country");
                 datos[7] = rs.getString("phone");
+                //agregamos los datos al modelo
                 model.addRow(datos);
 
 
@@ -102,15 +107,15 @@ public class EditBranch extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbDataCustomer = new javax.swing.JTable();
+        tbDataBranch = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btSendCustomer = new javax.swing.JButton();
+        btSendBranch = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Edit Customer");
 
-        tbDataCustomer.setModel(new javax.swing.table.DefaultTableModel(
+        tbDataBranch.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -121,16 +126,16 @@ public class EditBranch extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbDataCustomer);
+        jScrollPane1.setViewportView(tbDataBranch);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Select one branch to edit them");
+        jLabel1.setText("Select one customer to edit them");
 
-        btSendCustomer.setText("Edit");
-        btSendCustomer.addActionListener(new java.awt.event.ActionListener() {
+        btSendBranch.setText("Edit");
+        btSendBranch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSendCustomerActionPerformed(evt);
+                btSendBranchActionPerformed(evt);
             }
         });
 
@@ -145,7 +150,7 @@ public class EditBranch extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(btSendCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btSendBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -157,7 +162,7 @@ public class EditBranch extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btSendCustomer)
+                    .addComponent(btSendBranch)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,7 +172,7 @@ public class EditBranch extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSendCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendCustomerActionPerformed
+    private void btSendBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendBranchActionPerformed
        int rowSelected = tbDataBranch.getSelectedRow();
        
        if(rowSelected <= -1){
@@ -182,23 +187,27 @@ public class EditBranch extends javax.swing.JFrame {
         
            objeto.editBranch();
           
-
+          
+           
+           
+           
+          // this.dispose();
+           
        }
        
        
-    }//GEN-LAST:event_btSendCustomerActionPerformed
+    }//GEN-LAST:event_btSendBranchActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   /*
-public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-       /* try {
+        try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -216,9 +225,11 @@ public static void main(String args[]) {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-      /*  java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EditBranch().setVisible(true);
             }
@@ -226,11 +237,10 @@ public static void main(String args[]) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btSendCustomer;
+    private javax.swing.JButton btSendBranch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbDataCustomer;
+    private javax.swing.JTable tbDataBranch;
     private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables
 }
-*/
