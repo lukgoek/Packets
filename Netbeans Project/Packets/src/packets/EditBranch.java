@@ -22,7 +22,8 @@ public class EditBranch extends javax.swing.JFrame {
         initComponents();
         updateTable();
     }
-
+    
+      
     public EditBranch(UpdateBranch updateBranch, JTextField ID) {
         initComponents();
         updateTable();
@@ -45,7 +46,7 @@ public class EditBranch extends javax.swing.JFrame {
         
         
         //declaramos la consulta
-        String sql ="SELECT id, branch_name, address, postal_code, city, state, country,  phone,  FROM branchs WHERE date_removed IS NULL";
+        String sql ="SELECT id, branch_name, address, postal_code, city, state, country,  phone FROM branchs WHERE date_removed IS NULL";
         
         //modelo de datos para rellenar la tabla (arreglo de informacion)
         DefaultTableModel model = new DefaultTableModel();
@@ -86,7 +87,7 @@ public class EditBranch extends javax.swing.JFrame {
                 datos[5] = rs.getString("state");
                 datos[6] = rs.getString("country");
                 datos[7] = rs.getString("phone");
-                //agregamos los datos al modelo
+          
                 model.addRow(datos);
 
 
@@ -130,7 +131,7 @@ public class EditBranch extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Select one customer to edit them");
+        jLabel1.setText("Select one branch to edit them");
 
         btSendBranch.setText("Edit");
         btSendBranch.addActionListener(new java.awt.event.ActionListener() {
@@ -187,15 +188,10 @@ public class EditBranch extends javax.swing.JFrame {
         
            objeto.editBranch();
           
-          
-           
-           
-           
-          // this.dispose();
+         
            
        }
-       
-       
+         
     }//GEN-LAST:event_btSendBranchActionPerformed
 
     /**

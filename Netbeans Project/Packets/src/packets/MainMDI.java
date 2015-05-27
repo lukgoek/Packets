@@ -384,9 +384,8 @@ public class MainMDI extends javax.swing.JFrame {
       
         UpdateBranch obj = new UpdateBranch();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 500, 500);
+        obj.setBounds(50, 50, 650, 400);
         
-        obj.setVisible(true);
         
         desktopPane.add(obj);
         obj.show();
