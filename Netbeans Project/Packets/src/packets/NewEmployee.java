@@ -150,11 +150,6 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
         pnlPersonalInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "New Employee", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
-        txtLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLastNameActionPerformed(evt);
-            }
-        });
         txtLastName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtLastNameKeyTyped(evt);
@@ -196,11 +191,6 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
         jLabel13.setText("*E-mail:");
 
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEmailFocusLost(evt);
@@ -225,12 +215,6 @@ public class NewEmployee extends javax.swing.JInternalFrame {
         jLabel7.setText("*Branch:");
 
         comboTypeEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Drivers", "Secretary", "Manager", " " }));
-
-        txtConfirmEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConfirmEmailActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlPersonalInformationLayout = new javax.swing.GroupLayout(pnlPersonalInformation);
         pnlPersonalInformation.setLayout(pnlPersonalInformationLayout);
@@ -476,18 +460,6 @@ public class NewEmployee extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_txtNameKeyTyped
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtConfirmEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtConfirmEmailActionPerformed
-
-    private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLastNameActionPerformed
 
     /**
      * @param args the command line arguments

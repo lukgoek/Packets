@@ -215,7 +215,7 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Edit Customer");
+        setTitle("Edit Branch");
         setPreferredSize(new java.awt.Dimension(704, 587));
 
         pnlPersonalInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Replace the old personal information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
@@ -233,9 +233,6 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
         jLabel1.setText("*Postal Code:");
 
         txtPostalCode.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPostalCodeKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPostalCodeKeyTyped(evt);
             }
@@ -371,9 +368,9 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
         btnUpdateBranch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update1.png"))); // NOI18N
         btnUpdateBranch.setText("  Update");
         btnUpdateBranch.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update2.png"))); // NOI18N
-        btnUpdateBranch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateBranchActionPerformed(evt);
+        btnUpdateBranch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnUpdateBranchFocusGained(evt);
             }
         });
 
@@ -422,21 +419,15 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
                     .addComponent(btnUpdateBranch)
                     .addComponent(btnClose)
                     .addComponent(btnDelete))
+<<<<<<< HEAD
                 .addContainerGap(31, Short.MAX_VALUE))
+=======
+                .addContainerGap(30, Short.MAX_VALUE))
+>>>>>>> 864c31e75c00c4ec0be0e298e25342b72037e4c4
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnUpdateBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateBranchActionPerformed
-
-        updateBranchMethod();
-    }//GEN-LAST:event_btnUpdateBranchActionPerformed
-
-    private void txtPostalCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyPressed
-       
-
-    }//GEN-LAST:event_txtPostalCodeKeyPressed
 
     private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
          int postalCodeSize = txtPostalCode.getText().length();
@@ -527,6 +518,10 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_txtStateKeyTyped
+
+    private void btnUpdateBranchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnUpdateBranchFocusGained
+          updateBranchMethod();
+    }//GEN-LAST:event_btnUpdateBranchFocusGained
 
     /**
      * @param args the command line arguments
