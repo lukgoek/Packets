@@ -201,8 +201,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                   String numbervehicle = txtNumVehicle.getText();
                   String type = comboTypeVehicle.getSelectedItem().toString();
                   String driver = comboDriver.getSelectedItem().toString();
-                  String status = btngroupStatus.toString();
-                  System.out.println("status "+status);
+                  String status = comboStatus.getSelectedItem().toString();
                  
                      try {
                        PreparedStatement query = cn.prepareStatement(sql);
@@ -241,9 +240,6 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         comboDriver = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
-        optAvailable = new javax.swing.JRadioButton();
-        optBusy = new javax.swing.JRadioButton();
-        optDamaged = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtBrand = new javax.swing.JTextField();
@@ -251,11 +247,12 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         btnEdit = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
         btnEdit1 = new javax.swing.JButton();
+        comboStatus = new javax.swing.JComboBox();
         btnUpdateVehicle = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Replace the old personal information ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edit Vehicle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
         setClosable(true);
         setIconifiable(true);
 
@@ -279,20 +276,6 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         });
 
         jLabel10.setText("*Status:");
-
-        btngroupStatus.add(optAvailable);
-        optAvailable.setText("Available");
-
-        btngroupStatus.add(optBusy);
-        optBusy.setText("Busy");
-
-        btngroupStatus.add(optDamaged);
-        optDamaged.setText("Damaged");
-        optDamaged.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optDamagedActionPerformed(evt);
-            }
-        });
 
         jLabel12.setText("*Brand:");
 
@@ -321,6 +304,8 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
             }
         });
 
+        comboStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Available", "Busy", "Damaged" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -340,9 +325,6 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(optAvailable)
-                    .addComponent(optBusy)
-                    .addComponent(optDamaged)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -369,7 +351,8 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -409,14 +392,10 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                     .addComponent(comboDriver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(optAvailable))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(optBusy)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(optDamaged)
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         btnUpdateVehicle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update1.png"))); // NOI18N
@@ -473,7 +452,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                         .addComponent(btnUpdateVehicle)
                         .addComponent(btnClose))
                     .addComponent(btnDelete))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -493,10 +472,6 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
 
         UpdateVehicle();
     }//GEN-LAST:event_btnUpdateVehicleActionPerformed
-
-    private void optDamagedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optDamagedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optDamagedActionPerformed
 
     private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
                NewTypeVehicle objeto = new NewTypeVehicle();
@@ -581,6 +556,7 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnUpdateVehicle;
     private javax.swing.ButtonGroup btngroupStatus;
     private javax.swing.JComboBox comboDriver;
+    private javax.swing.JComboBox comboStatus;
     private javax.swing.JComboBox comboTypeVehicle;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -591,9 +567,6 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton optAvailable;
-    private javax.swing.JRadioButton optBusy;
-    private javax.swing.JRadioButton optDamaged;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtModel;

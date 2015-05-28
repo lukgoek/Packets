@@ -56,7 +56,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuNewTypeVehicle = new javax.swing.JMenuItem();
         menuUpdateVehicle = new javax.swing.JMenuItem();
         menuUpdateTypeVehicle = new javax.swing.JMenuItem();
-        deleteMenuItem1 = new javax.swing.JMenuItem();
+        menuUpdateLocation = new javax.swing.JMenuItem();
         menuShipments = new javax.swing.JMenu();
         menuNewShipments = new javax.swing.JMenuItem();
         menuUPdateShipments = new javax.swing.JMenuItem();
@@ -88,6 +88,8 @@ public class MainMDI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PACKETS.CO");
+
+        desktopPane.setLayout(null);
 
         lblBackground.setBackground(new java.awt.Color(255, 255, 255));
         lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -224,14 +226,20 @@ public class MainMDI extends javax.swing.JFrame {
         });
         menuVehicle.add(menuUpdateTypeVehicle);
 
-        deleteMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        deleteMenuItem1.setMnemonic('d');
-        deleteMenuItem1.setText("Delete");
-        menuVehicle.add(deleteMenuItem1);
+        menuUpdateLocation.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        menuUpdateLocation.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        menuUpdateLocation.setMnemonic('d');
+        menuUpdateLocation.setText("Update Location");
+        menuUpdateLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUpdateLocationActionPerformed(evt);
+            }
+        });
+        menuVehicle.add(menuUpdateLocation);
 
         menuBar.add(menuVehicle);
 
-        menuShipments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/options_menu.png"))); // NOI18N
+        menuShipments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/shipments.png"))); // NOI18N
         menuShipments.setMnemonic('h');
         menuShipments.setText("Shipments");
         menuShipments.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
@@ -321,7 +329,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void menuUpdateVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateVehicleActionPerformed
   UpdateVehicle obj = new UpdateVehicle();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 500, 500);
+        obj.setBounds(50, 50, 600, 480);
         
         //tamaño del internal frame
         //obj.setSize(700, 800);
@@ -370,15 +378,14 @@ public class MainMDI extends javax.swing.JFrame {
         obj.setBounds(50, 50, 650, 700);
         
         
-        obj.setVisible(true);
-        
         desktopPane.add(obj);
+        obj.show();
     }//GEN-LAST:event_menuUpdateCustomerActionPerformed
 
     private void menuNewLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewLocationActionPerformed
           NewLocation obj = new NewLocation();
         //coordenadas para mostrar
-        obj.setBounds(100, 100, 400, 300);
+        obj.setBounds(100, 100, 460, 370);
         
         
    
@@ -414,7 +421,7 @@ public class MainMDI extends javax.swing.JFrame {
 
         UpdateTypeVehicle obj = new UpdateTypeVehicle();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 550, 550);
+        obj.setBounds(50, 50, 480, 400);
         
         //tamaño del internal frame
         //obj.setSize(700, 800);
@@ -460,7 +467,7 @@ public class MainMDI extends javax.swing.JFrame {
         
          UpdateShipments obj = new UpdateShipments();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 650, 400);
+        obj.setBounds(50, 50, 650, 550);
         
 
        // obj.setVisible(true);
@@ -469,6 +476,21 @@ public class MainMDI extends javax.swing.JFrame {
         desktopPane.add(obj);
         obj.show();
     }//GEN-LAST:event_menuUPdateShipmentsActionPerformed
+
+    private void menuUpdateLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateLocationActionPerformed
+        
+        UpdateLocation obj = new UpdateLocation();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 500, 500);
+        
+
+       // obj.setVisible(true);
+
+        
+        desktopPane.add(obj);
+        obj.show();
+        
+    }//GEN-LAST:event_menuUpdateLocationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -513,7 +535,6 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuExit1;
     private javax.swing.JMenuItem MenuUpdateBranch;
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem1;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu1;
@@ -539,6 +560,7 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenu menuShipments;
     private javax.swing.JMenuItem menuUPdateShipments;
     public javax.swing.JMenuItem menuUpdateCustomer;
+    private javax.swing.JMenuItem menuUpdateLocation;
     private javax.swing.JMenuItem menuUpdateTypeVehicle;
     private javax.swing.JMenuItem menuUpdateVehicle;
     private javax.swing.JMenu menuVehicle;
