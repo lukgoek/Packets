@@ -252,14 +252,14 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         txtID = new javax.swing.JTextField();
         btnEdit1 = new javax.swing.JButton();
         btnUpdateVehicle = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Replace the old personal information ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
         setClosable(true);
         setIconifiable(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicle Description", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Replace the old vehicle information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
         jLabel3.setText("*Model:");
 
@@ -428,21 +428,21 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
             }
         });
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close1.png"))); // NOI18N
         btnClose.setText("Close");
         btnClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close2.png"))); // NOI18N
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete1.png"))); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete2.png"))); // NOI18N
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -453,11 +453,11 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(btnUpdateVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -467,12 +467,13 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdateVehicle)
-                    .addComponent(btnDelete)
-                    .addComponent(btnClose))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnUpdateVehicle)
+                        .addComponent(btnClose))
+                    .addComponent(btnDelete))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -493,33 +494,6 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         UpdateVehicle();
     }//GEN-LAST:event_btnUpdateVehicleActionPerformed
 
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCloseActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
-        int ID = Integer.parseInt(txtID.getText());
-        int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete vehicles with id: "+ID, "¡DELETE VEHICLES!", JOptionPane.YES_NO_OPTION, 1);
-
-        if(decision == 0){
-
-            String sql ="UPDATE vehicles SET removed_date = NOW() WHERE id=?";
-
-            try{
-
-                PreparedStatement query = cn.prepareStatement(sql);
-                query.setInt(1, ID);
-                query.execute();
-                JOptionPane.showMessageDialog(this, "Vehicle has been removed.");
-                cleanPanels();
-            }catch(Exception e){
-
-            }
-
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
     private void optDamagedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optDamagedActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_optDamagedActionPerformed
@@ -532,6 +506,36 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     private void btnEdit1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEdit1FocusGained
         updateComboTypeVehicle();
     }//GEN-LAST:event_btnEdit1FocusGained
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        if(txtID.getText().equals("")){
+            JOptionPane.showConfirmDialog(this, "You need select one vehicle first. ", "¡DELETE VEHICLE!", JOptionPane.YES_NO_OPTION, 1);
+        }else{
+            int ID = Integer.parseInt(txtID.getText());
+            int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete vehicle with id: "+ID, "¡DELETE VEHICLE!", JOptionPane.YES_NO_OPTION, 1);
+
+            if(decision == 0){
+
+                String sql ="UPDATE vehicles SET removed_date = NOW() WHERE id=?";
+
+                try{
+
+                    PreparedStatement query = cn.prepareStatement(sql);
+                    query.setInt(1, ID);
+                    query.execute();
+                    JOptionPane.showMessageDialog(this, "Vehicle has been removed.");
+                    cleanPanels();
+                }catch(Exception e){
+
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
