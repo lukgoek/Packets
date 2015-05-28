@@ -241,7 +241,7 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
             }
         });
 
-        pnlPersonalInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Branch", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        pnlPersonalInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Update Branch", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
         jLabel6.setText("*City:");
 

@@ -50,6 +50,7 @@ public class MainMDI extends javax.swing.JFrame {
         MenuEmployee = new javax.swing.JMenuItem();
         MenuBranch = new javax.swing.JMenuItem();
         MenuUpdateBranch = new javax.swing.JMenuItem();
+        MenuUpdateEmployee = new javax.swing.JMenuItem();
         menuVehicle = new javax.swing.JMenu();
         menuNewVehicle = new javax.swing.JMenuItem();
         menuNewLocation = new javax.swing.JMenuItem();
@@ -88,6 +89,8 @@ public class MainMDI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PACKETS.CO");
+
+        desktopPane.setLayout(null);
 
         lblBackground.setBackground(new java.awt.Color(255, 255, 255));
         lblBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -161,6 +164,15 @@ public class MainMDI extends javax.swing.JFrame {
             }
         });
         menuEmployee.add(MenuUpdateBranch);
+
+        MenuUpdateEmployee.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
+        MenuUpdateEmployee.setText("Update Employee");
+        MenuUpdateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuUpdateEmployeeActionPerformed(evt);
+            }
+        });
+        menuEmployee.add(MenuUpdateEmployee);
 
         menuBar.add(menuEmployee);
 
@@ -369,10 +381,8 @@ public class MainMDI extends javax.swing.JFrame {
         //coordenadas para mostrar
         obj.setBounds(50, 50, 650, 700);
         
-        
-        obj.setVisible(true);
-        
         desktopPane.add(obj);
+        obj.show();
     }//GEN-LAST:event_menuUpdateCustomerActionPerformed
 
     private void menuNewLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewLocationActionPerformed
@@ -470,6 +480,16 @@ public class MainMDI extends javax.swing.JFrame {
         obj.show();
     }//GEN-LAST:event_menuUPdateShipmentsActionPerformed
 
+    private void MenuUpdateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuUpdateEmployeeActionPerformed
+        UpdateEmployee obj = new UpdateEmployee();
+        //coordenadas para mostrar
+        obj.setBounds(50, 50, 719, 500);
+                
+        desktopPane.add(obj);
+        obj.show();
+        
+    }//GEN-LAST:event_MenuUpdateEmployeeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -512,6 +532,7 @@ public class MainMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuExit;
     private javax.swing.JMenuItem MenuExit1;
     private javax.swing.JMenuItem MenuUpdateBranch;
+    private javax.swing.JMenuItem MenuUpdateEmployee;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem1;
     private javax.swing.JDesktopPane desktopPane;

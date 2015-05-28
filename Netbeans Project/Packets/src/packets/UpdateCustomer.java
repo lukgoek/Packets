@@ -30,7 +30,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     
     public void updateComboDegree(){
          obj = new Conexion();
-        cn =obj.conectar();
+         cn =obj.conectar();
         
         
         comboDegree.removeAllItems();
@@ -130,12 +130,12 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                             String username = txtUsername.getText();
                             String password = txtPassword.getText();
 
-                   String sql ="UPDATE customers SET name = ?, las_name = ?, address = ?, phone = ?, postal_code = ?, city = ?, state = ?, country = ?, degree = ?, email = ?, username = ?, password = ?, company_name = ?, rfc = ?, position = ? WHERE id=?";
+                   String sql ="UPDATE customers SET name = ?, last_name = ?, address = ?, phone = ?, postal_code = ?, city = ?, state = ?, country = ?, degree = ?, email = ?, username = ?, password = ?, company_name = ?, rfc = ?, position = ? WHERE id=?";
 
                    try{
 
                        PreparedStatement query = cn.prepareStatement(sql);
-                            query.setString(1, name);
+                             query.setString(1, name);
                              query.setString(2, lastName);
                              query.setString(3, address);
                              query.setString(4, phone);
@@ -764,7 +764,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
                     .addComponent(btnUpdateCustomer)
                     .addComponent(btnClose)
                     .addComponent(btnDelete))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -849,7 +849,6 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEdit1ActionPerformed
 
     private void btnEdit1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEdit1FocusGained
-        
         updateComboDegree();
     }//GEN-LAST:event_btnEdit1FocusGained
 
