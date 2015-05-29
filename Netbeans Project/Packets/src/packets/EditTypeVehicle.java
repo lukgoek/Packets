@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author genesisaurora
  */
-public class EditTypeVehicle extends javax.swing.JInternalFrame {
+public class EditTypeVehicle extends javax.swing.JFrame {
     
     Conexion obj;
     Connection cn;

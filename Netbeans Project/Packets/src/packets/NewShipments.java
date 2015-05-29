@@ -38,6 +38,10 @@ public class NewShipments extends javax.swing.JInternalFrame {
         
        txtLastName.setText("");
        txtNumberGuide.setText("");
+       txtNameSender.setText("");
+       txtPhoneSender.setText("");
+       txtCellPhone.setText("");
+       txtAddress.setText("");
        genarateNumberGuide();
        
      }
@@ -81,7 +85,7 @@ public class NewShipments extends javax.swing.JInternalFrame {
     
     public void saveNewShipments(){
         
-        if(txtLastName.getText().equals("") || txtNumberGuide.getText().equals("") || txtAreaDestination.getText().equals("")){
+        if(txtLastName.getText().equals("") || txtNameSender.getText().equals("") || txtLastNameSender.getText().equals("") || txtAddress.getText().equals("") || txtPhoneSender.getText().equals("") || txtCellPhone.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
@@ -90,21 +94,35 @@ public class NewShipments extends javax.swing.JInternalFrame {
         cn =obj.conectar(); 
         
         
-         String sql ="INSERT INTO shipments (location, number_guide, compromise, type_send, content, area_destination, sender, shipments_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+         String sql ="INSERT INTO shipments (customer, number_guide, last_name, email, phone, type_send, area_destination, shipments_cost, name_sender, lastname_sender, phone_sender, cellphone, address, lapse_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
-                  String location = txtLastName.getText();
-                  String number_guide= txtNumberGuide.getText();
+                  String customer = txtNameCustomer.getText();
+                  String number_guide = txtNumberGuide.getText();
+                  String last_name = txtLastName.getText();
+                  String email = txtEmail.getText();
+                  String phone = txtPhone.getText();
                   String type_send = comboTypeSend.getSelectedItem().toString();
-                  String area_destination = txtAreaDestination.getText();
+                  String name_sender = txtNameSender.getText();
+                  String lastname_sender = txtLastNameSender.getText();
+                  String phone_sender = txtPhoneSender.getText();
+                  String cellphone = txtCellPhone.getText();
+                  String area_destination = txtAddress.getText();
     
                  
                   
                     try {
                        PreparedStatement query = cn.prepareStatement(sql);
-                         query.setString(1, location);
+                         query.setString(1, customer);
                          query.setString(2, number_guide);
-                         query.setString(4, type_send);
-                         query.setString(6, area_destination);
+                         query.setString(3, last_name);
+                         query.setString(4, email);
+                         query.setString(5, phone);
+                         query.setString(6, type_send);
+                         query.setString(7, name_sender);
+                         query.setString(8, lastname_sender);
+                         query.setString(9, phone_sender);
+                         query.setString(10, cellphone);
+                         query.setString(11, area_destination);
                          query.execute();
                          
                          cleanPanels();
@@ -160,12 +178,12 @@ public class NewShipments extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPhoneSender = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtCelularPhone = new javax.swing.JTextField();
+        txtCellPhone = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         lblLapseTime = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaDestination = new javax.swing.JTextArea();
+        txtAddress = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
         lblCost = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
@@ -236,9 +254,9 @@ public class NewShipments extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Lapse of Time:");
 
-        txtAreaDestination.setColumns(20);
-        txtAreaDestination.setRows(5);
-        jScrollPane1.setViewportView(txtAreaDestination);
+        txtAddress.setColumns(20);
+        txtAddress.setRows(5);
+        jScrollPane1.setViewportView(txtAddress);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -266,7 +284,7 @@ public class NewShipments extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCelularPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -290,7 +308,7 @@ public class NewShipments extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCelularPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPhoneSender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -546,8 +564,8 @@ public class NewShipments extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblLapseTime;
-    private javax.swing.JTextArea txtAreaDestination;
-    private javax.swing.JTextField txtCelularPhone;
+    private javax.swing.JTextArea txtAddress;
+    private javax.swing.JTextField txtCellPhone;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtLastName;

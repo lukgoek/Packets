@@ -115,7 +115,7 @@ public class EditVehicle extends javax.swing.JFrame {
         txtID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tbDataVehicle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

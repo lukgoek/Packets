@@ -180,7 +180,7 @@ public class NewTypeVehicle extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
                     .addComponent(btnSave))
-                .addGap(45, 45, 45))
+                .addContainerGap())
         );
 
         pack();
