@@ -387,10 +387,6 @@ public class MainMDI extends javax.swing.JFrame {
         //coordenadas para mostrar
         obj.setBounds(50, 50, 650, 700);
         
-<<<<<<< HEAD
-=======
-        
->>>>>>> a9c30ccadee87a3d9c9141795edd84cbe79122a1
         desktopPane.add(obj);
         obj.show();
     }//GEN-LAST:event_menuUpdateCustomerActionPerformed
@@ -490,7 +486,7 @@ public class MainMDI extends javax.swing.JFrame {
         obj.show();
     }//GEN-LAST:event_menuUPdateShipmentsActionPerformed
 
-<<<<<<< HEAD
+
     private void MenuUpdateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuUpdateEmployeeActionPerformed
         UpdateEmployee obj = new UpdateEmployee();
         //coordenadas para mostrar
@@ -500,7 +496,7 @@ public class MainMDI extends javax.swing.JFrame {
         obj.show();
         
     }//GEN-LAST:event_MenuUpdateEmployeeActionPerformed
-=======
+
     private void menuUpdateLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateLocationActionPerformed
         
         UpdateLocation obj = new UpdateLocation();
@@ -515,7 +511,7 @@ public class MainMDI extends javax.swing.JFrame {
         obj.show();
         
     }//GEN-LAST:event_menuUpdateLocationActionPerformed
->>>>>>> a9c30ccadee87a3d9c9141795edd84cbe79122a1
+
 
     /**
      * @param args the command line arguments

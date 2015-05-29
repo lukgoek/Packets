@@ -439,12 +439,6 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        EditBranch objeto = new EditBranch(this, txtID);
-        objeto.setVisible(true);
-
-    }//GEN-LAST:event_btnEditActionPerformed
-
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
         if(txtID.getText().equals("")){
@@ -558,6 +552,11 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
         }                                  
 
     }//GEN-LAST:event_txtPhoneKeyTyped
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        EditBranch objeto = new EditBranch(this, txtID);
+        objeto.setVisible(true);
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments

@@ -22,6 +22,7 @@ public class NewTypeEmployee extends javax.swing.JFrame {
     public NewTypeEmployee() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
         updateID();
         updateTableTypeEmployee();
     }
@@ -40,7 +41,7 @@ public class NewTypeEmployee extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         btnClose1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setText("ID:");
 
@@ -238,6 +239,7 @@ public class NewTypeEmployee extends javax.swing.JFrame {
 
                                  JOptionPane.showMessageDialog(rootPane, "Type Employee data has been saved.");
                                  updateTableTypeEmployee();
+                                 
                                  this.dispose();
                          } catch (SQLException ex) {
                              Logger.getLogger(NewEmployee.class.getName()).log(Level.SEVERE, null, ex);
