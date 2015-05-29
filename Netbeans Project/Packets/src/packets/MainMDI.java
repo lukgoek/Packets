@@ -465,7 +465,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void menuNewShipmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewShipmentsActionPerformed
          NewShipments obj = new NewShipments();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 580, 550);
+        obj.setBounds(100, 50, 700, 750);
               
         desktopPane.add(obj);
        

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-05-2015 a las 22:45:49
+-- Tiempo de generación: 29-05-2015 a las 20:07:12
 -- Versión del servidor: 5.6.12
 -- Versión de PHP: 5.5.3
 
@@ -40,14 +40,15 @@ CREATE TABLE IF NOT EXISTS `branchs` (
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `date_removed` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `branchs`
 --
 
 INSERT INTO `branchs` (`id`, `branch_name`, `address`, `postal_code`, `city`, `state`, `country`, `phone`, `registration_date`, `date_removed`) VALUES
-(1, 'sucursales', 'nnjkl7', '82000', 'opo', 'ppp', 'kkk', '9820269', '2015-05-28 01:28:19', '2015-05-28 01:28:19');
+(1, 'sucursales', 'nnjkl7', '82000', 'opo', 'ppp', 'kkk', '9820269', '2015-05-28 01:28:19', '2015-05-28 01:28:19'),
+(2, 'pppp', 'sdvsdgsdfg', 'hjkhjk', 'ytiyti', 'uikty', 'ytiyt', 'dfsg', '2015-05-29 11:47:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,14 +132,20 @@ CREATE TABLE IF NOT EXISTS `location` (
 
 CREATE TABLE IF NOT EXISTS `shipments` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
-  `location` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `customer` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `number_guide` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `compromise` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `type_send` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `content` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `area_destination` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `sender` varchar(70) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `last_name` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `phone` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `type_send` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `area_destination` varchar(90) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `shipments_cost` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `name_sender` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `lastname_sender` varchar(70) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `phone_sender` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `cellphone` varchar(20) CHARACTER SET utf32 COLLATE utf32_spanish_ci NOT NULL,
+  `address` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `lapse_time` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `removed_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -151,9 +158,9 @@ CREATE TABLE IF NOT EXISTS `shipments` (
 --
 
 CREATE TABLE IF NOT EXISTS `shipments_costs` (
-  `about` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `package` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `overweight` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `local` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `national` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `international` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
