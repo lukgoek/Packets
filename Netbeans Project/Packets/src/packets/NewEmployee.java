@@ -559,7 +559,7 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+            
         }
     }//GEN-LAST:event_txtLastNameKeyTyped
 
@@ -568,7 +568,7 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+            
         }
     }//GEN-LAST:event_txtNameKeyTyped
 
