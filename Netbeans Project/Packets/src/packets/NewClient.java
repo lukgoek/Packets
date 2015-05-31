@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
@@ -22,150 +24,139 @@ import javax.swing.text.BadLocationException;
  */
 public class NewClient extends javax.swing.JInternalFrame {
 
-    
-        Conexion obj;  
-        Connection cn;
-        
+    Conexion obj;
+    Connection cn;
+
     public NewClient() {
         initComponents();
         this.repaint();
     }
-    
-    
-    private void cleanPanels(){
-        
-       txtLastName.setText("");
-       txtName.setText("");
-       txtAddress.setText("");
-       txtPhone.setText("");
-       txtPostalCode.setText("");
-       txtCity.setText("");
-       txtState.setText("");
-       txtCountry.setText("");
-       txtUsername.setText("");
-       txtPassword.setText("");
-       txtConfirmPassword.setText("");
-       txtEmail.setText("");
-       txtConfirmEmail.setText("");
-       txtRFC.setText("");
-       txtPosition.setText("");
-       
-       txtLastName.requestFocus();
-       
+
+    private void cleanPanels() {
+
+        txtLastName.setText("");
+        txtName.setText("");
+        txtAddress.setText("");
+        txtPhone.setText("");
+        txtPostalCode.setText("");
+        txtCity.setText("");
+        txtState.setText("");
+        txtCountry.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+        txtConfirmPassword.setText("");
+        txtEmail.setText("");
+        txtConfirmEmail.setText("");
+        txtRFC.setText("");
+        txtPosition.setText("");
+
+        txtLastName.requestFocus();
+
     }
-    
-    
-    private void saveNewClient(){
-        System.out.println("contraseña: "+txtPassword.getText());
+
+    private void saveNewClient() {
+        System.out.println("contraseña: " + txtPassword.getText());
         //recogemos el email
         String email = txtEmail.getText();
         String companyName = txtCompanyName.getText();
         String rfc = txtRFC.getText();
         String position = txtPosition.getText();
-        
+
         //si las cajas de email estan basias asignamos null
-        if(txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")){
+        if (txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")) {
             email = "NULL";
         }
-        
-        if(txtCompanyName.getText().equals("")){
+
+        if (txtCompanyName.getText().equals("")) {
             companyName = "NULL";
         }
-        
-        if(txtRFC.getText().equals("")){
+
+        if (txtRFC.getText().equals("")) {
             rfc = "NULL";
         }
-        
-        if(txtPosition.getText().equals("")){
+
+        if (txtPosition.getText().equals("")) {
             position = "NULL";
         }
-        
-        if(txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")){
+
+        if (txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
-        
-        if(txtPostalCode.getText().length() < 5){
-            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+
+        if (txtPostalCode.getText().length() < 5) {
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");
             return;
-                   
+
         }
-        
-        
-        
-        
-        if(txtPassword.getText().equals(txtConfirmPassword.getText())){
-            if(txtEmail.getText().equals(txtConfirmEmail.getText())){
-                if(txtPassword.getText().length() >= 8){
-                   
-                       
-                      
+
+        if (txtPhone.getText().length() < 7) {
+            JOptionPane.showMessageDialog(rootPane, "Phone too short.");
+            return;
+
+        }
+
+        if (txtPassword.getText().equals(txtConfirmPassword.getText())) {
+            if (txtEmail.getText().equals(txtConfirmEmail.getText())) {
+                if (txtPassword.getText().length() >= 8) {
+
                     obj = new Conexion();
-                    cn =obj.conectar(); 
+                    cn = obj.conectar();
 
+                    String sql = "INSERT INTO customers (name, last_name, address, phone, postal_code, city, state, country, degree, email, username, password, company_name, rfc, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
 
+                    String lastName = txtLastName.getText();
+                    String name = txtName.getText();
+                    String address = txtAddress.getText();
+                    String phone = txtPhone.getText();
+                    String postalCode = txtPostalCode.getText();
+                    String city = txtCity.getText();
+                    String state = txtState.getText();
+                    String country = txtCountry.getText();
+                    String degree = comboDegree.getSelectedItem().toString();
 
-                     String sql ="INSERT INTO customers (name, last_name, address, phone, postal_code, city, state, country, degree, email, username, password, company_name, rfc, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
+                    String username = txtUsername.getText();
+                    String password = txtPassword.getText();
 
+                    try {
+                        PreparedStatement query = cn.prepareStatement(sql);
+                        query.setString(1, lastName);
+                        query.setString(2, name);
+                        query.setString(3, address);
+                        query.setString(4, phone);
+                        query.setString(5, postalCode);
+                        query.setString(6, city);
+                        query.setString(7, state);
+                        query.setString(8, country);
+                        query.setString(9, degree);
+                        query.setString(10, email);
+                        query.setString(11, username);
+                        query.setString(12, password);
+                        query.setString(13, companyName);
+                        query.setString(14, rfc);
+                        query.setString(15, position);
+                        query.execute();
 
-                     String lastName = txtLastName.getText();
-                     String name = txtName.getText();
-                     String address = txtAddress.getText();
-                     String phone = txtPhone.getText();
-                     String postalCode = txtPostalCode.getText();
-                     String city = txtCity.getText();
-                     String state = txtState.getText();
-                     String country = txtCountry.getText();
-                     String degree = comboDegree.getSelectedItem().toString();
+                        cleanPanels();
 
-                     String username = txtUsername.getText();
-                     String password = txtPassword.getText();
+                        JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
-
-
-                         try {
-                           PreparedStatement query = cn.prepareStatement(sql);
-                             query.setString(1, lastName);
-                             query.setString(2, name);
-                             query.setString(3, address);
-                             query.setString(4, phone);
-                             query.setString(5, postalCode);
-                             query.setString(6, city);
-                             query.setString(7, state);
-                             query.setString(8, country);
-                             query.setString(9, degree);
-                             query.setString(10, email);
-                             query.setString(11, username);
-                             query.setString(12, password);
-                             query.setString(13, companyName);
-                             query.setString(14, rfc);
-                             query.setString(15, position);
-                             query.execute();
-
-                             cleanPanels();
-
-
-                                 JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
-                         } catch (SQLException ex) {
-                             Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-            
-                   
-                }else{
-                   JOptionPane.showMessageDialog(rootPane, "Password too short."); 
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Password too short.");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "The e-mails do not match.");
             }
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(rootPane, "The passwords do not match.");
         }
-          
+
     }
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -200,7 +191,6 @@ public class NewClient extends javax.swing.JInternalFrame {
         txtConfirmPassword = new javax.swing.JPasswordField();
         jLabel17 = new javax.swing.JLabel();
         txtConfirmEmail = new javax.swing.JTextField();
-        btnEdit = new javax.swing.JButton();
         pnlCompanyInformation = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -221,6 +211,12 @@ public class NewClient extends javax.swing.JInternalFrame {
 
         jLabel6.setText("*City:");
 
+        txtLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLastNameKeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("*State:");
 
         jLabel2.setText("*Last Name:");
@@ -229,6 +225,12 @@ public class NewClient extends javax.swing.JInternalFrame {
 
         jLabel3.setText("*Name:");
 
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("*Address:");
 
         txtAddress.setColumns(20);
@@ -236,6 +238,12 @@ public class NewClient extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtAddress);
 
         jLabel5.setText("*Phone:");
+
+        txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyTyped(evt);
+            }
+        });
 
         jLabel1.setText("*Postal Code:");
 
@@ -248,11 +256,35 @@ public class NewClient extends javax.swing.JInternalFrame {
             }
         });
 
+        txtCity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCityKeyTyped(evt);
+            }
+        });
+
+        txtState.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStateKeyTyped(evt);
+            }
+        });
+
+        txtCountry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCountryKeyTyped(evt);
+            }
+        });
+
         jLabel12.setText("*Degree:");
 
         comboDegree.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dr.", "Lic.", "Dra.", "QFB." }));
 
         jLabel13.setText("e-mail:");
+
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
 
         jLabel14.setText("*Username:");
 
@@ -261,15 +293,6 @@ public class NewClient extends javax.swing.JInternalFrame {
         jLabel16.setText("*Confirm Password:");
 
         jLabel17.setText("Confirm e-mail:");
-
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit1.png"))); // NOI18N
-        btnEdit.setText(" Edit");
-        btnEdit.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit2.png"))); // NOI18N
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlPersonalInformationLayout = new javax.swing.GroupLayout(pnlPersonalInformation);
         pnlPersonalInformation.setLayout(pnlPersonalInformationLayout);
@@ -327,23 +350,17 @@ public class NewClient extends javax.swing.JInternalFrame {
                             .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtName)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPhone))
-                                    .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 10, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPersonalInformationLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60))))))
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPhone))
+                            .addGroup(pnlPersonalInformationLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 10, Short.MAX_VALUE))))))
         );
         pnlPersonalInformationLayout.setVerticalGroup(
             pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,8 +368,7 @@ public class NewClient extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnEdit))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -516,46 +532,122 @@ public class NewClient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtPostalCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyPressed
-       
+
 
     }//GEN-LAST:event_txtPostalCodeKeyPressed
 
     private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
-         int postalCodeSize = txtPostalCode.getText().length();
-        
-        System.out.println("char " +evt.getKeyChar());
-         
-        
-       if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
-               evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-       || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
-        
-       }else{
-           evt.consume();
-       }
-       
-       
-        System.out.println("tamaño "+postalCodeSize);
-        if(postalCodeSize > 4){
-           evt.consume();
-           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code."); 
+        int postalCodeSize = txtPostalCode.getText().length();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
+                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
+                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
+
+        } else {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + postalCodeSize);
+        if (postalCodeSize > 4) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code.");
         }
     }//GEN-LAST:event_txtPostalCodeKeyTyped
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        UpdateCustomer obj = new UpdateCustomer();
-        MainMDI MainMDI = new MainMDI();
-        obj.setBounds(50, 50, 650, 700);
-        
-        
-        obj.setVisible(true);
-        
-         MainMDI.add(obj);
-    }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void txtLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtLastNameKeyTyped
+
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtNameKeyTyped
+
+    private void txtCityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCityKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtCityKeyTyped
+
+    private void txtStateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStateKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtStateKeyTyped
+
+    private void txtCountryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCountryKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtCountryKeyTyped
+
+    private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
+        int phoneSize = txtPhone.getText().length();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
+                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
+                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
+
+        } else {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + phoneSize);
+        if (phoneSize > 8) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only five numbers for Phone.");
+        }
+    }//GEN-LAST:event_txtPhoneKeyTyped
+
+    public boolean isEmail(String correo) {
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
+        mat = pat.matcher(correo);
+        if (mat.find()) {
+            return true;
+        } else {
+
+            return false;
+
+        }
+    }
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        if (isEmail(txtEmail.getText())) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect email", "Validate Email", JOptionPane.INFORMATION_MESSAGE);
+            txtEmail.requestFocus();
+
+        }
+    }//GEN-LAST:event_txtEmailFocusLost
 
     /**
      * @param args the command line arguments
@@ -594,7 +686,6 @@ public class NewClient extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox comboDegree;
     private javax.swing.JLabel jLabel1;

@@ -23,9 +23,9 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
     public NewEmployee() {
         initComponents();
-        
+
         updateComboBrach();
-        
+
         updateComboTypeEmployee();
     }
 
@@ -42,80 +42,75 @@ public class NewEmployee extends javax.swing.JInternalFrame {
         txtLastName.requestFocus();
 
     }
-    
-    public void updateComboTypeEmployee(){
-         obj = new Conexion();
-         cn =obj.conectar();
-        
-        
+
+    public void updateComboTypeEmployee() {
+        obj = new Conexion();
+        cn = obj.conectar();
+
         comboTypeEmployee.removeAllItems();
-        
-     
+
         //declaramos la consulta
-        String sql ="SELECT description FROM type_employee";
-        
-        String []datos;
-   
-        try{
+        String sql = "SELECT description FROM type_employee";
+
+        String[] datos;
+
+        try {
             //Objeto statement es una consulta preparada
             //se obtiene de la conexion
-            Statement query = cn.createStatement();  
+            Statement query = cn.createStatement();
             //resultSet objeto que pèrmite recorrer las filas en una consulta
             ResultSet rs = query.executeQuery(sql);
-        
+
             //.next() manda al siguiente registro (devuelve true si tiene informacion)
-            while(rs.next()){
+            while (rs.next()) {
                 //asignamos tamaño al arreglo
                 datos = new String[8];
-                
+
                 //.getString(); recoge datos
                 datos[0] = rs.getString("description");
                 comboTypeEmployee.addItem(datos[0]);
             }
-        
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-            
+
         }
     }
-    
-    public void updateComboBrach(){
-         obj = new Conexion();
-         cn =obj.conectar();
-        
-        
+
+    public void updateComboBrach() {
+        obj = new Conexion();
+        cn = obj.conectar();
+
         comboBranch.removeAllItems();
-        
-     
+
         //declaramos la consulta
-        String sql ="SELECT branch_name FROM branchs";
-        
-        String []datos;
-   
-        try{
+        String sql = "SELECT branch_name FROM branchs";
+
+        String[] datos;
+
+        try {
             //Objeto statement es una consulta preparada
             //se obtiene de la conexion
-            Statement query = cn.createStatement();  
+            Statement query = cn.createStatement();
             //resultSet objeto que pèrmite recorrer las filas en una consulta
             ResultSet rs = query.executeQuery(sql);
-        
+
             //.next() manda al siguiente registro (devuelve true si tiene informacion)
-            while(rs.next()){
+            while (rs.next()) {
                 //asignamos tamaño al arreglo
                 datos = new String[1];
-                
+
                 //.getString(); recoge datos
                 datos[0] = rs.getString("branch_name");
                 comboBranch.addItem(datos[0]);
             }
-        
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-            
+
         }
     }
 
-    
     public void saveNewEmployee() {
 
         //recogemos el email
@@ -559,7 +554,7 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txtLastNameKeyTyped
 
@@ -568,30 +563,28 @@ public class NewEmployee extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
-       int phoneSize = txtPhone.getText().length();
-        
-        System.out.println("char " +evt.getKeyChar());
-         
-        
-       if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
-               evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-       || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
-        
-       }else{
-           evt.consume();
-       }
-       
-       
-        System.out.println("tamaño "+phoneSize);
-        if(phoneSize > 8){
-           evt.consume();
-           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Phone."); 
-        }  
+        int phoneSize = txtPhone.getText().length();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
+                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
+                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
+
+        } else {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + phoneSize);
+        if (phoneSize > 9) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only nine numbers for Phone.");
+        }
     }//GEN-LAST:event_txtPhoneKeyTyped
 
     private void btnEditDriversActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDriversActionPerformed
@@ -609,7 +602,7 @@ public class NewEmployee extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditBranchActionPerformed
 
     private void btnEditBranchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditBranchFocusGained
-          updateComboBrach();
+        updateComboBrach();
     }//GEN-LAST:event_btnEditBranchFocusGained
 
     private void comboBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBranchActionPerformed

@@ -12,85 +12,77 @@ import packets.NewClient;
 
 public class NewBranch extends javax.swing.JInternalFrame {
 
-        Conexion obj;  
-        Connection cn;
-        
+    Conexion obj;
+    Connection cn;
+
     public NewBranch() {
         initComponents();
     }
 
-        public void cleanPanels(){
-        
-       txtBranchName.setText("");
-       txtAddress.setText("");
-       txtPostalCode.setText("");
-       txtCity.setText("");
-       txtState.setText("");
-       txtCountry.setText("");
-       txtPhone.setText("");
+    public void cleanPanels() {
 
-       
-       txtBranchName.requestFocus();
-       
+        txtBranchName.setText("");
+        txtAddress.setText("");
+        txtPostalCode.setText("");
+        txtCity.setText("");
+        txtState.setText("");
+        txtCountry.setText("");
+        txtPhone.setText("");
+
+        txtBranchName.requestFocus();
+
     }
 
-       public void saveNewBranch(){
-        
-        
-        if(txtBranchName.getText().equals("") || txtAddress.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtPhone.getText().equals("")){
+    public void saveNewBranch() {
+
+        if (txtBranchName.getText().equals("") || txtAddress.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtPhone.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
-        
-        if(txtPostalCode.getText().length() < 5){
-            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+
+        if (txtPostalCode.getText().length() < 5) {
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");
             return;
-                   
+
         }
-        
-       if (txtPhone.getText().length() < 7) {
+
+        if (txtPhone.getText().length() < 7) {
             JOptionPane.showMessageDialog(rootPane, "Phone too short.");
             return;
 
         }
 
-                      
-                    obj = new Conexion();
-                    cn =obj.conectar(); 
+        obj = new Conexion();
+        cn = obj.conectar();
 
+        String sql = "INSERT INTO branchs (branch_name, address, postal_code, city, state, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
+        String branchName = txtBranchName.getText();
+        String address = txtAddress.getText();
+        String postalCode = txtPostalCode.getText();
+        String city = txtCity.getText();
+        String state = txtState.getText();
+        String country = txtCountry.getText();
+        String phone = txtPhone.getText();
 
-                     String sql ="INSERT INTO branchs (branch_name, address, postal_code, city, state, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement query = cn.prepareStatement(sql);
+            query.setString(1, branchName);
+            query.setString(2, address);
+            query.setString(3, postalCode);
+            query.setString(4, city);
+            query.setString(5, state);
+            query.setString(6, country);
+            query.setString(7, phone);
+            query.execute();
+            cleanPanels();
 
+            JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
+        } catch (SQLException ex) {
+            Logger.getLogger(NewBranch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
-                     String branchName = txtBranchName.getText();
-                     String address = txtAddress.getText();
-                     String postalCode = txtPostalCode.getText();
-                     String city = txtCity.getText();
-                     String state = txtState.getText();
-                     String country = txtCountry.getText();
-                     String phone = txtPhone.getText();
-                     
-                         try {
-                           PreparedStatement query = cn.prepareStatement(sql);
-                             query.setString(1, branchName);
-                             query.setString(2, address);
-                             query.setString(3, postalCode);
-                             query.setString(4, city);
-                             query.setString(5, state);
-                             query.setString(6, country);
-                             query.setString(7, phone);
-                             query.execute();
-                             cleanPanels();
-
-
-                           JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
-                         } catch (SQLException ex) {
-                           Logger.getLogger(NewBranch.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-       }
-            
-        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -303,42 +295,40 @@ public class NewBranch extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
-  int postalCodeSize = txtPostalCode.getText().length();
-        
-        System.out.println("char " +evt.getKeyChar());
-         
-        
-       if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
-               evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-       || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
-        
-       }else{
-           evt.consume();
-       }
-       
-       
-        System.out.println("tamaño "+postalCodeSize);
-        if(postalCodeSize > 4){
-           evt.consume();
-           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code."); 
-        }                                  
+        int postalCodeSize = txtPostalCode.getText().length();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
+                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
+                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
+
+        } else {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + postalCodeSize);
+        if (postalCodeSize > 4) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code.");
+        }
     }//GEN-LAST:event_txtPostalCodeKeyTyped
 
     private void txtBranchNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBranchNameKeyTyped
-       char campo = evt.getKeyChar();
-
-      if((campo<'a' || campo>'z') && (campo<'A' || campo>'Z') && (campo!=(char)KeyEvent.VK_BACK_SPACE) && (campo!=(char)KeyEvent.VK_SPACE)){
-      evt.consume();
-      JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
-}
-    }//GEN-LAST:event_txtBranchNameKeyTyped
-
-    private void txtCityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCityKeyTyped
-     char campo = evt.getKeyChar();
+        char campo = evt.getKeyChar();
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }//GEN-LAST:event_txtBranchNameKeyTyped
+
+    private void txtCityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCityKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+        
         }
     }//GEN-LAST:event_txtCityKeyTyped
 
@@ -347,7 +337,7 @@ public class NewBranch extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+        
         }
     }//GEN-LAST:event_txtStateKeyTyped
 
@@ -356,7 +346,7 @@ public class NewBranch extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+        
         }
     }//GEN-LAST:event_txtCountryKeyTyped
 
@@ -370,25 +360,23 @@ public class NewBranch extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
-    int phoneSize = txtPhone.getText().length();
-        
-        System.out.println("char " +evt.getKeyChar());
-         
-        
-       if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
-               evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-       || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
-        
-       }else{
-           evt.consume();
-       }
-       
-       
-        System.out.println("tamaño "+phoneSize);
-        if(phoneSize > 8){
-           evt.consume();
-           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Phone."); 
-        }              
+        int phoneSize = txtPhone.getText().length();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
+                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
+                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
+
+        } else {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + phoneSize);
+        if (phoneSize > 9) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only nine numbers for Phone.");
+        }
     }//GEN-LAST:event_txtPhoneKeyTyped
 
     /**
