@@ -359,7 +359,6 @@ public class UpdateEmployee extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Branchs"));
 
-        comboTypeBranch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mazatlàn", "Culiacán", "Guadalajara" }));
         comboTypeBranch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTypeBranchActionPerformed(evt);
@@ -405,7 +404,6 @@ public class UpdateEmployee extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Employee"));
 
-        comboTypeEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Drivers", "Secretary", "Manager", " " }));
         comboTypeEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTypeEmployeeActionPerformed(evt);
@@ -609,7 +607,7 @@ public class UpdateEmployee extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+           
         }
     }//GEN-LAST:event_txtLastNameKeyTyped
 
@@ -618,7 +616,7 @@ public class UpdateEmployee extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, "Only text", "Validate Text", JOptionPane.INFORMATION_MESSAGE);
+           
         }
     }//GEN-LAST:event_txtNameKeyTyped
 
