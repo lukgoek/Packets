@@ -9,7 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import static java.time.Instant.now;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -31,7 +36,60 @@ public class NewShipments extends javax.swing.JInternalFrame {
     public NewShipments() {
         initComponents();
         genarateNumberGuide();
+        lapseTime(comboTypeSend.getSelectedIndex());
         
+    }
+    
+    public void lapseTime(int combo){
+        Calendar calendarStart;
+        Calendar calendarEnd;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE-dd-MMMM");  
+        Date now = new Date();  
+        String startDate ="";
+        String endDate ="";
+        
+        if(combo == 0){
+            //Expresss
+         calendarStart = Calendar.getInstance();
+        calendarStart.setTime(now);
+        calendarStart.add(Calendar.DAY_OF_WEEK, 0);  
+        calendarStart.add(Calendar.DAY_OF_MONTH, 1);
+        
+         startDate = dateFormat.format(calendarStart.getTime());
+       }
+        if(combo == 1){
+            //Expresss
+         calendarStart = Calendar.getInstance();
+        calendarStart.setTime(now);
+        calendarStart.add(Calendar.DAY_OF_WEEK, 0);  
+        calendarStart.add(Calendar.DAY_OF_MONTH, 1);
+        
+         calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(now);
+        calendarEnd.add(Calendar.DAY_OF_WEEK, 0);  
+        calendarEnd.add(Calendar.DAY_OF_MONTH, 3);
+        
+         startDate = dateFormat.format(calendarStart.getTime());
+         endDate = " to "+dateFormat.format(calendarEnd.getTime());
+       }
+        
+        if(combo == 2){
+            //Expresss
+         calendarStart = Calendar.getInstance();
+        calendarStart.setTime(now);
+        calendarStart.add(Calendar.DAY_OF_WEEK, 0);  
+        calendarStart.add(Calendar.DAY_OF_MONTH, 3);
+        
+         calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(now);
+        calendarEnd.add(Calendar.DAY_OF_WEEK, 0);  
+        calendarEnd.add(Calendar.DAY_OF_MONTH, 5);
+        
+         startDate = dateFormat.format(calendarStart.getTime());
+         endDate = " to "+dateFormat.format(calendarEnd.getTime());
+       }
+ 
+      lblLapseTime.setText("Shipmets arrive aproximatlely \n"+startDate+""+endDate);
     }
 
     public void cleanPanels(){
@@ -253,6 +311,8 @@ public class NewShipments extends javax.swing.JInternalFrame {
         jLabel12.setText("Address:");
 
         jLabel13.setText("Lapse of Time:");
+
+        lblLapseTime.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         txtAddress.setColumns(20);
         txtAddress.setRows(5);
@@ -503,6 +563,7 @@ public class NewShipments extends javax.swing.JInternalFrame {
           lblCost.setText("120");
         }
         
+        lapseTime(comboTypeSend.getSelectedIndex());
         
     }//GEN-LAST:event_comboTypeSendActionPerformed
 
