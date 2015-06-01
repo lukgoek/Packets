@@ -1,6 +1,5 @@
 package packets;
 
-
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,373 +19,342 @@ import javax.swing.text.BadLocationException;
  */
 public class UpdateCustomer extends javax.swing.JInternalFrame {
 
-    
-        Conexion obj;  
-        Connection cn;
-        
+    Conexion obj;
+    Connection cn;
+
     public UpdateCustomer() {
         initComponents();
         updateComboDegree();
     }
-    
-    
-    public void updateComboDegree(){
-         obj = new Conexion();
-         cn =obj.conectar();
-        
-        
+
+    public void updateComboDegree() {
+        obj = new Conexion();
+        cn = obj.conectar();
+
         comboDegree.removeAllItems();
-        
-     
+
         //declaramos la consulta
-        String sql ="SELECT description FROM type_degree";
-        
-        String []datos;
-   
-        try{
+        String sql = "SELECT description FROM type_degree";
+
+        String[] datos;
+
+        try {
             //Objeto statement es una consulta preparada
             //se obtiene de la conexion
-            Statement consulta = cn.createStatement();  
+            Statement consulta = cn.createStatement();
             //resultSet objeto que pèrmite recorrer las filas en una consulta
             ResultSet rs = consulta.executeQuery(sql);
-        
+
             //.next() manda al siguiente registro (devuelve true si tiene informacion)
-            while(rs.next()){
+            while (rs.next()) {
                 //asignamos tamaño al arreglo
                 datos = new String[8];
-                
+
                 //.getString(); recoge datos
                 datos[0] = rs.getString("description");
                 comboDegree.addItem(datos[0]);
             }
-        
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-            
+
         }
     }
-    
-    
-    public void updateCustomerMethod(){
-        
+
+    public void updateCustomerMethod() {
+        if (txtID.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "You need to select one customer for edit them.");
+            return;
+        }
         int ID = Integer.parseInt(txtID.getText());
         int decision = JOptionPane.showConfirmDialog(this, "All information is correct?", "¡Review the information!", JOptionPane.YES_NO_OPTION, 2);
-        
-        
-         if(decision == 0){
-             
-        String email = txtEmail.getText();
-        String companyName = txtCompanyName.getText();
-        String rfc = txtRFC.getText();
-        String position = txtPosition.getText();
-        
-        //si las cajas de email estan basias asignamos null
-        if(txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")){
-            email = "NULL";
-        }
-        
-        if(txtCompanyName.getText().equals("")){
-            companyName = "NULL";
-        }
-        
-        if(txtRFC.getText().equals("")){
-            rfc = "NULL";
-        }
-        
-        if(txtPosition.getText().equals("")){
-            position = "NULL";
-        }
-        
-        if(txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
-            return;
-        }
-        
-        if(txtPostalCode.getText().length() < 5){
-            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
-            return;
-                   
-        }
-        
 
-        
-        if(txtPassword.getText().equals(txtConfirmPassword.getText())){
-            if(txtEmail.getText().equals(txtConfirmEmail.getText())){
-                if(txtPassword.getText().length() >= 8){
-                    
-                    obj = new Conexion();
-                    cn =obj.conectar(); 
-                    
-                
-                    String lastName = txtLastName.getText();
-                            String name = txtName.getText();
-                            String address = txtAddress.getText();
-                            String phone = txtPhone.getText();
-                            String postalCode = txtPostalCode.getText();
-                            String city = txtCity.getText();
-                            String state = txtState.getText();
-                            String country = txtCountry.getText();
-                            String degree = comboDegree.getSelectedItem().toString();
+        if (decision == 0) {
 
-                            String username = txtUsername.getText();
-                            String password = txtPassword.getText();
-
-                   String sql ="UPDATE customers SET name = ?, last_name = ?, address = ?, phone = ?, postal_code = ?, city = ?, state = ?, country = ?, degree = ?, email = ?, username = ?, password = ?, company_name = ?, rfc = ?, position = ? WHERE id=?";
-
-                   try{
-
-                       PreparedStatement query = cn.prepareStatement(sql);
-                             query.setString(1, name);
-                             query.setString(2, lastName);
-                             query.setString(3, address);
-                             query.setString(4, phone);
-                             query.setString(5, postalCode);
-                             query.setString(6, city);
-                             query.setString(7, state);
-                             query.setString(8, country);
-                             query.setString(9, degree);
-                             query.setString(10, email);
-                             query.setString(11, username);
-                             query.setString(12, password);
-                             query.setString(13, companyName);
-                             query.setString(14, rfc);
-                             query.setString(15, position);
-
-
-
-                        query.setInt(16, ID);
-                        query.execute();
-                        
-                       JOptionPane.showMessageDialog(this, "Customer has been Updated.");
-                       cleanPanels();
-                   }catch(Exception e){
-
-                   }   
-                }else{
-                   JOptionPane.showMessageDialog(rootPane, "Password too short."); 
-                }
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "The e-mails do not match.");
+            String email = txtEmail.getText();
+            String companyName = txtCompanyName.getText();
+            String rfc = txtRFC.getText().toUpperCase();
+            String position = txtPosition.getText();
+            //JOptionPane.showMessageDialog(rootPane, "rfc mayus ="+rfc);
+            //si las cajas de email estan basias asignamos null
+            if (txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")) {
+                email = "NULL";
             }
-            
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "The passwords do not match.");
+
+            if (txtCompanyName.getText().equals("")) {
+                companyName = "NULL";
+            }
+
+            if (txtRFC.getText().equals("")) {
+                rfc = "NULL";
+            }
+
+            if (txtPosition.getText().equals("")) {
+                position = "NULL";
+            }
+
+            if (txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
+                return;
+            }
+
+            if (txtPostalCode.getText().length() < 5) {
+                JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");
+                return;
+
+            }
+
+            if (txtPassword.getText().equals(txtConfirmPassword.getText())) {
+                if (txtEmail.getText().equals(txtConfirmEmail.getText())) {
+                    if (txtPassword.getText().length() >= 8) {
+
+                        obj = new Conexion();
+                        cn = obj.conectar();
+
+                        String lastName = txtLastName.getText();
+                        String name = txtName.getText();
+                        String address = txtAddress.getText();
+                        String phone = txtPhone.getText();
+                        String postalCode = txtPostalCode.getText();
+                        String city = txtCity.getText();
+                        String state = txtState.getText();
+                        String country = txtCountry.getText();
+                        String degree = comboDegree.getSelectedItem().toString();
+
+                        String username = txtUsername.getText();
+                        String password = txtPassword.getText();
+
+                        String sql = "UPDATE customers SET name = ?, last_name = ?, address = ?, phone = ?, postal_code = ?, city = ?, state = ?, country = ?, degree = ?, email = ?, username = ?, password = ?, company_name = ?, rfc = ?, position = ? WHERE id=?";
+
+                        try {
+
+                            PreparedStatement query = cn.prepareStatement(sql);
+                            query.setString(1, name);
+                            query.setString(2, lastName);
+                            query.setString(3, address);
+                            query.setString(4, phone);
+                            query.setString(5, postalCode);
+                            query.setString(6, city);
+                            query.setString(7, state);
+                            query.setString(8, country);
+                            query.setString(9, degree);
+                            query.setString(10, email);
+                            query.setString(11, username);
+                            query.setString(12, password);
+                            query.setString(13, companyName);
+                            query.setString(14, rfc);
+                            query.setString(15, position);
+
+                            query.setInt(16, ID);
+                            query.execute();
+
+                            JOptionPane.showMessageDialog(this, "Customer has been Updated.");
+                            cleanPanels();
+                        } catch (Exception e) {
+
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Password too short.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "The e-mails do not match.");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "The passwords do not match.");
+            }
         }
-    } 
-        
-        
+
     }
 
-    
-    
-    public void editCustomer(){
-        
+    public void editCustomer() {
+
         //cleanPanels();
         String ID = txtID.getText();
-        
-        
+
         String degree = "";
-        
-        String sql ="SELECT name, last_name, address, phone, postal_code, city, state, country, username, email, company_name, rfc, position, degree FROM customers WHERE id=?";
-        
-            try {
-                
-                obj = new Conexion();
-                cn =obj.conectar(); 
-                 
-                PreparedStatement query = cn.prepareStatement(sql);
-                query.setString(1, ID);
-                ResultSet rs = query.executeQuery();
-                
-                if(rs.next()){
-                    
-                    txtLastName.setText(rs.getString("name"));
-                    txtName.setText(rs.getString("last_name"));
-                    txtAddress.setText(rs.getString("address"));
-                    txtPhone.setText(rs.getString("phone"));
-                    txtPostalCode.setText(rs.getString("postal_code"));
-                    txtCity.setText(rs.getString("city"));
-                    txtState.setText(rs.getString("state"));
-                    txtCountry.setText(rs.getString("country"));
-                    txtUsername.setText(rs.getString("username"));
-                    
-                    txtEmail.setText(rs.getString("email"));
-                    
-                    txtCompanyName.setText(rs.getString("company_name"));
-                    txtRFC.setText(rs.getString("rfc"));
-                    txtPosition.setText(rs.getString("position"));
-                    
-                    degree = rs.getString("degree");
-                    
-                    int tamañoCombo = comboDegree.getItemCount();
-                    //System.out.println(tamañoCombo);
-                    
-                  for(int i=0; i<tamañoCombo; i++){
-                      
-                      String comboContenido = comboDegree.getItemAt(i).toString();
-                      System.out.println(comboContenido);
-                      System.out.println(degree+" --- "+comboContenido);
-                      
-                      if(comboContenido.equals(degree)){
-                          comboDegree.setSelectedIndex(i);
-                                  System.out.println(degree+" entro "+comboContenido);
-                          break;
-                      }
-                      
-                      
-                  }
-                    
-                    
-                    
+
+        String sql = "SELECT name, last_name, address, phone, postal_code, city, state, country, username, email, company_name, rfc, position, degree FROM customers WHERE id=?";
+
+        try {
+
+            obj = new Conexion();
+            cn = obj.conectar();
+
+            PreparedStatement query = cn.prepareStatement(sql);
+            query.setString(1, ID);
+            ResultSet rs = query.executeQuery();
+
+            if (rs.next()) {
+
+                txtLastName.setText(rs.getString("name"));
+                txtName.setText(rs.getString("last_name"));
+                txtAddress.setText(rs.getString("address"));
+                txtPhone.setText(rs.getString("phone"));
+                txtPostalCode.setText(rs.getString("postal_code"));
+                txtCity.setText(rs.getString("city"));
+                txtState.setText(rs.getString("state"));
+                txtCountry.setText(rs.getString("country"));
+                txtUsername.setText(rs.getString("username"));
+
+                txtEmail.setText(rs.getString("email"));
+
+                txtCompanyName.setText(rs.getString("company_name"));
+                txtRFC.setText(rs.getString("rfc"));
+                txtPosition.setText(rs.getString("position"));
+
+                degree = rs.getString("degree");
+
+                int tamañoCombo = comboDegree.getItemCount();
+                //System.out.println(tamañoCombo);
+
+                for (int i = 0; i < tamañoCombo; i++) {
+
+                    String comboContenido = comboDegree.getItemAt(i).toString();
+                    System.out.println(comboContenido);
+                    System.out.println(degree + " --- " + comboContenido);
+
+                    if (comboContenido.equals(degree)) {
+                        comboDegree.setSelectedIndex(i);
+                        System.out.println(degree + " entro " + comboContenido);
+                        break;
+                    }
+
                 }
-                
-                
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+
             }
-        
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
-    private void cleanPanels(){
-        
-       txtLastName.setText("");
-       txtName.setText("");
-       txtAddress.setText("");
-       txtPhone.setText("");
-       txtPostalCode.setText("");
-       txtCity.setText("");
-       txtState.setText("");
-       txtCountry.setText("");
-       txtUsername.setText("");
-       txtPassword.setText("");
-       txtConfirmPassword.setText("");
-       txtEmail.setText("");
-       txtConfirmEmail.setText("");
-       txtRFC.setText("");
-       txtPosition.setText("");
-       
-       txtLastName.requestFocus();
-       
+
+    private void cleanPanels() {
+
+        txtLastName.setText("");
+        txtName.setText("");
+        txtAddress.setText("");
+        txtPhone.setText("");
+        txtPostalCode.setText("");
+        txtCity.setText("");
+        txtState.setText("");
+        txtCountry.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+        txtConfirmPassword.setText("");
+        txtEmail.setText("");
+        txtConfirmEmail.setText("");
+        txtRFC.setText("");
+        txtPosition.setText("");
+
+        txtLastName.requestFocus();
+
     }
-    
-    
-    private void saveNewClient(){
-        
+
+    private void saveNewClient() {
+
         //recogemos el email
         String email = txtEmail.getText();
         String companyName = txtCompanyName.getText();
-        String rfc = txtRFC.getText();
+        String rfc = txtRFC.getText().toUpperCase();
         String position = txtPosition.getText();
-        
+
         //si las cajas de email estan basias asignamos null
-        if(txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")){
+        if (txtEmail.getText().equals("") && txtConfirmEmail.getText().equals("")) {
             email = "NULL";
         }
-        
-        if(txtCompanyName.getText().equals("")){
+
+        if (txtCompanyName.getText().equals("")) {
             companyName = "NULL";
         }
-        
-        if(txtRFC.getText().equals("")){
+
+        if (txtRFC.getText().equals("")) {
             rfc = "NULL";
         }
-        
-        if(txtPosition.getText().equals("")){
+
+        if (txtPosition.getText().equals("")) {
             position = "NULL";
         }
-        
-        if(txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")){
+
+        if (txtLastName.getText().equals("") || txtName.getText().equals("") || txtAddress.getText().equals("") || txtPhone.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtName.getText().equals("") || txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
-        
-        if(txtPostalCode.getText().length() < 5){
-            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+
+        if (txtPostalCode.getText().length() < 5) {
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");
             return;
-                   
+
         }
-        
-         if (txtPhone.getText().length() < 7) {
+
+        if (txtPhone.getText().length() < 7) {
             JOptionPane.showMessageDialog(rootPane, "Phone too short.");
             return;
 
-        }        
-        
-        
-        
-        if(txtPassword.getText().equals(txtConfirmPassword.getText())){
-            if(txtEmail.getText().equals(txtConfirmEmail.getText())){
-                if(txtPassword.getText().length() >= 8){
-                   
-                       
-                      
+        }
+
+        if (txtPassword.getText().equals(txtConfirmPassword.getText())) {
+            if (txtEmail.getText().equals(txtConfirmEmail.getText())) {
+                if (txtPassword.getText().length() >= 8) {
+
                     obj = new Conexion();
-                    cn =obj.conectar(); 
+                    cn = obj.conectar();
 
+                    String sql = "INSERT INTO customers (name, last_name, address, phone, postal_code, city, state, country, degree, email, username, password, company_name, rfc, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
 
+                    String lastName = txtLastName.getText();
+                    String name = txtName.getText();
+                    String address = txtAddress.getText();
+                    String phone = txtPhone.getText();
+                    String postalCode = txtPostalCode.getText();
+                    String city = txtCity.getText();
+                    String state = txtState.getText();
+                    String country = txtCountry.getText();
+                    String degree = comboDegree.getSelectedItem().toString();
 
-                     String sql ="INSERT INTO customers (name, last_name, address, phone, postal_code, city, state, country, degree, email, username, password, company_name, rfc, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?, ?, ?)";
+                    String username = txtUsername.getText();
+                    String password = txtPassword.getText();
 
+                    try {
+                        PreparedStatement query = cn.prepareStatement(sql);
+                        query.setString(1, lastName);
+                        query.setString(2, name);
+                        query.setString(3, address);
+                        query.setString(4, phone);
+                        query.setString(5, postalCode);
+                        query.setString(6, city);
+                        query.setString(7, state);
+                        query.setString(8, country);
+                        query.setString(9, degree);
+                        query.setString(10, email);
+                        query.setString(11, username);
+                        query.setString(12, password);
+                        query.setString(13, companyName);
+                        query.setString(14, rfc);
+                        query.setString(15, position);
+                        query.execute();
 
-                     String lastName = txtLastName.getText();
-                     String name = txtName.getText();
-                     String address = txtAddress.getText();
-                     String phone = txtPhone.getText();
-                     String postalCode = txtPostalCode.getText();
-                     String city = txtCity.getText();
-                     String state = txtState.getText();
-                     String country = txtCountry.getText();
-                     String degree = comboDegree.getSelectedItem().toString();
+                        cleanPanels();
 
-                     String username = txtUsername.getText();
-                     String password = txtPassword.getText();
+                        JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
-
-
-                         try {
-                           PreparedStatement query = cn.prepareStatement(sql);
-                             query.setString(1, lastName);
-                             query.setString(2, name);
-                             query.setString(3, address);
-                             query.setString(4, phone);
-                             query.setString(5, postalCode);
-                             query.setString(6, city);
-                             query.setString(7, state);
-                             query.setString(8, country);
-                             query.setString(9, degree);
-                             query.setString(10, email);
-                             query.setString(11, username);
-                             query.setString(12, password);
-                             query.setString(13, companyName);
-                             query.setString(14, rfc);
-                             query.setString(15, position);
-                             query.execute();
-
-                             cleanPanels();
-
-
-                                 JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
-                         } catch (SQLException ex) {
-                             Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-            
-                   
-                }else{
-                   JOptionPane.showMessageDialog(rootPane, "Password too short."); 
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Password too short.");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "The e-mails do not match.");
             }
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(rootPane, "The passwords do not match.");
         }
-          
+
     }
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -714,6 +682,24 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Position:");
 
+        txtPosition.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPositionKeyTyped(evt);
+            }
+        });
+
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
+            }
+        });
+
+        txtCompanyName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCompanyNameKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCompanyInformationLayout = new javax.swing.GroupLayout(pnlCompanyInformation);
         pnlCompanyInformation.setLayout(pnlCompanyInformationLayout);
         pnlCompanyInformationLayout.setHorizontalGroup(
@@ -824,36 +810,32 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
     private void txtPostalCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyPressed
-       
+
 
     }//GEN-LAST:event_txtPostalCodeKeyPressed
 
     private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
-         int postalCodeSize = txtPostalCode.getText().length();
-        
-        System.out.println("char " +evt.getKeyChar());
-         
-        
-       if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
-               evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-       || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
-        
-       }else{
-           evt.consume();
-       }
-       
-       
-        System.out.println("tamaño "+postalCodeSize);
-        if(postalCodeSize > 4){
-           evt.consume();
-           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code."); 
+        int postalCodeSize = txtPostalCode.getText().length();
+        char campo = evt.getKeyChar();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (campo < '0' || campo > '9') {
+            evt.consume();
         }
+
+        System.out.println("tamaño " + postalCodeSize);
+        if (postalCodeSize > 4) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code.");
+        }
+
     }//GEN-LAST:event_txtPostalCodeKeyTyped
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         EditCustomer objeto = new EditCustomer(this, txtID);
         objeto.setVisible(true);
- 
+
 
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -862,33 +844,29 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        
-        
-        
-        if(txtID.getText().equals("")){
-           JOptionPane.showConfirmDialog(this, "You need select one customer first. ", "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1); 
-        }else{
+
+        if (txtID.getText().equals("")) {
+            JOptionPane.showConfirmDialog(this, "You need select one customer first. ", "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
+        } else {
             int ID = Integer.parseInt(txtID.getText());
-            int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete customer with id: "+ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
+            int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete customer with id: " + ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
 
+            if (decision == 0) {
 
-             if(decision == 0){
+                String sql = "UPDATE customers SET date_removed = NOW() WHERE id=?";
 
-
-                String sql ="UPDATE customers SET date_removed = NOW() WHERE id=?";
-
-                try{
+                try {
 
                     PreparedStatement query = cn.prepareStatement(sql);
                     query.setInt(1, ID);
-                     query.execute();
+                    query.execute();
                     JOptionPane.showMessageDialog(this, "Customer has been removed.");
                     cleanPanels();
-                }catch(Exception e){
+                } catch (Exception e) {
 
-                }   
-             } 
-         } 
+                }
+            }
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
@@ -905,7 +883,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboDegreeActionPerformed
 
     private void txtLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyTyped
-           char campo = evt.getKeyChar();
+        char campo = evt.getKeyChar();
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
@@ -914,7 +892,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtLastNameKeyTyped
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
-           char campo = evt.getKeyChar();
+        char campo = evt.getKeyChar();
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
@@ -923,7 +901,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void txtCityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCityKeyTyped
-         char campo = evt.getKeyChar();
+        char campo = evt.getKeyChar();
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
@@ -932,7 +910,7 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCityKeyTyped
 
     private void txtStateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStateKeyTyped
-           char campo = evt.getKeyChar();
+        char campo = evt.getKeyChar();
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
@@ -941,14 +919,14 @@ public class UpdateCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtStateKeyTyped
 
     private void txtCountryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCountryKeyTyped
-          char campo = evt.getKeyChar();
+        char campo = evt.getKeyChar();
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
 
         }
     }//GEN-LAST:event_txtCountryKeyTyped
-public boolean isEmail(String correo) {
+    public boolean isEmail(String correo) {
         Pattern pat = null;
         Matcher mat = null;
         pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
@@ -974,23 +952,47 @@ public boolean isEmail(String correo) {
 
     private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
         int phoneSize = txtPhone.getText().length();
+        char campo = evt.getKeyChar();
 
         System.out.println("char " + evt.getKeyChar());
 
-        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
-                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
-
-        } else {
+        if (campo < '0' || campo > '9') {
             evt.consume();
         }
 
         System.out.println("tamaño " + phoneSize);
-        if (phoneSize > 8) {
+        if (phoneSize > 9) {
             evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Only five numbers for Phone.");
+            JOptionPane.showMessageDialog(rootPane, "Only nine numbers for Phone.");
         }
     }//GEN-LAST:event_txtPhoneKeyTyped
+
+    private void txtCompanyNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanyNameKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtCompanyNameKeyTyped
+
+    private void txtPositionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPositionKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtPositionKeyTyped
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo < '0' || campo > '9') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
 
     /**
      * @param args the command line arguments

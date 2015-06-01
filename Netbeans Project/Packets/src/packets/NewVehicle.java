@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package packets;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,9 +21,9 @@ import javax.swing.JRadioButton;
  */
 public class NewVehicle extends javax.swing.JInternalFrame {
 
-        Conexion obj;  
-        Connection cn;
-        
+    Conexion obj;
+    Connection cn;
+
     /**
      * Creates new form NewVehicle
      */
@@ -31,57 +31,54 @@ public class NewVehicle extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-     public void cleanPanels(){
-        
-       txtBrand.setText("");
-       txtModel.setText("");
-       txtPlate.setText("");
-       
-     }
-     public void saveNewVehicle(){
-         
-             
-         if(txtBrand.getText().equals("") || txtModel.getText().equals("") || txtPlate.getText().equals("")){
+    public void cleanPanels() {
+
+        txtBrand.setText("");
+        txtModel.setText("");
+        txtPlate.setText("");
+
+    }
+
+    public void saveNewVehicle() {
+
+        if (txtBrand.getText().equals("") || txtModel.getText().equals("") || txtPlate.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
-    
-                obj = new Conexion();
-                cn =obj.conectar(); 
 
-        String sql ="INSERT INTO vehicles (brand, model, plate, number_vehicle, type_vehicle, driver, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-               
-                  String brand = txtBrand.getText();
-                  String model = txtModel.getText();
-                  String plate = txtPlate.getText();
-                  String numbervehicle = txtNumVehicle.getText();
-                  String type = comboType.getSelectedItem().toString();
-                  String driver = comboDriver.getSelectedItem().toString();
-                  String status = comboStatus.getSelectedItem().toString();
-                 
-                     try {
-                       PreparedStatement query = cn.prepareStatement(sql);
-                         query.setString(1, brand);
-                         query.setString(2, model);
-                         query.setString(3, plate);
-                         query.setString(4, numbervehicle);
-                         query.setString(5, type);
-                         query.setString(6, driver);
-                         query.setString(7, status);
-                         query.execute();
-                         
-                         cleanPanels();
+        obj = new Conexion();
+        cn = obj.conectar();
 
+        String sql = "INSERT INTO vehicles (brand, model, plate, number_vehicle, type_vehicle, driver, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-                             JOptionPane.showMessageDialog(rootPane, "Vehicle data has been saved.");
-                     } catch (SQLException ex) {
-                         Logger.getLogger(NewVehicle.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-   
-         }
-     
-     
- 
+        String brand = txtBrand.getText();
+        String model = txtModel.getText().toUpperCase();
+        String plate = txtPlate.getText().toUpperCase();
+        String numbervehicle = txtNumVehicle.getText();
+        String type = comboType.getSelectedItem().toString();
+        String driver = comboDriver.getSelectedItem().toString();
+        String status = comboStatus.getSelectedItem().toString();
+
+        try {
+            PreparedStatement query = cn.prepareStatement(sql);
+            query.setString(1, brand);
+            query.setString(2, model);
+            query.setString(3, plate);
+            query.setString(4, numbervehicle);
+            query.setString(5, type);
+            query.setString(6, driver);
+            query.setString(7, status);
+            query.execute();
+
+            cleanPanels();
+
+            JOptionPane.showMessageDialog(rootPane, "Vehicle data has been saved.");
+        } catch (SQLException ex) {
+            Logger.getLogger(NewVehicle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -118,9 +115,27 @@ public class NewVehicle extends javax.swing.JInternalFrame {
 
         jLabel3.setText("*Model:");
 
+        txtModel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtModelKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("*Plate:");
 
+        txtPlate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPlateKeyTyped(evt);
+            }
+        });
+
         jLabel5.setText("*Number Vehicle:");
+
+        txtNumVehicle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumVehicleKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("*Driver:");
 
@@ -136,6 +151,12 @@ public class NewVehicle extends javax.swing.JInternalFrame {
         jLabel10.setText("*Status:");
 
         jLabel12.setText("*Brand:");
+
+        txtBrand.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBrandKeyTyped(evt);
+            }
+        });
 
         comboType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Camion 3 axes", "Camion 4 axes", "Camion 6 axes", "Van" }));
         comboType.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -281,8 +302,52 @@ public class NewVehicle extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboDriverActionPerformed
 
     private void comboTypeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTypeFocusGained
-   
+
     }//GEN-LAST:event_comboTypeFocusGained
+
+    private void txtBrandKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBrandKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtBrandKeyTyped
+
+    private void txtPlateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlateKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo < '0' || campo > '9') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtPlateKeyTyped
+
+    private void txtModelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModelKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo < '0' || campo > '9') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtModelKeyTyped
+
+    private void txtNumVehicleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumVehicleKeyTyped
+        int numVehicleSize = txtNumVehicle.getText().length();
+        char campo = evt.getKeyChar();
+        
+        System.out.println("char " + evt.getKeyChar());
+
+        if (campo < '0' || campo > '9') {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + numVehicleSize);
+        if (numVehicleSize > 9) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only nine numbers for Phone.");
+        }
+    }//GEN-LAST:event_txtNumVehicleKeyTyped
 
     /**
      * @param args the command line arguments

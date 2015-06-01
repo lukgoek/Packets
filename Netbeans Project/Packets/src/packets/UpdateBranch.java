@@ -9,180 +9,160 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class UpdateBranch extends javax.swing.JInternalFrame {
 
-       
-        Conexion obj;  
-        Connection cn;
+    Conexion obj;
+    Connection cn;
 
     public UpdateBranch() {
         initComponents();
     }
 
-               
-    public void updateBranchMethod(){
-        
+    public void updateBranchMethod() {
+
         int ID = Integer.parseInt(txtID.getText());
         int decision = JOptionPane.showConfirmDialog(this, "All information is correct?", "¡Review the information!", JOptionPane.YES_NO_OPTION, 2);
-        
-        
-         if(decision == 0){
-        
-        
-        if(txtPostalCode.getText().length() < 5){
-            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
-            return;
-                   
+
+        if (decision == 0) {
+
+            if (txtPostalCode.getText().length() < 5) {
+                JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");
+                return;
+
+            }
+
+            obj = new Conexion();
+            cn = obj.conectar();
+
+            String branchName = txtBranchName.getText();
+            String address = txtAddress.getText();
+            String postalCode = txtPostalCode.getText();
+            String city = txtCity.getText();
+            String state = txtState.getText();
+            String country = txtCountry.getText();
+            String phone = txtPhone.getText();
+
+            String sql = "UPDATE branchs SET branch_name = ?, address = ?, postal_code = ?, city = ?, state = ?, country = ?, phone = ? WHERE id=?";
+
+            try {
+
+                PreparedStatement query = cn.prepareStatement(sql);
+                query.setString(1, branchName);
+                query.setString(2, address);
+                query.setString(3, postalCode);
+                query.setString(4, city);
+                query.setString(5, state);
+                query.setString(6, country);
+                query.setString(7, phone);
+
+                query.setInt(8, ID);
+                query.execute();
+
+                JOptionPane.showMessageDialog(this, "Branch has been Updated.");
+                cleanPanels();
+            } catch (Exception e) {
+
+            }
         }
-                 
-                    obj = new Conexion();
-                    cn =obj.conectar(); 
-                    
-                
-                            String branchName = txtBranchName.getText();
-                            String address = txtAddress.getText();
-                            String postalCode = txtPostalCode.getText();
-                            String city = txtCity.getText();
-                            String state = txtState.getText();
-                            String country = txtCountry.getText();
-                            String phone = txtPhone.getText();
+    }
 
-                   String sql ="UPDATE branchs SET branch_name = ?, address = ?, postal_code = ?, city = ?, state = ?, country = ?, phone = ? WHERE id=?";
+    public void editBranch() {
 
-                   try{
-
-                       PreparedStatement query = cn.prepareStatement(sql);
-                             query.setString(1, branchName);
-                             query.setString(2, address);
-                             query.setString(3, postalCode);
-                             query.setString(4, city);
-                             query.setString(5, state);
-                             query.setString(6, country);
-                             query.setString(7, phone);
-
-
-                        query.setInt(8, ID);
-                        query.execute();
-                        
-                       JOptionPane.showMessageDialog(this, "Branch has been Updated.");
-                       cleanPanels();
-                   }catch(Exception e){
-
-                   }   
-         }
-    } 
-        
-        
-    public void editBranch(){
-        
         //cleanPanels();
         String ID = txtID.getText();
-        
-        
-        
-        String sql ="SELECT branch_name, address, postal_code, city, state, country, phone FROM branchs WHERE id=?";
-        
-            try {
-                
-                obj = new Conexion();
-                cn =obj.conectar(); 
-                 
-                PreparedStatement query = cn.prepareStatement(sql);
-                query.setString(1, ID);
-                ResultSet rs = query.executeQuery();
-                
-                if(rs.next()){
-                    
-                    txtBranchName.setText(rs.getString("branch_name"));
-                    txtAddress.setText(rs.getString("address"));
-                    txtPhone.setText(rs.getString("phone"));
-                    txtPostalCode.setText(rs.getString("postal_code"));
-                    txtCity.setText(rs.getString("city"));
-                    txtState.setText(rs.getString("state"));
-                    txtCountry.setText(rs.getString("country"));
-                  
-                }
-                
-                
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(UpdateBranch.class.getName()).log(Level.SEVERE, null, ex);
+
+        String sql = "SELECT branch_name, address, postal_code, city, state, country, phone FROM branchs WHERE id=?";
+
+        try {
+
+            obj = new Conexion();
+            cn = obj.conectar();
+
+            PreparedStatement query = cn.prepareStatement(sql);
+            query.setString(1, ID);
+            ResultSet rs = query.executeQuery();
+
+            if (rs.next()) {
+
+                txtBranchName.setText(rs.getString("branch_name"));
+                txtAddress.setText(rs.getString("address"));
+                txtPhone.setText(rs.getString("phone"));
+                txtPostalCode.setText(rs.getString("postal_code"));
+                txtCity.setText(rs.getString("city"));
+                txtState.setText(rs.getString("state"));
+                txtCountry.setText(rs.getString("country"));
+
             }
-        
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateBranch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
-    private void cleanPanels(){
-        
-       txtBranchName.setText("");
-       txtAddress.setText("");
-       txtPhone.setText("");
-       txtPostalCode.setText("");
-       txtCity.setText("");
-       txtState.setText("");
-       txtCountry.setText("");
-       txtBranchName.requestFocus();
-       
+
+    private void cleanPanels() {
+
+        txtBranchName.setText("");
+        txtAddress.setText("");
+        txtPhone.setText("");
+        txtPostalCode.setText("");
+        txtCity.setText("");
+        txtState.setText("");
+        txtCountry.setText("");
+        txtBranchName.requestFocus();
+
     }
-    
-    
-    private void saveNewBranch(){
-        
-       if(txtBranchName.getText().equals("") || txtAddress.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtPhone.getText().equals("")){
+
+    private void saveNewBranch() {
+
+        if (txtBranchName.getText().equals("") || txtAddress.getText().equals("") || txtPostalCode.getText().equals("") || txtCity.getText().equals("") || txtState.getText().equals("") || txtCountry.getText().equals("") || txtPhone.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
-        
-        if(txtPostalCode.getText().length() < 5){
-            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");  
+
+        if (txtPostalCode.getText().length() < 5) {
+            JOptionPane.showMessageDialog(rootPane, "Postal Code too short.");
             return;
-                   
+
         }
-        
-       if (txtPhone.getText().length() < 7) {
+
+        if (txtPhone.getText().length() < 7) {
             JOptionPane.showMessageDialog(rootPane, "Phone too short.");
             return;
 
         }
 
-                      
-                    obj = new Conexion();
-                    cn =obj.conectar(); 
+        obj = new Conexion();
+        cn = obj.conectar();
 
+        String sql = "INSERT INTO branchs (nombre_sucursal, direccion, codigo_postal, ciudad, estado, pais, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
+        String branchName = txtBranchName.getText();
+        String address = txtAddress.getText();
+        String postalCode = txtPostalCode.getText();
+        String city = txtCity.getText();
+        String state = txtState.getText();
+        String country = txtCountry.getText();
+        String phone = txtPhone.getText();
 
-                     String sql ="INSERT INTO branchs (nombre_sucursal, direccion, codigo_postal, ciudad, estado, pais, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement query = cn.prepareStatement(sql);
+            query.setString(1, branchName);
+            query.setString(2, address);
+            query.setString(3, postalCode);
+            query.setString(4, city);
+            query.setString(5, state);
+            query.setString(6, country);
+            query.setString(7, phone);
+            query.execute();
+            cleanPanels();
 
-
-                     String branchName = txtBranchName.getText();
-                     String address = txtAddress.getText();
-                     String postalCode = txtPostalCode.getText();
-                     String city = txtCity.getText();
-                     String state = txtState.getText();
-                     String country = txtCountry.getText();
-                     String phone = txtPhone.getText();
-                     
-                         try {
-                           PreparedStatement query = cn.prepareStatement(sql);
-                             query.setString(1, branchName);
-                             query.setString(2, address);
-                             query.setString(3, postalCode);
-                             query.setString(4, city);
-                             query.setString(5, state);
-                             query.setString(6, country);
-                             query.setString(7, phone);
-                             query.execute();
-                             cleanPanels();
-
-
-                           JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
-                         } catch (SQLException ex) {
-                           Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
-                         }
+            JOptionPane.showMessageDialog(rootPane, "Customer data has been saved.");
+        } catch (SQLException ex) {
+            Logger.getLogger(NewClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -441,24 +421,24 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        if(txtID.getText().equals("")){
+        if (txtID.getText().equals("")) {
             JOptionPane.showConfirmDialog(this, "You need select one branch first. ", "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
-        }else{
+        } else {
             int ID = Integer.parseInt(txtID.getText());
-            int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete branch with id: "+ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
+            int decision = JOptionPane.showConfirmDialog(this, "Are you sure? Do you want to delete branch with id: " + ID, "¡DELETE CUSTOMER!", JOptionPane.YES_NO_OPTION, 1);
 
-            if(decision == 0){
+            if (decision == 0) {
 
-                String sql ="UPDATE branchs SET date_removed = NOW() WHERE id=?";
+                String sql = "UPDATE branchs SET date_removed = NOW() WHERE id=?";
 
-                try{
+                try {
 
                     PreparedStatement query = cn.prepareStatement(sql);
                     query.setInt(1, ID);
                     query.execute();
                     JOptionPane.showMessageDialog(this, "Customer has been removed.");
                     cleanPanels();
-                }catch(Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -477,27 +457,24 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
     private void txtBranchNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBranchNameKeyTyped
         char campo = evt.getKeyChar();
 
-        if((campo<'a' || campo>'z') && (campo<'A' || campo>'Z') && (campo!=(char)KeyEvent.VK_BACK_SPACE) && (campo!=(char)KeyEvent.VK_SPACE)){
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txtBranchNameKeyTyped
 
     private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
         int postalCodeSize = txtPostalCode.getText().length();
+        char campo = evt.getKeyChar();
 
-        System.out.println("char " +evt.getKeyChar());
+        System.out.println("char " + evt.getKeyChar());
 
-        if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
-            evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-            || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
-
-        }else{
+        if (campo < '0' || campo > '9') {
             evt.consume();
         }
 
-        System.out.println("tamaño "+postalCodeSize);
-        if(postalCodeSize > 4){
+        System.out.println("tamaño " + postalCodeSize);
+        if (postalCodeSize > 4) {
             evt.consume();
             JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code.");
         }
@@ -508,7 +485,7 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txtCityKeyTyped
 
@@ -517,7 +494,7 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txtStateKeyTyped
 
@@ -526,30 +503,26 @@ public class UpdateBranch extends javax.swing.JInternalFrame {
 
         if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txtCountryKeyTyped
 
     private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
         int phoneSize = txtPhone.getText().length();
-        
-        System.out.println("char " +evt.getKeyChar());
-         
-        
-       if(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER ||  evt.getKeyChar() == KeyEvent.VK_TAB ||
-               evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-       || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9){
-        
-       }else{
-           evt.consume();
-       }
-       
-       
-        System.out.println("tamaño "+phoneSize);
-        if(phoneSize > 7){
-           evt.consume();
-           JOptionPane.showMessageDialog(rootPane, "Only five numbers for Postal Code."); 
-        }                                  
+        char campo = evt.getKeyChar();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (campo < '0' || campo > '9') {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + phoneSize);
+        if (phoneSize > 9) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only nine numbers for Phone.");
+        }
+
 
     }//GEN-LAST:event_txtPhoneKeyTyped
 

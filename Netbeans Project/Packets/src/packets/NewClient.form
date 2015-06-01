@@ -482,10 +482,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPosition">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPositionKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRFC">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRFCKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCompanyName">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCompanyNameKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
