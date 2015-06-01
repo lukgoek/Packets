@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import static java.time.Instant.now;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,12 +38,10 @@ public class NewShipments extends javax.swing.JInternalFrame {
     public NewShipments() {
         initComponents();
         genarateNumberGuide();
-<<<<<<< HEAD
 
-=======
         lapseTime(comboTypeSend.getSelectedIndex());
         
->>>>>>> a8f277bd69e2a9d05b8ad5cd6e3cc70a54242302
+
     }
     
     public void lapseTime(int combo){
@@ -594,14 +592,11 @@ public class NewShipments extends javax.swing.JInternalFrame {
         if (type.equals("Basic(3-5 days)")) {
             lblCost.setText("120");
         }
-<<<<<<< HEAD
 
-
-=======
         
         lapseTime(comboTypeSend.getSelectedIndex());
         
->>>>>>> a8f277bd69e2a9d05b8ad5cd6e3cc70a54242302
+
     }//GEN-LAST:event_comboTypeSendActionPerformed
 
     private void txtNameSenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameSenderKeyTyped
