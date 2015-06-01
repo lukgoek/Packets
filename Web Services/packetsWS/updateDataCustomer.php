@@ -28,7 +28,7 @@ $query = "UPDATE customers SET name = '".$value['newName']."', last_name = '".$v
 $result = mysql_query($query) or die('Consulta fallida: ' . mysql_error());
 
 
-	     echo json_encode($result, true);
+	     echo json_encode('guardado');
 
     
 

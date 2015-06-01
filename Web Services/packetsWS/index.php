@@ -1,6 +1,6 @@
 
 <?php
-
+header("Content-Type: text/html;charset=utf-8");
 //$array = json_decode(entity, true);
 
 $value = json_decode(file_get_contents('php://input'), true);
