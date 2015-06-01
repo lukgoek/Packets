@@ -87,8 +87,8 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         String sql ="UPDATE vehicles SET brand = ?, model = ?, plate = ?, number_vehicle = ?, type_vehicle = ?, driver = ?, status = ? WHERE id = ?";
                
                   String brand = txtBrand.getText();
-                  String model = txtModel.getText();
-                  String plate = txtPlate.getText();
+                  String model = txtModel.getText().toUpperCase();
+                  String plate = txtPlate.getText().toUpperCase();
                   String numbervehicle = txtNumVehicle.getText();
                   String type = comboTypeVehicle.getSelectedItem().toString();
                   String driver = comboDriver.getSelectedItem().toString();
@@ -260,9 +260,27 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
 
         jLabel3.setText("*Model:");
 
+        txtModel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtModelKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("*Plate:");
 
+        txtPlate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPlateKeyTyped(evt);
+            }
+        });
+
         jLabel5.setText("*Number Vehicle:");
+
+        txtNumVehicle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumVehicleKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("*Driver:");
 
@@ -278,6 +296,12 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
         jLabel10.setText("*Status:");
 
         jLabel12.setText("*Brand:");
+
+        txtBrand.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBrandKeyTyped(evt);
+            }
+        });
 
         comboTypeVehicle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Camion 3 axes", "Camion 4 axes", "Camion 6 axes", "Van" }));
         comboTypeVehicle.addActionListener(new java.awt.event.ActionListener() {
@@ -453,9 +477,8 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnUpdateVehicle)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDelete)
-                        .addComponent(btnClose)))
+                    .addComponent(btnClose)
+                    .addComponent(btnDelete))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -519,6 +542,50 @@ public class UpdateVehicle extends javax.swing.JInternalFrame {
     private void comboTypeVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTypeVehicleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboTypeVehicleActionPerformed
+
+    private void txtBrandKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBrandKeyTyped
+         char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtBrandKeyTyped
+
+    private void txtPlateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlateKeyTyped
+      char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo < '0' || campo > '9') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtPlateKeyTyped
+
+    private void txtModelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModelKeyTyped
+         char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo < '0' || campo > '9') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtModelKeyTyped
+
+    private void txtNumVehicleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumVehicleKeyTyped
+      int numVehicleSize = txtNumVehicle.getText().length();
+        char campo = evt.getKeyChar();
+        
+        System.out.println("char " + evt.getKeyChar());
+
+        if (campo < '0' || campo > '9') {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + numVehicleSize);
+        if (numVehicleSize > 9) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only nine numbers for Phone.");
+        }
+    }//GEN-LAST:event_txtNumVehicleKeyTyped
 
     /**
      * @param args the command line arguments

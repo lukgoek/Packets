@@ -67,10 +67,8 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnUpdateVehicle" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnClose" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnClose" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -205,6 +203,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtModel">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtModelKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -212,6 +213,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPlate">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPlateKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -219,6 +223,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumVehicle">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumVehicleKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -257,6 +264,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBrand">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBrandKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="comboTypeVehicle">
           <Properties>
