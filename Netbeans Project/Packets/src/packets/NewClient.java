@@ -49,7 +49,7 @@ public class NewClient extends javax.swing.JInternalFrame {
         txtConfirmEmail.setText("");
         txtRFC.setText("");
         txtPosition.setText("");
-
+        txtCompanyName.setText("");
         txtLastName.requestFocus();
 
     }
@@ -59,7 +59,7 @@ public class NewClient extends javax.swing.JInternalFrame {
         //recogemos el email
         String email = txtEmail.getText();
         String companyName = txtCompanyName.getText();
-        String rfc = txtRFC.getText();
+        String rfc = txtRFC.getText().toUpperCase();
         String position = txtPosition.getText();
 
         //si las cajas de email estan basias asignamos null
@@ -430,6 +430,24 @@ public class NewClient extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Position:");
 
+        txtPosition.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPositionKeyTyped(evt);
+            }
+        });
+
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
+            }
+        });
+
+        txtCompanyName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCompanyNameKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCompanyInformationLayout = new javax.swing.GroupLayout(pnlCompanyInformation);
         pnlCompanyInformation.setLayout(pnlCompanyInformationLayout);
         pnlCompanyInformationLayout.setHorizontalGroup(
@@ -538,14 +556,11 @@ public class NewClient extends javax.swing.JInternalFrame {
 
     private void txtPostalCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostalCodeKeyTyped
         int postalCodeSize = txtPostalCode.getText().length();
+        char campo = evt.getKeyChar();
 
         System.out.println("char " + evt.getKeyChar());
 
-        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
-                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
-
-        } else {
+        if (campo < '0' || campo > '9') {
             evt.consume();
         }
 
@@ -607,21 +622,18 @@ public class NewClient extends javax.swing.JInternalFrame {
 
     private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
         int phoneSize = txtPhone.getText().length();
+        char campo = evt.getKeyChar();
 
         System.out.println("char " + evt.getKeyChar());
 
-        if (evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar() == KeyEvent.VK_TAB
-                || evt.getKeyChar() == KeyEvent.VK_0 || evt.getKeyChar() == KeyEvent.VK_1 || evt.getKeyChar() == KeyEvent.VK_2 || evt.getKeyChar() == KeyEvent.VK_3 || evt.getKeyChar() == KeyEvent.VK_4 || evt.getKeyChar() == KeyEvent.VK_5 || evt.getKeyChar() == KeyEvent.VK_6 || evt.getKeyChar() == KeyEvent.VK_7 || evt.getKeyChar() == KeyEvent.VK_8 || evt.getKeyChar() == KeyEvent.VK_9
-                || evt.getKeyChar() == KeyEvent.VK_NUMPAD0 || evt.getKeyChar() == KeyEvent.VK_NUMPAD1 || evt.getKeyChar() == KeyEvent.VK_NUMPAD2 || evt.getKeyChar() == KeyEvent.VK_NUMPAD3 || evt.getKeyChar() == KeyEvent.VK_NUMPAD4 || evt.getKeyChar() == KeyEvent.VK_NUMPAD5 || evt.getKeyChar() == KeyEvent.VK_NUMPAD6 || evt.getKeyChar() == KeyEvent.VK_NUMPAD7 || evt.getKeyChar() == KeyEvent.VK_NUMPAD8 || evt.getKeyChar() == KeyEvent.VK_NUMPAD9) {
-
-        } else {
+        if (campo < '0' || campo > '9') {
             evt.consume();
         }
 
         System.out.println("tamaño " + phoneSize);
-        if (phoneSize > 8) {
+        if (phoneSize > 9) {
             evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Only five numbers for Phone.");
+            JOptionPane.showMessageDialog(rootPane, "Only nine numbers for Phone.");
         }
     }//GEN-LAST:event_txtPhoneKeyTyped
 
@@ -648,6 +660,35 @@ public class NewClient extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_txtEmailFocusLost
+
+    private void txtCompanyNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanyNameKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+
+    }//GEN-LAST:event_txtCompanyNameKeyTyped
+
+    private void txtPositionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPositionKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+
+    }//GEN-LAST:event_txtPositionKeyTyped
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo < '0' || campo > '9') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
 
     /**
      * @param args the command line arguments
