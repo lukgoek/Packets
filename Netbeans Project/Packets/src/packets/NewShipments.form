@@ -394,8 +394,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNameSender">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNameSenderKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtLastNameSender">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtLastNameSenderKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -403,6 +409,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPhoneSender">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPhoneSenderKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -410,6 +419,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCellPhone">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCellPhoneKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>

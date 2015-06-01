@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.3.11
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2015 a las 09:32:02
--- Versión del servidor: 5.6.21
--- Versión de PHP: 5.6.3
+-- Tiempo de generación: 01-06-2015 a las 13:53:36
+-- Versión del servidor: 5.6.24
+-- Versión de PHP: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `branchs` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `branch_name` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `address` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `postal_code` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
@@ -55,7 +55,7 @@ INSERT INTO `branchs` (`id`, `branch_name`, `address`, `postal_code`, `city`, `s
 --
 
 CREATE TABLE IF NOT EXISTS `customers` (
-`ID` int(5) NOT NULL,
+  `ID` int(5) NOT NULL,
   `name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `last_name` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `company_name` varchar(70) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `password` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_removed` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `customers`
@@ -82,7 +82,8 @@ CREATE TABLE IF NOT EXISTS `customers` (
 INSERT INTO `customers` (`ID`, `name`, `last_name`, `company_name`, `RFC`, `phone`, `address`, `postal_code`, `city`, `state`, `country`, `position`, `degree`, `email`, `username`, `password`, `registration_date`, `date_removed`) VALUES
 (1, 'Humberto', 'Lugo Aguilar', 'NULL', 'NULL', '6691536979', 'Bahia Ceuta #501 Col. Mazatlan 3', 82193, 'Mazatlan', 'Sinaloa', 'Mexico', 'NULL', 'Dr.', 'lugoe_@hotmail.com', 'lugoe', '6779c91708de5fbb697206fa7dbe84d0', '2015-05-25 12:15:31', NULL),
 (2, 'Cortez Hernandez', 'Gabino', 'NULL', 'NULL', '6951091757', 'Ramon F. Iturbe #502 Colonia Infonavit Playas', 82580, 'Mazatlan', 'Sinaloa', 'Mexico', 'NULL', 'Dr.', 'onibag_93@hotmail.com', 'gabino93', '84f0ac1160190ae4b2cf5bef9cd526a6', '2015-05-25 12:19:08', NULL),
-(3, 'Lopez Castañeda', 'Paul Antonio', 'NULL', 'NULL', '9820269', 'Francisco Villa #2249. Col. Centro', 82000, 'Mazatlan', 'Sinaloa', 'Mexico', 'NULL', 'Lic.', 'paul@hotmail.com', 'paul', '25d55ad283aa400af464c76d713c07ad', '2015-05-25 12:24:48', NULL);
+(3, 'Lopez Castañeda', 'Paul Antonio', 'NULL', 'NULL', '9820269', 'Francisco Villa #2249. Col. Centro', 82000, 'Mazatlan', 'Sinaloa', 'Mexico', 'NULL', 'Lic.', 'paul@hotmail.com', 'paul', '25d55ad283aa400af464c76d713c07ad', '2015-05-25 12:24:48', NULL),
+(4, 'fernanda', 'ibarra', 'fernanda', 'NULL', '669153252', 'bahia ceuta', 82152, 'Mazatlan', 'Sinaloa', 'Mexico', 'NULL', 'DR.', 'NULL', 'ferni', 'b98a5a57d055dbabf959dcd6f36509ef', '2015-06-01 03:30:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -91,7 +92,7 @@ INSERT INTO `customers` (`ID`, `name`, `last_name`, `company_name`, `RFC`, `phon
 --
 
 CREATE TABLE IF NOT EXISTS `employees` (
-`id` int(15) NOT NULL,
+  `id` int(15) NOT NULL,
   `last_name` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `address` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -112,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
 --
 
 CREATE TABLE IF NOT EXISTS `location` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL,
   `number_guide` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `id_branch` int(10) NOT NULL,
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -126,9 +127,9 @@ CREATE TABLE IF NOT EXISTS `location` (
 --
 
 CREATE TABLE IF NOT EXISTS `shipments` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL,
   `customer` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `number_guide` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `guide_number` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `last_name` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `phone` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -139,11 +140,18 @@ CREATE TABLE IF NOT EXISTS `shipments` (
   `lastname_sender` varchar(70) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `phone_sender` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `cellphone` varchar(20) CHARACTER SET utf32 COLLATE utf32_spanish_ci NOT NULL,
-  `address` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `lapse_time` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `lapse_time` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `location` varchar(100) NOT NULL,
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `removed_date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `shipments`
+--
+
+INSERT INTO `shipments` (`id`, `customer`, `guide_number`, `last_name`, `email`, `phone`, `type_send`, `area_destination`, `shipments_cost`, `name_sender`, `lastname_sender`, `phone_sender`, `cellphone`, `lapse_time`, `location`, `registration_date`, `removed_date`) VALUES
+(1, 'Humberto', '85118467', 'Lugo Aguilar', 'lugoe_@hotmail.com', '6691536979', 'Basic(3-5 days)', 'Bahia Ceuta #501 Col.Mazatlan 3', '120', 'Fernanda', 'Ibarra', '6691536979', '691536979', 'Shipmets arrive aproximatlely \njue-04-junio to sáb-06-junio', 'Mazatlan, Sinaloa Branch: Isurgentes', '2015-06-01 05:38:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -164,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `shipments_costs` (
 --
 
 CREATE TABLE IF NOT EXISTS `type_branch` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `description` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -175,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `type_branch` (
 --
 
 CREATE TABLE IF NOT EXISTS `type_degree` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL,
   `description` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -194,7 +202,7 @@ INSERT INTO `type_degree` (`id`, `description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `type_employee` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `description` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -212,7 +220,7 @@ INSERT INTO `type_employee` (`id`, `description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `type_vehicles` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL,
   `capacity_weight` varchar(15) NOT NULL,
   `type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -224,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `type_vehicles` (
 --
 
 CREATE TABLE IF NOT EXISTS `vehicles` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL,
   `brand` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `model` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `plate` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -255,61 +263,61 @@ INSERT INTO `vehicles` (`id`, `brand`, `model`, `plate`, `number_vehicle`, `type
 -- Indices de la tabla `branchs`
 --
 ALTER TABLE `branchs`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `customers`
 --
 ALTER TABLE `customers`
- ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indices de la tabla `employees`
 --
 ALTER TABLE `employees`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `location`
 --
 ALTER TABLE `location`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `shipments`
 --
 ALTER TABLE `shipments`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `type_branch`
 --
 ALTER TABLE `type_branch`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `type_degree`
 --
 ALTER TABLE `type_degree`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `type_employee`
 --
 ALTER TABLE `type_employee`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `type_vehicles`
 --
 ALTER TABLE `type_vehicles`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `vehicles`
 --
 ALTER TABLE `vehicles`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -319,52 +327,52 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT de la tabla `branchs`
 --
 ALTER TABLE `branchs`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `customers`
 --
 ALTER TABLE `customers`
-MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `employees`
 --
 ALTER TABLE `employees`
-MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `location`
 --
 ALTER TABLE `location`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `shipments`
 --
 ALTER TABLE `shipments`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `type_branch`
 --
 ALTER TABLE `type_branch`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `type_degree`
 --
 ALTER TABLE `type_degree`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `type_employee`
 --
 ALTER TABLE `type_employee`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `type_vehicles`
 --
 ALTER TABLE `type_vehicles`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `vehicles`
 --
 ALTER TABLE `vehicles`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

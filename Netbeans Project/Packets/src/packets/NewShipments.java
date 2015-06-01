@@ -5,6 +5,7 @@
  */
 package packets;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,17 +28,22 @@ import javax.swing.JOptionPane;
  */
 public class NewShipments extends javax.swing.JInternalFrame {
 
-        Conexion obj;  
-        Connection cn;
-        Random rnd = new Random();
+    Conexion obj;
+    Connection cn;
+    Random rnd = new Random();
+
     /**
      * Creates new form NewShipments
      */
     public NewShipments() {
         initComponents();
         genarateNumberGuide();
+<<<<<<< HEAD
+
+=======
         lapseTime(comboTypeSend.getSelectedIndex());
         
+>>>>>>> a8f277bd69e2a9d05b8ad5cd6e3cc70a54242302
     }
     
     public void lapseTime(int combo){
@@ -92,6 +98,7 @@ public class NewShipments extends javax.swing.JInternalFrame {
       lblLapseTime.setText("Shipmets arrive aproximatlely \n"+startDate+""+endDate);
     }
 
+<<<<<<< HEAD
     public void cleanPanels(){
         
                   txtNameCustomer.setText("");
@@ -111,50 +118,73 @@ public class NewShipments extends javax.swing.JInternalFrame {
      }
      public void selectCustomer(){
         
+=======
+    public void cleanPanels() {
+
+        txtLastName.setText("");
+        txtNumberGuide.setText("");
+        txtNameSender.setText("");
+        txtPhoneSender.setText("");
+        txtCellPhone.setText("");
+        txtAddress.setText("");
+        genarateNumberGuide();
+
+    }
+
+    public void selectCustomer() {
+
+>>>>>>> bfdca35e41cc9eaaa8ea6fd2875be0fe15ef4b57
         //cleanPanels();
         String ID = txtID.getText();
-        
-        
+
         String degree = "";
-        
-        String sql ="SELECT name, last_name, phone, email FROM customers WHERE id=?";
-        
-            try {
-                
-                obj = new Conexion();
-                cn =obj.conectar(); 
-                 
-                PreparedStatement query = cn.prepareStatement(sql);
-                query.setString(1, ID);
-                ResultSet rs = query.executeQuery();
-                
-                if(rs.next()){
-                    
-                    txtNameCustomer.setText(rs.getString("name"));
-                    txtLastName.setText(rs.getString("last_name"));
-                    txtPhone.setText(rs.getString("phone"));
-                    txtEmail.setText(rs.getString("email"));
-                  
-                }
-                
-                
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+
+        String sql = "SELECT name, last_name, phone, email FROM customers WHERE id=?";
+
+        try {
+
+            obj = new Conexion();
+            cn = obj.conectar();
+
+            PreparedStatement query = cn.prepareStatement(sql);
+            query.setString(1, ID);
+            ResultSet rs = query.executeQuery();
+
+            if (rs.next()) {
+
+                txtNameCustomer.setText(rs.getString("name"));
+                txtLastName.setText(rs.getString("last_name"));
+                txtPhone.setText(rs.getString("phone"));
+                txtEmail.setText(rs.getString("email"));
+
             }
-        
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
-    
-    
-    public void saveNewShipments(){
-        
-        if(txtLastName.getText().equals("") || txtNameSender.getText().equals("") || txtLastNameSender.getText().equals("") || txtAddress.getText().equals("") || txtPhoneSender.getText().equals("") || txtCellPhone.getText().equals("")){
+
+    public void saveNewShipments() {
+
+        if (txtLastName.getText().equals("") || txtNameSender.getText().equals("") || txtLastNameSender.getText().equals("") || txtAddress.getText().equals("") || txtPhoneSender.getText().equals("") || txtCellPhone.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please, complete all required fields (*).");
             return;
         }
-        
+
+        if (txtPhoneSender.getText().length() < 7) {
+            JOptionPane.showMessageDialog(rootPane, "Phone too short.");
+            return;
+
+        }
+
+        if (txtCellPhone.getText().length() < 7) {
+            JOptionPane.showMessageDialog(rootPane, "Cell phone too short.");
+            return;
+        }
+
         obj = new Conexion();
+<<<<<<< HEAD
         cn =obj.conectar(); 
         
         
@@ -204,25 +234,65 @@ public class NewShipments extends javax.swing.JInternalFrame {
                          Logger.getLogger(NewShipments.class.getName()).log(Level.SEVERE, null, ex);
                      }
                       
-    }
-    
-    private void genarateNumberGuide(){
-        
-     int [] elements = new int[10];    
-     int n=0;      
+=======
+        cn = obj.conectar();
 
-      for(int i=0; i<10; i++) //generamos 10 números
-      {
-             n = (int)(rnd.nextDouble() * 100.0); //generamos numeros aleatorios entre 0 y 100
-             elements[i] = n; //guardamos el entero obtenido en el array
-             elements[i]++;  //le sumamos uno a la posición del array para poder guardar el siguiente número
-       }
-        String numberGuide = elements[2]+""+elements[3]+""+elements[7]+""+elements[9];
-        
-        
+        String sql = "INSERT INTO shipments (customer, number_guide, last_name, email, phone, type_send, area_destination, shipments_cost, name_sender, lastname_sender, phone_sender, cellphone, address, lapse_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        String customer = txtNameCustomer.getText();
+        String number_guide = txtNumberGuide.getText();
+        String last_name = txtLastName.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        String type_send = comboTypeSend.getSelectedItem().toString();
+        String name_sender = txtNameSender.getText();
+        String lastname_sender = txtLastNameSender.getText();
+        String phone_sender = txtPhoneSender.getText();
+        String cellphone = txtCellPhone.getText();
+        String area_destination = txtAddress.getText();
+
+        try {
+            PreparedStatement query = cn.prepareStatement(sql);
+            query.setString(1, customer);
+            query.setString(2, number_guide);
+            query.setString(3, last_name);
+            query.setString(4, email);
+            query.setString(5, phone);
+            query.setString(6, type_send);
+            query.setString(7, name_sender);
+            query.setString(8, lastname_sender);
+            query.setString(9, phone_sender);
+            query.setString(10, cellphone);
+            query.setString(11, area_destination);
+            query.execute();
+
+            cleanPanels();
+
+            JOptionPane.showMessageDialog(rootPane, "Shipments data has been saved.");
+        } catch (SQLException ex) {
+            Logger.getLogger(NewShipments.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+>>>>>>> bfdca35e41cc9eaaa8ea6fd2875be0fe15ef4b57
+    }
+
+    private void genarateNumberGuide() {
+
+        int[] elements = new int[10];
+        int n = 0;
+
+        for (int i = 0; i < 10; i++) //generamos 10 números
+        {
+            n = (int) (rnd.nextDouble() * 100.0); //generamos numeros aleatorios entre 0 y 100
+            elements[i] = n; //guardamos el entero obtenido en el array
+            elements[i]++;  //le sumamos uno a la posición del array para poder guardar el siguiente número
+        }
+        String numberGuide = elements[2] + "" + elements[3] + "" + elements[7] + "" + elements[9];
+
         txtNumberGuide.setText(numberGuide);
-       
-}
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -320,9 +390,33 @@ public class NewShipments extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Last Name:");
 
+        txtNameSender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameSenderKeyTyped(evt);
+            }
+        });
+
+        txtLastNameSender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLastNameSenderKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Phone:");
 
+        txtPhoneSender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPhoneSenderKeyTyped(evt);
+            }
+        });
+
         jLabel5.setText("Cellphone:");
+
+        txtCellPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCellPhoneKeyTyped(evt);
+            }
+        });
 
         jLabel12.setText("Address:");
 
@@ -560,7 +654,7 @@ public class NewShipments extends javax.swing.JInternalFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-          saveNewShipments();
+        saveNewShipments();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -573,28 +667,85 @@ public class NewShipments extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void txtNumberGuideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumberGuideActionPerformed
-        
+
     }//GEN-LAST:event_txtNumberGuideActionPerformed
 
     private void comboTypeSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTypeSendActionPerformed
-       
+
         String type = comboTypeSend.getSelectedItem().toString();
-        
-        if(type.equals("Normal(1-3 days)")){
+
+        if (type.equals("Normal(1-3 days)")) {
             lblCost.setText("180");
         }
-        
-        if(type.equals("Express(1 day)")){
+
+        if (type.equals("Express(1 day)")) {
             lblCost.setText("250");
         }
-        
-        if(type.equals("Basic(3-5 days)")){
-          lblCost.setText("120");
+
+        if (type.equals("Basic(3-5 days)")) {
+            lblCost.setText("120");
         }
+<<<<<<< HEAD
+
+
+=======
         
         lapseTime(comboTypeSend.getSelectedIndex());
         
+>>>>>>> a8f277bd69e2a9d05b8ad5cd6e3cc70a54242302
     }//GEN-LAST:event_comboTypeSendActionPerformed
+
+    private void txtNameSenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameSenderKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtNameSenderKeyTyped
+
+    private void txtLastNameSenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameSenderKeyTyped
+        char campo = evt.getKeyChar();
+
+        if ((campo < 'a' || campo > 'z') && (campo < 'A' || campo > 'Z') && (campo != (char) KeyEvent.VK_BACK_SPACE) && (campo != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtLastNameSenderKeyTyped
+
+    private void txtPhoneSenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneSenderKeyTyped
+        int phoneSize = txtPhoneSender.getText().length();
+        char campo = evt.getKeyChar();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (campo < '0' || campo > '9') {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + phoneSize);
+        if (phoneSize > 9) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only nine numbers for Phone.");
+        }
+    }//GEN-LAST:event_txtPhoneSenderKeyTyped
+
+    private void txtCellPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCellPhoneKeyTyped
+        int phoneSize = txtCellPhone.getText().length();
+        char campo = evt.getKeyChar();
+
+        System.out.println("char " + evt.getKeyChar());
+
+        if (campo < '0' || campo > '9') {
+            evt.consume();
+        }
+
+        System.out.println("tamaño " + phoneSize);
+        if (phoneSize > 13) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Only thirteen numbers for Phone.");
+        }
+    }//GEN-LAST:event_txtCellPhoneKeyTyped
 
     /**
      * @param args the command line arguments
