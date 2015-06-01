@@ -22,7 +22,7 @@ mysql_select_db('packets') or die('No se pudo seleccionar la base de datos');
 
 
 // Realizar una consulta MySQL
-$query = "SELECT name, last_name, phone, address, postal_code, city, state, country, degree, email, username, company_name, rfc, position, registration_date FROM customers WHERE username = '".$value['user']."'";
+$query = "SELECT customer, last_name, type_send, name_sender, lastname_sender, area_destination FROM shipments WHERE guide_number = '".$value['guideNumber']."'";
 $result = mysql_query($query) or die('Consulta fallida: ' . mysql_error());
 $fila = mysql_fetch_row($result);
 // Imprimir los resultados en HTML
@@ -42,7 +42,6 @@ while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
    		//echo $fila[13];
         //echo $fila[14];
     
-
 	echo json_encode($fila, true);
 
 
