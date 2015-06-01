@@ -216,7 +216,7 @@ public class MainMDI extends javax.swing.JFrame {
         menuUPdateShipments.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         menuUPdateShipments.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         menuUPdateShipments.setMnemonic('a');
-        menuUPdateShipments.setText("Update Shipments");
+        menuUPdateShipments.setText("Change Location Shipment");
         menuUPdateShipments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuUPdateShipmentsActionPerformed(evt);
@@ -337,7 +337,7 @@ public class MainMDI extends javax.swing.JFrame {
     private void menuNewShipmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewShipmentsActionPerformed
          NewShipments obj = new NewShipments();
         //coordenadas para mostrar
-        obj.setBounds(100, 50, 700, 750);
+        obj.setBounds(100, 50, 850, 750);
               
         desktopPane.add(obj);
        
@@ -346,12 +346,12 @@ public class MainMDI extends javax.swing.JFrame {
 
     private void menuUPdateShipmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUPdateShipmentsActionPerformed
         
-         UpdateShipments obj = new UpdateShipments();
+         NewLocation obj = new NewLocation();
         //coordenadas para mostrar
-        obj.setBounds(50, 50, 650, 550);
+        
         
 
-       // obj.setVisible(true);
+        //obj.setVisible(true);
 
         
         desktopPane.add(obj);
