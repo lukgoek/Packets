@@ -425,8 +425,7 @@ public class NewClient extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Name:");
 
-        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel10.setText("RFC?:");
+        jLabel10.setText("RFC:");
 
         jLabel11.setText("Position:");
 

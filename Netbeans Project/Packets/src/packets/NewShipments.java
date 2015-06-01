@@ -38,12 +38,10 @@ public class NewShipments extends javax.swing.JInternalFrame {
     public NewShipments() {
         initComponents();
         genarateNumberGuide();
-<<<<<<< HEAD
 
-=======
         lapseTime(comboTypeSend.getSelectedIndex());
         
->>>>>>> a8f277bd69e2a9d05b8ad5cd6e3cc70a54242302
+
     }
     
     public void lapseTime(int combo){
@@ -98,7 +96,7 @@ public class NewShipments extends javax.swing.JInternalFrame {
       lblLapseTime.setText("Shipmets arrive aproximatlely \n"+startDate+""+endDate);
     }
 
-<<<<<<< HEAD
+
     public void cleanPanels(){
         
                   txtNameCustomer.setText("");
@@ -116,24 +114,13 @@ public class NewShipments extends javax.swing.JInternalFrame {
        genarateNumberGuide();
        
      }
-     public void selectCustomer(){
+  
         
-=======
-    public void cleanPanels() {
 
-        txtLastName.setText("");
-        txtNumberGuide.setText("");
-        txtNameSender.setText("");
-        txtPhoneSender.setText("");
-        txtCellPhone.setText("");
-        txtAddress.setText("");
-        genarateNumberGuide();
-
-    }
 
     public void selectCustomer() {
 
->>>>>>> bfdca35e41cc9eaaa8ea6fd2875be0fe15ef4b57
+
         //cleanPanels();
         String ID = txtID.getText();
 
@@ -184,7 +171,7 @@ public class NewShipments extends javax.swing.JInternalFrame {
         }
 
         obj = new Conexion();
-<<<<<<< HEAD
+
         cn =obj.conectar(); 
         
         
@@ -234,46 +221,8 @@ public class NewShipments extends javax.swing.JInternalFrame {
                          Logger.getLogger(NewShipments.class.getName()).log(Level.SEVERE, null, ex);
                      }
                       
-=======
-        cn = obj.conectar();
 
-        String sql = "INSERT INTO shipments (customer, number_guide, last_name, email, phone, type_send, area_destination, shipments_cost, name_sender, lastname_sender, phone_sender, cellphone, address, lapse_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        String customer = txtNameCustomer.getText();
-        String number_guide = txtNumberGuide.getText();
-        String last_name = txtLastName.getText();
-        String email = txtEmail.getText();
-        String phone = txtPhone.getText();
-        String type_send = comboTypeSend.getSelectedItem().toString();
-        String name_sender = txtNameSender.getText();
-        String lastname_sender = txtLastNameSender.getText();
-        String phone_sender = txtPhoneSender.getText();
-        String cellphone = txtCellPhone.getText();
-        String area_destination = txtAddress.getText();
-
-        try {
-            PreparedStatement query = cn.prepareStatement(sql);
-            query.setString(1, customer);
-            query.setString(2, number_guide);
-            query.setString(3, last_name);
-            query.setString(4, email);
-            query.setString(5, phone);
-            query.setString(6, type_send);
-            query.setString(7, name_sender);
-            query.setString(8, lastname_sender);
-            query.setString(9, phone_sender);
-            query.setString(10, cellphone);
-            query.setString(11, area_destination);
-            query.execute();
-
-            cleanPanels();
-
-            JOptionPane.showMessageDialog(rootPane, "Shipments data has been saved.");
-        } catch (SQLException ex) {
-            Logger.getLogger(NewShipments.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
->>>>>>> bfdca35e41cc9eaaa8ea6fd2875be0fe15ef4b57
     }
 
     private void genarateNumberGuide() {
@@ -685,14 +634,11 @@ public class NewShipments extends javax.swing.JInternalFrame {
         if (type.equals("Basic(3-5 days)")) {
             lblCost.setText("120");
         }
-<<<<<<< HEAD
 
-
-=======
         
         lapseTime(comboTypeSend.getSelectedIndex());
         
->>>>>>> a8f277bd69e2a9d05b8ad5cd6e3cc70a54242302
+
     }//GEN-LAST:event_comboTypeSendActionPerformed
 
     private void txtNameSenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameSenderKeyTyped
